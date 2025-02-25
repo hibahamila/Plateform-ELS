@@ -16,10 +16,10 @@ class CreateFeedbackTable extends Migration
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id'); 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->unsignedBigInteger('formation_id');
-            $table->foreign('formation_id')->references('id')->on('formations');
-            $table->integer('nombre_rate'); 
+            $table->foreign('formation_id')->references('id')->on('formations')->onDelete('cascade');;
+            $table->decimal('nombre_rate', 2, 1)->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,7 @@ class CreateFeedbackTable extends Migration
      */
     public function down()
     {
+        
         Schema::dropIfExists('feedback');
     }
 }

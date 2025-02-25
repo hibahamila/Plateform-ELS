@@ -9,7 +9,7 @@
             <p class="card-text"><strong>Description :</strong> <?php echo e($lesson->description); ?></p>
             <p class="card-text"><strong>Durée :</strong> <?php echo e($lesson->duree); ?></p>
             <p class="card-text"><strong>Chapitre :</strong> <?php echo e($lesson->chapitre->titre ?? 'N/A'); ?></p>
-            <a href="<?php echo e(route('lessons.index')); ?>" class="btn btn-secondary">Retour</a>
+            <a href="<?php echo e(route('lessons.index')); ?>" class="btn btn-secondary">Retour à la liste</a>
             <a href="<?php echo e(route('lessons.edit', $lesson->id)); ?>" class="btn btn-warning">Modifier</a>
             <form action="<?php echo e(route('lessons.destroy', $lesson->id)); ?>" method="POST" style="display:inline;">
                 <?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?>

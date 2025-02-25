@@ -14,7 +14,8 @@ class FormationController extends Controller
         $formations = Formation::all();  
 
         //renvoie les formations avec les donnees 
-        return view('formations.index', compact('formations'));
+        return view('admin.apps.formation.formations', compact('formations'));
+
     }
 
     // Afficher le formulaire de création
@@ -23,7 +24,8 @@ class FormationController extends Controller
     {
         // Récupère toutes les catégories disponibles dans la base de données.
         $categories = Categorie::all();
-        return view('formations.create', compact('categories'));
+        return view('admin.apps.formation.formationcreate', compact('categories'));
+
         // Renvoie la vue formations.create avec les catégories disponibles.
     }
     
@@ -51,7 +53,9 @@ class FormationController extends Controller
 
 
         // return redirect()->route('formations.index')->with('success', 'Formation ajoutée avec succès.');
-                return redirect()->route('formations.index');
+                // return redirect()->route('formations.index');
+                return redirect()->route('formations');
+
 
 
         // yhezek  lel  liste des formations avec  message de succès.
@@ -62,7 +66,11 @@ class FormationController extends Controller
     public function show($id)
     {
         $formation = Formation::findOrFail($id); // Recherche la formation par son ID et génère une erreur 404 si elle n'est pas trouvée.
-        return view('formations.show', compact('formation'));// Renvoie la vue formations.show avec les données de la formation trouvée.
+        
+        // Renvoie la vue admin.apps.formation.formationshow avec les données de la formation trouvée.
+        return view('admin.apps.formation.formationshow', compact('formation'));
+
+    
     }
 
     
@@ -72,7 +80,7 @@ class FormationController extends Controller
     {
         $formation = Formation::findOrFail($id);
         $categories = Categorie::all();
-        return view('formations.edit', compact('formation', 'categories'));
+        return view('admin.apps.formation.formationedit', compact('formation', 'categories'));
     }
 
     // Mettre à jour une formation
@@ -92,7 +100,7 @@ class FormationController extends Controller
         $formation = Formation::findOrFail($id);
         $formation->update($request->all());
 
-        return redirect()->route('formations.index')->with('success', 'Formation mise à jour avec succès.');
+        return redirect()->route('formations')->with('success', 'Formation mise à jour avec succès.');
     }
 
     // Supprimer une formation
@@ -100,7 +108,8 @@ class FormationController extends Controller
     {
         $formation = Formation::findOrFail($id);
         $formation->delete();
+        return redirect()->route('formations')->with('delete', 'Formation supprimée avec succès.');
 
-        return redirect()->route('formations.index')->with('success', 'Formation supprimée avec succès.');
+
     }
 }

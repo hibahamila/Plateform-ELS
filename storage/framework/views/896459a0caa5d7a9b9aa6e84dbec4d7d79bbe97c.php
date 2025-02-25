@@ -249,6 +249,65 @@
                             <li><a href="<?php echo e(route('projects')); ?>" class="<?php echo e(routeActive('projects')); ?>">Project List</a></li>
                             <li><a href="<?php echo e(route('projectcreate')); ?>" class="<?php echo e(routeActive('projectcreate')); ?>">Create new </a></li>
                         </ul>
+
+                        
+                        <a class="nav-link menu-title <?php echo e(prefixActive('/formation')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Formation </span></a>
+                        <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/formation')); ?>;">
+                            <li><a href="<?php echo e(route('formations')); ?>" class="<?php echo e(routeActive('formations')); ?>">Formations List</a></li>
+                            <li><a href="<?php echo e(route('formationcreate')); ?>" class="<?php echo e(routeActive('formationcreate')); ?>">Create new </a></li>
+                        </ul>
+
+                        
+
+                        <a class="nav-link menu-title <?php echo e(prefixActive('/categorie')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Categorie </span></a>
+                        <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/categorie')); ?>;">
+                            <li><a href="<?php echo e(route('categories')); ?>" class="<?php echo e(routeActive('categories')); ?>">Categories List</a></li>
+                            <li><a href="<?php echo e(route('categoriecreate')); ?>" class="<?php echo e(routeActive('categoriecreate')); ?>">Create new </a></li>
+                        </ul>
+
+                        
+                        <a class="nav-link menu-title <?php echo e(prefixActive('/categorie')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Cours </span></a>
+                        <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/cours')); ?>;">
+                            <li><a href="<?php echo e(route('cours')); ?>" class="<?php echo e(routeActive('cours')); ?>">cours List</a></li>
+                            <li><a href="<?php echo e(route('courscreate')); ?>" class="<?php echo e(routeActive('courscreate')); ?>">Create new </a></li>
+                        </ul>
+                        
+
+                        <a class="nav-link menu-title <?php echo e(prefixActive('/chapitre')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Chapitre </span></a>
+                        <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/chapitre')); ?>;">
+                            <li><a href="<?php echo e(route('chapitres')); ?>" class="<?php echo e(routeActive('chapitres')); ?>">chapitres List</a></li>
+                            <li><a href="<?php echo e(route('chapitrecreate')); ?>" class="<?php echo e(routeActive('chapitrecreate')); ?>">Create new </a></li>
+                        </ul>
+
+                         
+                         <a class="nav-link menu-title <?php echo e(prefixActive('/lesson')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Leçon </span></a>
+                         <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/lesson')); ?>;">
+                             <li><a href="<?php echo e(route('lessons')); ?>" class="<?php echo e(routeActive('lessons')); ?>">Leçons List</a></li>
+                             <li><a href="<?php echo e(route('lessoncreate')); ?>" class="<?php echo e(routeActive('lessoncreate')); ?>">Create new </a></li>
+                         </ul>
+
+
+                          
+                          <a class="nav-link menu-title <?php echo e(prefixActive('/quiz')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Quiz </span></a>
+                          <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/quiz')); ?>;">
+                              <li><a href="<?php echo e(route('quizzes')); ?>" class="<?php echo e(routeActive('quizzes')); ?>">Quizzes List</a></li>
+                              <li><a href="<?php echo e(route('quizcreate')); ?>" class="<?php echo e(routeActive('quizcreate')); ?>">Create new </a></li>
+                          </ul>
+
+                          
+                          <a class="nav-link menu-title <?php echo e(prefixActive('/question')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Question </span></a>
+                          <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/question')); ?>;">
+                              <li><a href="<?php echo e(route('questions')); ?>" class="<?php echo e(routeActive('questions')); ?>">Questions List</a></li>
+                              <li><a href="<?php echo e(route('questioncreate')); ?>" class="<?php echo e(routeActive('questioncreate')); ?>">Create new </a></li>
+                          </ul>
+                          
+
+                           
+                           <a class="nav-link menu-title <?php echo e(prefixActive('/reponse')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Reponse </span></a>
+                           <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/reponse')); ?>;">
+                               <li><a href="<?php echo e(route('reponses')); ?>" class="<?php echo e(routeActive('reponses')); ?>">Reponses List</a></li>
+                               <li><a href="<?php echo e(route('reponsecreate')); ?>" class="<?php echo e(routeActive('reponsecreate')); ?>">Create new </a></li>
+                           </ul>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href="<?php echo e(route('file-manager')); ?>"><i data-feather="git-pull-request"></i><span>File manager</span></a>

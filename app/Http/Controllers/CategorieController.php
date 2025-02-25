@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Categorie;
+use App\Models\Formation;
 use Illuminate\Http\Request;
 
 class CategorieController extends Controller
@@ -11,13 +13,13 @@ class CategorieController extends Controller
     public function index()
     {
         $categories = Categorie::all();
-        return view('categories.index', compact('categories'));
+        return view('admin.apps.categorie.categories', compact('categories'));
     }
 
     // Afficher le formulaire de création
     public function create()
     {
-        return view('categories.create');
+        return view('admin.apps.categorie.categoriecreate');
     }
 
     // Enregistrer une nouvelle catégorie
@@ -29,21 +31,24 @@ class CategorieController extends Controller
 
         Categorie::create($request->all());
 
-        return redirect()->route('categories.index')->with('success', 'Catégorie ajoutée avec succès.');
+        return redirect()->route('categories')->with('success', 'Catégorie ajoutée avec succès.');
     }
 
     // Afficher une catégorie spécifique
     public function show($id)
     {
         $categorie = Categorie::findOrFail($id);
-        return view('categories.show', compact('categorie'));
+        return view('admin.apps.categorie.categorieshow', compact('categorie'));
     }
 
     // Afficher le formulaire d'édition
     public function edit($id)
     {
         $categorie = Categorie::findOrFail($id);
-        return view('categories.edit', compact('categorie'));
+        $formations = Formation::all(); // Ajouter la récupération des formations
+
+
+        return view('admin.apps.categorie.categorieedit', compact('categorie','formations'));
     }
 
     // Mettre à jour une catégorie
@@ -56,7 +61,7 @@ class CategorieController extends Controller
         $categorie = Categorie::findOrFail($id);
         $categorie->update($request->all());
 
-        return redirect()->route('categories.index')->with('success', 'Catégorie mise à jour avec succès.');
+        return redirect()->route('categories')->with('success', 'Catégorie mise à jour avec succès.');
     }
 
     // Supprimer une catégorie
@@ -65,6 +70,6 @@ class CategorieController extends Controller
         $categorie = Categorie::findOrFail($id);
         $categorie->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Catégorie supprimée avec succès.');
+        return redirect()->route('categories')->with('delete', 'Catégorie supprimée avec succès.');
     }
 }

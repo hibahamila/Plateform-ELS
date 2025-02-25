@@ -1,92 +1,84 @@
 
 
 <?php $__env->startSection('content'); ?>
-    <h1>Ajouter une formation</h1>
+<div class="container d-flex justify-content-center">
+    <div class="card p-4 shadow" style="max-width: 600px; width: 100%;">
+        <h2 class="text-center mb-4">Ajouter une Formation</h2>
 
-    <!-- Afficher le message de succès -->
-    
+        <?php if($errors->any()): ?>
+        <div class="alert alert-danger">
+            <ul>
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li><?php echo e($error); ?></li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </ul>
+        </div>
+        <?php endif; ?>
 
-    <?php if($errors->any()): ?>
-    <div class="alert alert-danger">
-        <ul>
-            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <li><?php echo e($error); ?></li>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        </ul>
-    </div>
-<?php endif; ?>
-
-    <div class="card">
-        
         <form action="<?php echo e(route('formations.store')); ?>" method="POST" class="form theme-form">
             <?php echo csrf_field(); ?>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <!-- Champ Titre -->
-                        <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Titre</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" id="titre" type="text" name="titre" placeholder="Titre" value="<?php echo e(old('titre')); ?>" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-sm-3 col-form-label">Description</label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" rows="5" cols="5" name="description" placeholder="Description"><?php echo e(old('description')); ?></textarea>
-                            </div>
-                        </div>
-
-                        <br>
-
-                        <!-- Champ Durée -->
-                        <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Durée (HH:mm)</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" id="duree" type="text" name="duree" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" value="<?php echo e(old('duree')); ?>" />
-                            </div>
-                        </div>
-
-                        <!-- Champ Type -->
-                        <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Type</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" id="type" type="text" name="type" placeholder="Type" value="<?php echo e(old('type')); ?>" />
-                            </div>
-                        </div>
-
-                        <!-- Champ Prix -->
-                        <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Prix</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" id="prix" type="number" name="prix" placeholder="Prix" step="0.001" value="<?php echo e(old('prix')); ?>" />
-                            </div>
-                        </div>
-
-                        <!-- Champ Catégorie -->
-                        <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Catégorie</label>
-                            <div class="col-sm-9">
-                                <select class="form-select" id="categorie_id" name="categorie_id">
-                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($categorie->id); ?>" <?php echo e(old('categorie_id') == $categorie->id ? 'selected' : ''); ?>><?php echo e($categorie->titre); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label class="form-label">Titre</label>
+                <input class="form-control" type="text" name="titre" placeholder="Titre" value="<?php echo e(old('titre')); ?>" required />
             </div>
 
-            <!-- Boutons de soumission et d'annulation -->
-            <div class="card-footer text-end">
-            <div class="col-sm-9 offset-sm-3">
-                <button class="btn btn-success" type="submit">Ajouter</button>
-                <input class="btn btn-light" type="reset" value="Annuler" />
-    </div>
-</div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="4" name="description" placeholder="Description" required><?php echo e(old('description')); ?></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Durée (HH:mm)</label>
+                <input class="form-control" type="text" name="duree" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" value="<?php echo e(old('duree')); ?>" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Type</label>
+                <input class="form-control" type="text" name="type" placeholder="Type" value="<?php echo e(old('type')); ?>" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Prix</label>
+                <input class="form-control" type="number" name="prix" placeholder="Prix" step="0.01" value="<?php echo e(old('prix')); ?>" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Catégorie</label>
+                <select class="form-select" name="categorie_id" required>
+                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <option value="<?php echo e($categorie->id); ?>" <?php echo e(old('categorie_id') == $categorie->id ? 'selected' : ''); ?>>
+                            <?php echo e($categorie->titre); ?>
+
+                        </option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button class="btn custom-btn px-4" type="submit">Ajouter</button>
+                <button class="btn btn-secondary px-4" type="button" onclick="window.location.href='<?php echo e(route('formations.index')); ?>'">Annuler</button>
+
+                
             </div>
         </form>
     </div>
+</div>
+
+<style>
+    .custom-btn {
+        background-color: #2b786a; /* Vert foncé */
+        color: white; /* Texte en blanc */
+        border-color: #2b786a; /* Border avec la même couleur */
+    }
+
+    .custom-btn:hover {
+        background-color: #1f5c4d; /* Couleur encore plus foncée au survol */
+        border-color: #1f5c4d;
+        color: white; /* Texte en blanc */
+
+    }
+</style>
+
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\OneDrive\Bureau\PFE\viho_admin_boilerplate\resources\views/formations/create.blade.php ENDPATH**/ ?>

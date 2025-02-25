@@ -12,7 +12,7 @@ class Formation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['titre', 'description', 'duree', 'type', 'prix', 'categorie_id'];
+    protected $fillable = ['titre', 'description', 'duree', 'type','statut', 'prix', 'categorie_id'];
 
     public function categorie()
     {

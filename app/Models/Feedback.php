@@ -18,12 +18,15 @@ class Feedback extends Model
     ];
 
 
+    //(Chaque Feedback appartient à une Formation)
+
     public function formation()
     {
         return $this->belongsTo(Formation::class);
     }
 
-    
+    // (Chaque Feedback appartient à un Utilisateur)
+
     public function user()
     {
         return $this->belongsTo(User::class);

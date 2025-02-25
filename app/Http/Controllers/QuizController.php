@@ -14,13 +14,13 @@ class QuizController extends Controller
     public function index()
     {
         $quizzes = Quiz::all();
-        return view('quizzes.index', compact('quizzes'));
+        return view('admin.apps.quiz.quizzes', compact('quizzes'));
     }
 
     public function create()
     {
         $cours = Cours::all(); // Récupérer tous les cours
-        return view('quizzes.create', compact('cours'));
+        return view('admin.apps.quiz.quizcreate', compact('cours'));
     }
 
     public function store(Request $request)
@@ -31,25 +31,25 @@ class QuizController extends Controller
             'titre' => 'required|string',
             'description' => 'required|string',
             'date_limite' => 'required|date',
-            'date_fin' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_limite',
             'cours_id' => 'required|exists:cours,id', // Validation de la clé étrangère
             'score_minimum' => 'required|integer',
         ]);
 
         Quiz::create($request->all());
 
-        return redirect()->route('quizzes.index')->with('success', 'Quiz ajouté avec succès');
+        return redirect()->route('quizzes')->with('success', 'Quiz ajouté avec succès');
     }
 
     public function show(Quiz $quiz)
     {
-        return view('quizzes.show', compact('quiz'));
+        return view('admin.apps.quiz.quizshow', compact('quiz'));
     }
 
     public function edit(Quiz $quiz)
     {
         $cours = Cours::all(); // Récupérer tous les cours
-        return view('quizzes.edit', compact('quiz', 'cours'));
+        return view('admin.apps.quiz.quizedit', compact('quiz', 'cours'));
     }
 
     public function update(Request $request, Quiz $quiz)
@@ -58,19 +58,19 @@ class QuizController extends Controller
             'titre' => 'required|string',
             'description' => 'required|string',
             'date_limite' => 'required|date',
-            'date_fin' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_limite',
             'cours_id' => 'required|exists:cours,id', // Validation de la clé étrangère
             'score_minimum' => 'required|integer',
         ]);
 
         $quiz->update($request->all());
 
-        return redirect()->route('quizzes.index')->with('success', 'Quiz mis à jour avec succès');
+        return redirect()->route('quizzes')->with('success', 'Quiz mis à jour avec succès');
     }
 
     public function destroy(Quiz $quiz)
     {
         $quiz->delete();
-        return redirect()->route('quizzes.index')->with('success', 'Quiz supprimé avec succès');
+        return redirect()->route('quizzes')->with('delete', 'Quiz supprimé avec succès');
     }
 }

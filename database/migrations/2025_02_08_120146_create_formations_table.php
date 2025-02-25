@@ -21,6 +21,7 @@ class CreateFormationsTable extends Migration
             $table->string('type'); 
             $table->decimal('prix', 8, 3);
             $table->unsignedBigInteger('categorie_id');
+            $table->boolean('statut')->default(true);
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });

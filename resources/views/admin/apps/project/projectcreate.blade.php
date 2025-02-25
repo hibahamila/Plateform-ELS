@@ -131,4 +131,5 @@
     <script src="{{asset('assets/js/dropzone/dropzone-script.js')}}"></script>
 	@endpush
 
-@endsection
+@endsection 
+ 

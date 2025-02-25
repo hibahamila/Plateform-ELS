@@ -15,7 +15,7 @@ class CoursController extends Controller
     public function index()
     {
         $cours = Cours::with('user', 'formation')->get();
-        return view('cours.index', compact('cours'));
+        return view('admin.apps.cours.cours', compact('cours'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CoursController extends Controller
     {
         $users = User::all();
         $formations = Formation::all();
-        return view('cours.create', compact('users', 'formations'));
+        return view('admin.apps.cours.courscreate', compact('users', 'formations'));
     }
 
     /**
@@ -47,7 +47,7 @@ class CoursController extends Controller
         Cours::create($request->all());
 
 
-        return redirect()->route('cours.index')->with('success', 'Cours ajouté avec succès.');
+        return redirect()->route('cours')->with('success', 'Cours ajouté avec succès.');
     }
 
     /**
@@ -56,7 +56,7 @@ class CoursController extends Controller
     public function show($id)
     {
         $cours = Cours::with('user', 'formation')->findOrFail($id);
-        return view('cours.show', compact('cours'));
+        return view('admin.apps.cours.coursshow', compact('cours'));
     }
 
     /**
@@ -67,7 +67,7 @@ class CoursController extends Controller
         $cours = Cours::findOrFail($id);
         $users = User::all();
         $formations = Formation::all();
-        return view('cours.edit', compact('cours', 'users', 'formations'));
+        return view('admin.apps.cours.coursedit', compact('cours', 'users', 'formations'));
     }
 
     /**
@@ -86,8 +86,10 @@ class CoursController extends Controller
 
         $cours = Cours::findOrFail($id);
         $cours->update($request->all());
+        // return redirect()->route('coursupdate', ['id' => $cours->id])->with('success', 'Cours mis à jour avec succès.');
 
-        return redirect()->route('cours.index')->with('success', 'Cours mis à jour avec succès.');
+
+        return redirect()->route('cours')->with('success', 'Cours mis à jour avec succès.');
     }
 
     /**
@@ -98,6 +100,6 @@ class CoursController extends Controller
         $cours = Cours::findOrFail($id);
         $cours->delete();
 
-        return redirect()->route('cours.index')->with('success', 'Cours supprimé avec succès.');
+        return redirect()->route('cours')->with('delete', 'Cours supprimé avec succès.');
     }
 }

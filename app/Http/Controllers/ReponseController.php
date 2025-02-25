@@ -4,87 +4,73 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reponse;
+use App\Models\Question;
 
 class ReponseController extends Controller
 {
-    /**
-     * Afficher toutes les réponses.
-     */
+    // Afficher toutes les réponses
     public function index()
     {
-        $reponses = Reponse::all();
-        return view('reponses.index', compact('reponses'));
+        $reponses = Reponse::with('question')->get();
+        return view('admin.apps.reponse.reponses', compact('reponses'));
     }
 
-    /**
-     * Afficher le formulaire de création d'une réponse.
-     */
+    // Afficher le formulaire de création
     public function create()
     {
-        return view('reponses.create');
+        $questions = Question::all();
+        return view('admin.apps.reponse.reponsecreate', compact('questions'));
     }
 
-    /**
-     * Enregistrer une nouvelle réponse dans la base de données.
-     */
+    // Enregistrer une nouvelle réponse
     public function store(Request $request)
     {
         $request->validate([
-            'contenu' => 'required|string',
-            'question_id' => 'required|exists:questions,id'
+            'question_id' => 'required|exists:questions,id',
+            'contenu' => 'required|string|max:255',
+            'est_correcte' => 'required|boolean',
         ]);
 
         Reponse::create([
-            'contenu' => $request->contenu,
             'question_id' => $request->question_id,
+            'contenu' => $request->contenu,
+            'est_correcte' => $request->est_correcte,
         ]);
 
-        return redirect()->route('reponses.index')->with('success', 'Réponse ajoutée avec succès.');
+        return redirect()->route('reponses')->with('success', 'Réponse ajoutée avec succès.');
     }
 
-    /**
-     * Afficher une réponse spécifique.
-     */
-    public function show($id)
+    // Afficher une seule réponse
+    public function show(Reponse $reponse)
     {
-        $reponse = Reponse::findOrFail($id);
-        return view('reponses.show', compact('reponse'));
+        return view('admin.apps.reponse.reponseshow', compact('reponse'));
     }
 
-    /**
-     * Afficher le formulaire de modification d'une réponse.
-     */
-    public function edit($id)
+    // Afficher le formulaire de modification
+    public function edit(Reponse $reponse)
     {
-        $reponse = Reponse::findOrFail($id);
-        return view('reponses.edit', compact('reponse'));
+        $questions = Question::all();
+        return view('admin.apps.reponse.reponseedit', compact('reponse', 'questions'));
     }
 
-    /**
-     * Mettre à jour une réponse.
-     */
-    public function update(Request $request, $id)
+    // Mettre à jour une réponse
+    public function update(Request $request, Reponse $reponse)
     {
         $request->validate([
-            'contenu' => 'required|string',
+            'question_id' => 'required|exists:questions,id',
+            'contenu' => 'required|string|max:255',
+            'est_correcte' => 'required|boolean',
         ]);
 
-        $reponse = Reponse::findOrFail($id);
-        $reponse->update([
-            'contenu' => $request->contenu,
-        ]);
+        $reponse->update($request->all());
 
-        return redirect()->route('reponses.index')->with('success', 'Réponse mise à jour avec succès.');
+        return redirect()->route('reponses')->with('success', 'Réponse mise à jour avec succès.');
     }
 
-    /**
-     * Supprimer une réponse.
-     */
-    public function destroy($id)
+    // Supprimer une réponse
+    public function destroy(Reponse $reponse)
     {
-        $reponse = Reponse::findOrFail($id);
         $reponse->delete();
-
-        return redirect()->route('reponses.index')->with('success', 'Réponse supprimée avec succès.');
+        return redirect()->route('reponses')->with('delete', 'Réponse supprimée avec succès.');
     }
 }

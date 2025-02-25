@@ -11,8 +11,19 @@
         </div>
     <?php endif; ?>
 
-    <!-- Bouton pour ajouter une nouvelle formation -->
-    <a href="<?php echo e(route('formations.create')); ?>" class="btn btn-primary mb-3">Ajouter une formation</a>
+    <?php if(session('delete')): ?>
+        <div class="alert alert-danger" id="delete-message">
+            <?php echo e(session('delete')); ?>
+
+        </div>
+    <?php endif; ?>
+
+    <!-- Bouton pour ajouter une nouvelle formation, légèrement à gauche -->
+    <div class="d-flex justify-content-end mb-3">
+        <a href="<?php echo e(route('formations.create')); ?>" class="btn custom-btn px-4" style="margin-right: 10px;">
+            <i class="fa fa-plus"></i> Ajouter une formation
+        </a>
+    </div>
 
     <!-- Table pour afficher la liste des formations -->
     <div class="card">
@@ -61,14 +72,26 @@
     <script>
         window.onload = function() {
             const successMessage = document.getElementById('success-message');
+            const deleteMessage = document.getElementById('delete-message');
+
             if (successMessage) {
                 // Rendre le message visible immédiatement
                 successMessage.style.opacity = 1;
-                // Après 0.5 secondes, faire disparaître rapidement
+                // Après 2 secondes, faire disparaître rapidement
                 setTimeout(() => {
-                    successMessage.style.transition = 'opacity 0.5s ease';
+                    successMessage.style.transition = 'opacity 0.3s ease';
                     successMessage.style.opacity = 0;
-                }, 500); // Délai de 0.5 seconde avant de commencer à disparaître
+                }, 2000); // Délai de 2 secondes avant de commencer à disparaître
+            }
+
+            if (deleteMessage) {
+                // Rendre le message visible immédiatement
+                deleteMessage.style.opacity = 1;
+                // Après 2 secondes, faire disparaître rapidement
+                setTimeout(() => {
+                    deleteMessage.style.transition = 'opacity 0.3s ease';
+                    deleteMessage.style.opacity = 0;
+                }, 2000); // Délai de 2 secondes avant de commencer à disparaître
             }
         }
     </script>
@@ -76,9 +99,40 @@
     <!-- Ajouter le style CSS pour l'animation -->
     <style>
         /* Style initial du message */
-        #success-message {
+        #success-message, #delete-message {
             opacity: 0;
-            transition: opacity 0.5s ease; /* Définir une transition rapide */
+            transition: opacity 0.3s ease; /* Transition plus rapide */
+        }
+
+        /* Message de succès : vert */
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        /* Message de suppression : rouge */
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        /* Style pour le bouton avec l'icône + */
+        .custom-btn {
+            background-color: #2b786a; /* Vert foncé */
+            color: white;
+            border-color: #2b786a;
+        }
+
+        .custom-btn:hover {
+            background-color: #1f5c4d; /* Plus foncé au survol */
+            border-color: #1f5c4d;
+            color: white;
+        }
+
+        .custom-btn i {
+            margin-right: 8px; /* Espacement entre l'icône et le texte */
         }
     </style>
 <?php $__env->stopSection(); ?>

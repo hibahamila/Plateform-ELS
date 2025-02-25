@@ -4,14 +4,20 @@
     <h1>Détails de la Question</h1>
 
     <div>
-        <p><strong>Enoncé :</strong> <?php echo e($question->texte); ?></p>
+        <p><strong>Enoncé :</strong> <?php echo e($question->enonce); ?></p>
     </div>
 
     <h2>Réponses associées :</h2>
     <?php if($question->reponses->count() > 0): ?>
         <ul>
             <?php $__currentLoopData = $question->reponses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reponse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <li><?php echo e($reponse->texte); ?> - <strong><?php echo e($reponse->est_correct ? 'Correcte' : 'Incorrecte'); ?></strong></li>
+            <li><?php echo e($reponse->contenu); ?> - <strong><?php echo e($reponse->est_correcte ? 'Correcte' : 'Incorrecte'); ?></strong></li>
+
+            
+
+                
+                
+
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
     <?php else: ?>

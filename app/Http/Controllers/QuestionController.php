@@ -2,84 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\Reponse;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    // Afficher toutes les questions
     public function index()
     {
+        // Récupérer toutes les questions avec leur quiz associé
         $questions = Question::with('quiz')->get();
-        return view('questions.index', compact('questions'));
+        return view('admin.apps.question.questions', compact('questions'));
     }
 
-    // Afficher le formulaire de création
     public function create()
     {
+        // Récupérer tous les quiz pour le formulaire de création
         $quizzes = Quiz::all();
-        return view('questions.create', compact('quizzes'));
+        return view('admin.apps.question.questioncreate', compact('quizzes'));
     }
 
-    // Stocker une nouvelle question
     public function store(Request $request)
     {
         $request->validate([
             'enonce' => 'required|string|max:255',
-            'quiz_id' => 'required|exists:quizzes,id',
+            'quiz_id' => 'required|exists:quizzes,id', 
         ]);
 
+        // Création de la question
         Question::create($request->all());
 
-        return redirect()->route('questions.index')->with('success', 'Question ajoutée avec succès');
+        return redirect()->route('questions')->with('success', 'Question ajoutée avec succès.');
     }
 
-    // Afficher une seule question
-    public function show(Question $question)
+    public function show($id)
     {
-        return view('questions.show', compact('question'));
+        // Récupérer la question avec son quiz associé
+        $question = Question::with('quiz')->findOrFail($id);
+        return view('admin.apps.question.questionshow', compact('question'));
     }
 
-    // Afficher le formulaire d'édition
-    // public function edit(Question $question)
-    // {
-    //     // dd($question);  // Pour afficher l'objet et vérifier son contenu
-    //     if (!$question) {
-    //         return redirect()->route('questions.index')->with('error', 'Question non trouvée');
-    //     }
+    public function edit($id)
+    {
+        // Récupérer la question et tous les quiz pour le formulaire de modification
+        $question = Question::findOrFail($id);
+        $quizzes = Quiz::all();
+        $reponse = Reponse::where('question_id', $id)->get(); // Assurez-vous que la variable $reponse est définie
 
-    //     $quizzes = Quiz::all();
-    //     return view('questions.edit', compact('question', 'quizzes'));
-    // }
+        return view('admin.apps.question.questionedit', compact('question', 'quizzes', 'reponse'));
+        // return view('admin.apps.question.questionedit', compact('question', 'quizzes'));
+    }
 
-
-    public function edit(Question $question)
-{
-    $quizzes = Quiz::all();
-    return view('questions.edit', compact('question', 'quizzes'));
-}
-    // Mettre à jour une question
-    public function update(Request $request, Question $question)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'enonce' => 'required|string|max:255',
             'quiz_id' => 'required|exists:quizzes,id',
         ]);
 
+        // Mise à jour de la question
+        $question = Question::findOrFail($id);
         $question->update($request->all());
 
-        return redirect()->route('questions.index')->with('success', 'Question mise à jour avec succès');
+        return redirect()->route('questions')->with('success', 'Question mise à jour avec succès.');
     }
 
-    // Supprimer une question
-    public function destroy(Question $question)
+    public function destroy($id)
     {
-        if ($question) {
-            $question->delete();
-            return redirect()->route('questions.index')->with('success', 'Question supprimée avec succès');
-        } else {
-            return redirect()->route('questions.index')->with('error', 'Question non trouvée');
-        }
+        // Suppression de la question
+        $question = Question::findOrFail($id);
+        $question->delete();
+
+        return redirect()->route('questions')->with('delete', 'Question supprimée avec succès.');
     }
 }
