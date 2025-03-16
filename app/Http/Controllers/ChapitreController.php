@@ -10,33 +10,38 @@ class ChapitreController extends Controller
 {
     public function index()
     {
-        // Récupérer tous les chapitres
         $chapitres = Chapitre::with('cours')->get();
         return view('admin.apps.chapitre.chapitres', compact('chapitres'));
     }
 
-    public function create()
+     public function create()
     {
-        // Récupérer les cours pour les afficher dans un select
-        $cours = Cours::all();
+        $cours = Cours::all();   
         return view('admin.apps.chapitre.chapitrecreate', compact('cours'));
     }
 
+
+
+    //code jdid 
     public function store(Request $request)
-    {
-        $request->validate([
-            'titre' => 'required|string|max:255',
-            'description' => 'required|string',
-            'cours_id' => 'required|exists:cours,id',
-            'duree' => 'required|date_format:H:i',
-        ]);
+{
+    $request->validate([
+        'titre' => 'required|string|max:255',
+        'description' => 'required|string',
+        'cours_id' => 'required|exists:cours,id',
+        'duree' => 'required|date_format:H:i',
+    ]);
+    $chapitre = Chapitre::create($request->all());
+    // pour passe l id a la vue suivante 
+    session()->flash('chapitre_id', $chapitre->id);
 
-        // Création du chapitre
-        Chapitre::create($request->all());
+    // Rediriger vers la même page pour permettre la persistance des données dans le formulaire
+    return redirect()->route('chapitrecreate')->withInput(); // Utilisez withInput() pour maintenir les anciennes données
 
-        return redirect()->route('chapitres')->with('success', 'Chapitre ajouté avec succès.');
-    }
 
+}
+
+   
     public function edit($id)
     {
         $chapitre = Chapitre::findOrFail($id);
@@ -46,10 +51,8 @@ class ChapitreController extends Controller
 
     public function show($id)
 {
-    // Récupérer le chapitre avec son id, incluant les informations de cours associées
     $chapitre = Chapitre::with('cours')->findOrFail($id);
 
-    // Retourner la vue avec les données du chapitre
     return view('admin.apps.chapitre.chapitreshow', compact('chapitre'));
 }
 
@@ -76,3 +79,5 @@ class ChapitreController extends Controller
         return redirect()->route('chapitres')->with('delete', 'Chapitre supprimé avec succès.');
     }
 }
+
+

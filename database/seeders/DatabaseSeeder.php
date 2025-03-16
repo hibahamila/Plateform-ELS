@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Database\Seeders\PermissionsDemoSeeder;
 use Illuminate\Database\Seeder;
+use UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,5 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(PermissionsDemoSeeder::class);
+
     }
 }

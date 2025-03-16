@@ -14,14 +14,13 @@ class CreatePaiementsTable extends Migration
     public function up()
     {
         Schema::create('paiements', function (Blueprint $table) {
-            $table->id(); // Clé primaire (id)
-            $table->unsignedBigInteger('user_id'); // Clé étrangère
+            $table->id();
+            $table->unsignedBigInteger('user_id'); 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
             
             $table->float('montant');
             $table->date('date_paiement');
-            $table->string('statut'); // Ex: "En attente", "Payé", "Échoué"
-
+            $table->string('statut'); // Ex: "En attente", "Payé", "Échoué
             $table->timestamps();
         });
     }

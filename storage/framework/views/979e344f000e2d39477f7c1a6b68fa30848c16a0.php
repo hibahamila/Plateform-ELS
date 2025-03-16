@@ -6,7 +6,6 @@
 
 <?php $__env->startPush('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
-    <!-- CSS de Select2 via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <?php $__env->stopPush(); ?>
 
@@ -43,51 +42,55 @@
                             </div>
                         <?php endif; ?>
 
-                        <form action="<?php echo e(route('coursupdate', $cours->id)); ?>" method="POST">
+                        <form action="<?php echo e(route('coursupdate', $cours->id)); ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate >
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('PUT'); ?>
 
-                            <!-- Titre -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="titre" class="form-label">Titre du Cours</label>
                                         <input type="text" name="titre" class="form-control" value="<?php echo e(old('titre', $cours->titre)); ?>" required>
+                                        <div class="invalid-feedback">Veuillez entrer un titre valide.</div>
+
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Description -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Description</label>
-                                        <textarea name="description" class="form-control" rows="4" required><?php echo e(old('description', $cours->description)); ?></textarea>
+                                        <textarea name="description" class="form-control" rows="4" required ><?php echo e(old('description', $cours->description)); ?></textarea>
+                                        <div class="invalid-feedback">Veuillez entrer une description valide.</div>
+
+                                    
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Date de début -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="date_debut" class="form-label">Date de Début</label>
                                         <input type="date" name="date_debut" class="form-control" value="<?php echo e(old('date_debut', $cours->date_debut)); ?>" required>
+                                        <div class="invalid-feedback">Veuillez entrer une date de debut valide.</div>
+
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Date de fin -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="date_fin" class="form-label">Date de Fin</label>
                                         <input type="date" name="date_fin" class="form-control" value="<?php echo e(old('date_fin', $cours->date_fin)); ?>" required>
+                                        <div class="invalid-feedback">Veuillez entrer une date de fin valide.</div>
+
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Formation avec Select2 -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
@@ -101,11 +104,12 @@
                                                 </option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
+                                        <div class="invalid-feedback">Veuillez sélectionner une formation.</div>
+
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Utilisateur avec Select2 -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
@@ -118,12 +122,13 @@
                                                 </option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
+                                        <div class="invalid-feedback">Veuillez sélectionner un professeur .</div>
+
                                     </div>
                                 </div>
                             </div>
 
 
-                            <!-- Boutons -->
                             <div class="row">
                                 <div class="col text-end">
                                     <button class="btn btn-secondary me-3" type="submit">Mettre à jour</button>
@@ -140,16 +145,16 @@
 <?php $__env->startPush('scripts'); ?>
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone-script.js')); ?>"></script>
-    <!-- Inclusion de Select2 JS via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <!-- Inclusion du fichier JS externe pour l'initialisation de Select2 -->
     <script src="<?php echo e(asset('assets/js/select2-init/single-select.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/form-validation/form-validation.js')); ?>"></script>
+
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('styles'); ?>
     <style>
         .custom-btn {
-            background-color: #2b786a; /* Vert foncé */
+            background-color: #2b786a; 
             color: white;
             border-color: #2b786a;
         }

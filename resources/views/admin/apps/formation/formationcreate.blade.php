@@ -1,50 +1,11 @@
 
-
-{{-- bl validation  --}}
-
-
-@extends('layouts.admin.master')
+ @extends('layouts.admin.master')
 
 @section('title') Ajouter une Formation @endsection
 
 @push('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dropzone.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <style>
-        /* Styles pour les messages d'alerte */
-        #success-message, #delete-message, #create-message {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .alert-success {
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-            color: #155724;
-        }
-        .alert-danger {
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-            color: #721c24;
-        }
-        .alert-info {
-            background-color: #d1ecf1;
-            border-color: #bee5eb;
-            color: #0c5460;
-        }
-        .custom-btn {
-            background-color: #2b786a;
-            color: white;
-            border-color: #2b786a;
-        }
-        .custom-btn:hover {
-            background-color: #1f5c4d;
-            border-color: #1f5c4d;
-            color: white;
-        }
-        .custom-btn i {
-            margin-right: 8px;
-        }
-    </style>
 @endpush
 
 @section('content')
@@ -72,7 +33,7 @@
                         @endif
 
                         <div class="form theme-form">
-                            <form class="needs-validation" action="{{ route('formationstore') }}" method="POST" novalidate>
+                            <form class="needs-validation" action="{{ route('formationstore') }}" method="POST" enctype="multipart/form-data" novalidate >
                                 @csrf
                                 <div class="row">
                                     <div class="col">
@@ -88,7 +49,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="description">Description</label>
-                                            <textarea class="form-control" id="description" rows="4" name="description" placeholder="Description" required>{{ old('description') }}</textarea>
+                                            <textarea class="form-control" id="description" rows="4" name="description" placeholder="Description" required >{{ old('description') }}</textarea>
                                             <div class="invalid-feedback">Veuillez entrer une description valide.</div>
                                         </div>
                                     </div>
@@ -119,6 +80,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                {{-- champs el 3edi  --}}
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="image">Image</label>
+                                            <input class="form-control" type="file" id="image" name="image" accept="image/*" required />
+                                            <div class="invalid-feedback">Veuillez télécharger une image valide.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- champs b dropzone  --}}
+                                
+
+                                
+                          
 
                                 <div class="row">
                                     <div class="col">
@@ -160,24 +138,16 @@
     <script src="{{ asset('assets/js/select2-init/single-select.js') }}"></script>
     <script src="{{ asset('assets/js/form-validation/form-validation.js') }}"></script>
 
-    {{-- <script>
-        // Activer la validation des formulaires Bootstrap
-        (function () {
-            'use strict'
-            var forms = document.querySelectorAll('.needs-validation')
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
-    </script> --}}
+    {{-- zedtou lel dropzone --}}
+    <script>
+    
+    </script>
+    
+
 @endpush
 
-@endsection 
+@endsection
+
+
+
 

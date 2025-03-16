@@ -2,10 +2,18 @@
 
 
 
+
+
+
+
+
+
+ 
+
 <?php $__env->startSection('title'); ?> Modifier une Catégorie <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('css'); ?>
-<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -32,7 +40,7 @@
                             </div>
                         <?php endif; ?>
                         <div class="form theme-form">
-                            <form action="<?php echo e(route('categorieupdate', $categorie->id)); ?>" method="POST">
+                            <form action="<?php echo e(route('categorieupdate', $categorie->id)); ?>" method="POST" class="theme-form needs-validation" novalidate>
                                 <?php echo csrf_field(); ?>
                                 <?php echo method_field('PUT'); ?>
 
@@ -41,10 +49,11 @@
                                         <div class="mb-3">
                                             <label class="form-label">Titre</label>
                                             <input class="form-control" type="text" name="titre" placeholder="Titre" value="<?php echo e(old('titre', $categorie->titre)); ?>" required />
+                                            <div class="invalid-feedback">Veuillez entrer un titre valide.</div>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col">
                                         <div class="text-end">
@@ -61,11 +70,13 @@
         </div>
     </div>
 
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startPush('scripts'); ?>
 <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/dropzone/dropzone-script.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/form-validation/form-validation.js')); ?>"></script>
 <?php $__env->stopPush(); ?>
-<?php $__env->stopSection(); ?> 
 
 
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/categorie/categorieedit.blade.php ENDPATH**/ ?>

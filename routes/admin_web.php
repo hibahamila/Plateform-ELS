@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ChapitreController;
 use App\Http\Controllers\CoursController;
@@ -10,6 +13,9 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ReponseController;
 use Illuminate\Support\Facades\Route;
+
+
+
 
 
 
@@ -233,7 +239,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::prefix('chapitres')->group(function () {
         Route::get('chapitres', [ChapitreController::class, 'index'])->name('chapitres');
-        Route::get('chapitrecreate', [ChapitreController::class, 'create'])->name('chapitrecreate');
+		// Route::get('chapitrecreate', [ChapitreController::class, 'create'])->name('chapitrecreate');
+
+        Route::get('chapitrecreate/{cours_id?}', [ChapitreController::class, 'create'])->name('chapitrecreate');
         Route::post('store', [ChapitreController::class, 'store'])->name('chapitrestore');
         Route::get('{id}', [ChapitreController::class, 'show'])->name('chapitreshow');
         Route::get('{id}/edit', [ChapitreController::class, 'edit'])->name('chapitreedit');
@@ -274,15 +282,15 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 
 
-	Route::prefix('reponses')->group(function () {
-        Route::get('reponses', [ReponseController::class, 'index'])->name('reponses'); 
-        Route::get('reponsecreate', [ReponseController::class, 'create'])->name('reponsecreate'); 
-        Route::post('store', [ReponseController::class, 'store'])->name('reponsestore'); 
-        Route::get('/{reponse}', [ReponseController::class, 'show'])->name('reponseshow'); 
-        Route::get('/{reponse}/edit', [ReponseController::class, 'edit'])->name('reponseedit'); 
-        Route::put('/{reponse}', [ReponseController::class, 'update'])->name('reponseupdate'); 
-        Route::delete('/{reponse}', [ReponseController::class, 'destroy'])->name('reponsedestroy'); 
-    });
+	// Route::prefix('reponses')->group(function () {
+    //     Route::get('reponses', [ReponseController::class, 'index'])->name('reponses'); 
+    //     Route::get('reponsecreate', [ReponseController::class, 'create'])->name('reponsecreate'); 
+    //     Route::post('store', [ReponseController::class, 'store'])->name('reponsestore'); 
+    //     Route::get('/{reponse}', [ReponseController::class, 'show'])->name('reponseshow'); 
+    //     Route::get('/{reponse}/edit', [ReponseController::class, 'edit'])->name('reponseedit'); 
+    //     Route::put('/{reponse}', [ReponseController::class, 'update'])->name('reponseupdate'); 
+    //     Route::delete('/{reponse}', [ReponseController::class, 'destroy'])->name('reponsedestroy'); 
+    // });
 
 	Route::prefix('feedbacks')->group(function () {
 		Route::get('/', [FeedbackController::class, 'index'])->name('feedbacks');
@@ -416,5 +424,24 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 	
 	Route::view('knowledgebase', 'admin.miscellaneous.knowledgebase')->name('knowledgebase');
+
+
+	
+
+});
+
+Route::middleware(['auth', 'role:admin|super-admin'])->name('admin.')->prefix('admin')->group(function () {
+    Route::resource('/roles', RoleController::class);
+    Route::resource('/permissions', PermissionController::class);
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::delete('/users/{user}',[UserController::class,'destroy'])->name('users.destroy');
+    Route::get('/users/{user}',[UserController::class,'show'])->name('users.roles');
+    Route::delete('/users/{user}/roles/{role}',[UserController::class,'removeRole'])->name('users.roles.remove');
+    Route::delete('/users/{user}/permissions/{permission}',[UserController::class,'revokePermission'])->name('users.permissions.revoke');
+    Route::patch('/users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.toggleStatus');
+ 
+
 
 });

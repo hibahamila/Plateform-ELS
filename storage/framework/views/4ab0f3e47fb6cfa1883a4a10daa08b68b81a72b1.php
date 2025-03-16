@@ -1,50 +1,11 @@
 
-
-
-
-
-
+ 
 
 <?php $__env->startSection('title'); ?> Ajouter une Formation <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <style>
-        /* Styles pour les messages d'alerte */
-        #success-message, #delete-message, #create-message {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .alert-success {
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-            color: #155724;
-        }
-        .alert-danger {
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-            color: #721c24;
-        }
-        .alert-info {
-            background-color: #d1ecf1;
-            border-color: #bee5eb;
-            color: #0c5460;
-        }
-        .custom-btn {
-            background-color: #2b786a;
-            color: white;
-            border-color: #2b786a;
-        }
-        .custom-btn:hover {
-            background-color: #1f5c4d;
-            border-color: #1f5c4d;
-            color: white;
-        }
-        .custom-btn i {
-            margin-right: 8px;
-        }
-    </style>
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -72,7 +33,7 @@
                         <?php endif; ?>
 
                         <div class="form theme-form">
-                            <form class="needs-validation" action="<?php echo e(route('formationstore')); ?>" method="POST" novalidate>
+                            <form class="needs-validation" action="<?php echo e(route('formationstore')); ?>" method="POST" enctype="multipart/form-data" novalidate >
                                 <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="col">
@@ -88,7 +49,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="description">Description</label>
-                                            <textarea class="form-control" id="description" rows="4" name="description" placeholder="Description" required><?php echo e(old('description')); ?></textarea>
+                                            <textarea class="form-control" id="description" rows="4" name="description" placeholder="Description" required ><?php echo e(old('description')); ?></textarea>
                                             <div class="invalid-feedback">Veuillez entrer une description valide.</div>
                                         </div>
                                     </div>
@@ -119,6 +80,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="image">Image</label>
+                                            <input class="form-control" type="file" id="image" name="image" accept="image/*" required />
+                                            <div class="invalid-feedback">Veuillez télécharger une image valide.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                
+
+                                
+                          
 
                                 <div class="row">
                                     <div class="col">
@@ -162,9 +140,17 @@
     <script src="<?php echo e(asset('assets/js/form-validation/form-validation.js')); ?>"></script>
 
     
+    <script>
+    
+    </script>
+    
+
 <?php $__env->stopPush(); ?>
 
-<?php $__env->stopSection(); ?> 
+<?php $__env->stopSection(); ?>
+
+
+
 
 
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/formation/formationcreate.blade.php ENDPATH**/ ?>

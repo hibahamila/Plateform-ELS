@@ -249,6 +249,13 @@
                             <li><a href="<?php echo e(route('projects')); ?>" class="<?php echo e(routeActive('projects')); ?>">Project List</a></li>
                             <li><a href="<?php echo e(route('projectcreate')); ?>" class="<?php echo e(routeActive('projectcreate')); ?>">Create new </a></li>
                         </ul>
+                         
+
+                         <a class="nav-link menu-title <?php echo e(prefixActive('/categorie')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Categories </span></a>
+                         <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/categorie')); ?>;">
+                             <li><a href="<?php echo e(route('categories')); ?>" class="<?php echo e(routeActive('categories')); ?>">Categories List</a></li>
+                             <li><a href="<?php echo e(route('categoriecreate')); ?>" class="<?php echo e(routeActive('categoriecreate')); ?>">Create new </a></li>
+                         </ul>
 
                         
                         <a class="nav-link menu-title <?php echo e(prefixActive('/formation')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Formations </span></a>
@@ -257,13 +264,7 @@
                             <li><a href="<?php echo e(route('formationcreate')); ?>" class="<?php echo e(routeActive('formationcreate')); ?>">Create new </a></li>
                         </ul>
 
-                        
-
-                        <a class="nav-link menu-title <?php echo e(prefixActive('/categorie')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Categories </span></a>
-                        <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/categorie')); ?>;">
-                            <li><a href="<?php echo e(route('categories')); ?>" class="<?php echo e(routeActive('categories')); ?>">Categories List</a></li>
-                            <li><a href="<?php echo e(route('categoriecreate')); ?>" class="<?php echo e(routeActive('categoriecreate')); ?>">Create new </a></li>
-                        </ul>
+                       
 
                         
                         <a class="nav-link menu-title <?php echo e(prefixActive('/categorie')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Cours </span></a>
@@ -369,7 +370,7 @@
                         <a class="nav-link menu-title link-nav <?php echo e(routeActive('bookmark')); ?>" href="<?php echo e(route('bookmark')); ?>"><i data-feather="heart"></i><span>Bookmarks</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('contacts')); ?>" href="<?php echo e(route('contacts')); ?>"><i data-feather="list"></i><span>Contacts</span></a>
+                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('contacts')); ?>" href="<?php echo e(route('contacts')); ?>"><i data-feather="list"></i><span>Utilisateurs et Accés</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav <?php echo e(routeActive('task')); ?>" href="<?php echo e(route('task')); ?>"><i data-feather="check-square"></i><span>Tasks</span></a>

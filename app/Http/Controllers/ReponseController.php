@@ -22,23 +22,39 @@ class ReponseController extends Controller
         return view('admin.apps.reponse.reponsecreate', compact('questions'));
     }
 
-    // Enregistrer une nouvelle réponse
-    public function store(Request $request)
-    {
-        $request->validate([
-            'question_id' => 'required|exists:questions,id',
-            'contenu' => 'required|string|max:255',
-            'est_correcte' => 'required|boolean',
-        ]);
+ 
 
-        Reponse::create([
-            'question_id' => $request->question_id,
-            'contenu' => $request->contenu,
-            'est_correcte' => $request->est_correcte,
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'enonce' => 'required|string',
+        'quiz_id' => 'required|exists:quizzes,id',
+        'response_count' => 'required|integer|min:1|max:10',
+        'reponses' => 'required|array',
+        'reponses.*.contenu' => 'required|string',
+        'reponses.*.est_correcte' => 'boolean',
+    ]);
 
-        return redirect()->route('reponses')->with('success', 'Réponse ajoutée avec succès.');
+    // Création de la question
+    $question = Question::create([
+        'enonce' => $request->enonce,
+        'quiz_id' => $request->quiz_id,
+    ]);
+
+    // Vérification que $request->reponses est bien un tableau
+    if (is_array($request->reponses)) {
+        foreach ($request->reponses as $reponse) {
+            Reponse::create([
+                'contenu' => $reponse['contenu'],
+                'est_correcte' => isset($reponse['est_correcte']) ? $reponse['est_correcte'] : 0,
+                'question_id' => $question->id,
+            ]);
+        }
     }
+
+    return redirect()->route('questions')->with('success', 'Question et réponses ajoutées avec succès !');
+}
+
 
     // Afficher une seule réponse
     public function show(Reponse $reponse)
@@ -56,21 +72,28 @@ class ReponseController extends Controller
     // Mettre à jour une réponse
     public function update(Request $request, Reponse $reponse)
     {
+        // Validation des données
         $request->validate([
             'question_id' => 'required|exists:questions,id',
             'contenu' => 'required|string|max:255',
             'est_correcte' => 'required|boolean',
         ]);
 
-        $reponse->update($request->all());
+        // Mise à jour de la réponse
+        $reponse->update([
+            'question_id' => $request->question_id,
+            'contenu' => $request->contenu,
+            'est_correcte' => $request->est_correcte,
+        ]);
 
-        return redirect()->route('reponses')->with('success', 'Réponse mise à jour avec succès.');
+        // Retourner à la liste des réponses avec un message de succès
+        return redirect()->route('reponses.index')->with('success', 'Réponse mise à jour avec succès.');
     }
 
     // Supprimer une réponse
     public function destroy(Reponse $reponse)
     {
         $reponse->delete();
-        return redirect()->route('reponses')->with('delete', 'Réponse supprimée avec succès.');
+        return redirect()->route('reponses.index')->with('delete', 'Réponse supprimée avec succès.');
     }
 }

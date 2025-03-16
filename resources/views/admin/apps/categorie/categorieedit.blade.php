@@ -1,11 +1,10 @@
 
-
-@extends('layouts.admin.master')
+ @extends('layouts.admin.master')
 
 @section('title') Modifier une Catégorie @endsection
 
 @push('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dropzone.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dropzone.css') }}">
 @endpush
 
 @section('content')
@@ -32,7 +31,7 @@
                             </div>
                         @endif
                         <div class="form theme-form">
-                            <form action="{{ route('categorieupdate', $categorie->id) }}" method="POST">
+                            <form action="{{ route('categorieupdate', $categorie->id) }}" method="POST" class="theme-form needs-validation" novalidate>
                                 @csrf
                                 @method('PUT')
 
@@ -41,10 +40,11 @@
                                         <div class="mb-3">
                                             <label class="form-label">Titre</label>
                                             <input class="form-control" type="text" name="titre" placeholder="Titre" value="{{ old('titre', $categorie->titre) }}" required />
+                                            <div class="invalid-feedback">Veuillez entrer un titre valide.</div>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col">
                                         <div class="text-end">
@@ -61,9 +61,11 @@
         </div>
     </div>
 
+@endsection
+
 @push('scripts')
 <script src="{{ asset('assets/js/dropzone/dropzone.js') }}"></script>
 <script src="{{ asset('assets/js/dropzone/dropzone-script.js') }}"></script>
+<script src="{{ asset('assets/js/form-validation/form-validation.js') }}"></script>
 @endpush
-@endsection 
 

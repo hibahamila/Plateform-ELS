@@ -8,14 +8,15 @@ class CreateQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
+  *
+     * @return void 
      */
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->string('enonce');
+            $table->integer('response_count')->default(1);
             $table->unsignedBigInteger('quiz_id'); 
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
             $table->timestamps(); 

@@ -2,178 +2,132 @@
 
 
 
+
+
 <?php $__env->startSection('title'); ?> Liste des Catégories
- <?php echo e($title); ?>
+<?php echo e($title); ?>
 
 <?php $__env->stopSection(); ?>
+
 <?php $__env->startPush('css'); ?>
-<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/datatables.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/table.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/custom-style.css')); ?>">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/prism.css')); ?>">
-
-
-<style>
-    /* Pagination verte */
-    #categories-table_wrapper .dataTables_wrapper .dataTables_paginate .paginate_button {
-        color: #28a745 !important;
-        border: 1px solid #28a745 !important;
-        margin: 0 5px;
-        padding: 5px 10px;
-        border-radius: 4px;
-        cursor: pointer;
-        background-color: transparent !important;
-    }
-
-    #categories-table_wrapper .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-        background-color: #28a745 !important;
-        color: white !important;
-        border: 1px solid #28a745 !important;
-    }
-
-    #categories-table_wrapper .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-        background-color: #28a745 !important;
-        color: white !important;
-        border: 1px solid #28a745 !important;
-    }
-
-    .delete-icon {
-        color: #dc3545;
-    }
-
-    #categories-table_wrapper .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
-    #categories-table_wrapper .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
-        color: #6c757d !important;
-        border: 1px solid #6c757d !important;
-        background-color: transparent !important;
-        cursor: not-allowed;
-    }
-</style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/prism.css')); ?>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <?php $__env->stopPush(); ?>
 
-
 <?php $__env->startSection('content'); ?>
-	<?php $__env->startComponent('components.breadcrumb'); ?>
-		<?php $__env->slot('breadcrumb_title'); ?>
-			<h3>Liste des Catégories</h3>
-		<?php $__env->endSlot(); ?>
-		<li class="breadcrumb-item">Apps</li>
-		<li class="breadcrumb-item active">Liste des Catégories</li>
-	<?php echo $__env->renderComponent(); ?>
-	
-	<div class="container-fluid">
-	    <div class="row">
-	        <div class="col-sm-12">
-	            <div class="card">
-	                <div class="card-header">
-	                    <h5>Catégories Disponibles</h5>
-	                    <span>Ce tableau affiche la liste des catégories disponibles. Vous pouvez rechercher, trier et paginer les données.</span>
-	                </div>
-	                <div class="card-body">
-                        <?php if(session('success')): ?>
-                            <div class="alert alert-success" id="success-message">
-                                <?php echo e(session('success')); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+    <?php $__env->slot('breadcrumb_title'); ?>
+        <h3>Liste des Catégories</h3>
+    <?php $__env->endSlot(); ?>
+    <li class="breadcrumb-item">Apps</li>
+    <li class="breadcrumb-item active">Liste des Catégories</li>
+<?php echo $__env->renderComponent(); ?>
 
-                            </div>
-                        <?php endif; ?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h5>Catégories Disponibles</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger" id="success-message" style="display: none;">
+                    </div>
 
-                        <?php if(session('delete')): ?>
-                            <div class="alert alert-danger" id="delete-message">
-                                <?php echo e(session('delete')); ?>
+                    <?php if(session('delete')): ?>
+                        <div class="alert alert-danger" id="delete-message">
+                            <?php echo e(session('delete')); ?>
 
-                            </div>
-                        <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
 
-                        <div class="row project-cards">
-                            <div class="col-md-12 project-list">
-                                <div class="card">
-                                    <div class="row">
-                                        <div class="col-md-6 p-0">
-                                        </div>
-                                        <div class="col-md-6 p-0">
-                                            <div class="form-group mb-0 me-0"></div>
-                                            <a class="btn btn-primary custom-btn" href="<?php echo e(route('categoriecreate')); ?>">
-                                                <i data-feather="plus-square"></i>Ajouter une catégorie
-                                            </a>
+                    <div class="row project-cards">
+                        <div class="col-md-12 project-list">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-md-6 p-0"></div>
+                                        <div class="row project-cards">
+                                            <div class="col-md-12 project-list">
+                                                <div class="card">
+                                                    <div class="row">
+                                                        <!-- Conteneur du bouton aligné à droite sans cadre -->
+                                                        
+
+
+                                                        <div class="col-md-6 p-0">
+                                                            <a class="btn btn-primary custom-btn" href="<?php echo e(route('categoriecreate')); ?>">
+                                                                <i data-feather="plus-square"></i>Ajouter une Catégorie
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="table-responsive">
-                            <table class="display" id="categories-table">
-                                <thead>
+                    <div class="table-responsive">
+                        <table class="dataTable display" id="categories-table">
+                            <thead>
+                                <tr>
+                                    <th>Nom de la Catégorie</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+
+                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <th>Nom de la Catégorie</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <tr>
-                                            <td><?php echo e($categorie->titre); ?></td>
-                                            <td>
-                                                <i class="icofont icofont-edit edit-icon action-icon" data-edit-url="<?php echo e(route('categorieedit', $categorie->id)); ?>"></i>
-                                                <i class="icofont icofont-ui-delete delete-icon action-icon" data-delete-url="<?php echo e(route('categoriedestroy', $categorie->id)); ?>" data-csrf="<?php echo e(csrf_token()); ?>"></i>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </tbody>
-                            </table>
-                        </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
+                                        <td>
+                                            <?php echo e($categorie->titre); ?>
 
-	<?php $__env->startPush('scripts'); ?>
-	<script src="<?php echo e(asset('assets/js/prism/prism.min.js')); ?>"></script>
+                                            <div class="dropdown float-right">
+                                                <button class="btn btn-sm btn-light dropdown-toggle no-caret" type="button" id="actionMenu<?php echo e($categorie->id); ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actionMenu<?php echo e($categorie->id); ?>">
+                                                    <a class="dropdown-item" href="<?php echo e(route('categorieedit', $categorie->id)); ?>">
+                                                        <i class="icofont icofont-ui-edit"></i>
+                                                    </a>
+                                                    <a class="dropdown-item text-danger delete-action" href="javascript:void(0);" data-delete-url="<?php echo e(route('categoriedestroy', $categorie->id)); ?>" data-type="catégorie" data-name="<?php echo e($categorie->titre); ?>" data-csrf="<?php echo e(csrf_token()); ?>">
+                                                        <i class="icofont icofont-ui-delete"></i> 
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php $__env->startPush('scripts'); ?>
+    <script src="<?php echo e(asset('assets/js/dropdown/dropdown.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/prism/prism.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/clipboard/clipboard.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/custom-card/custom-card.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/height-equal.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/actions-icon/actions-icon.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/datatables/datatables.js')); ?>"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
 
-    <script>
-        $(document).ready(function() {
-            // Initialisation de DataTable
-            $('#categories-table').DataTable({
-                language: {
-                    url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/fr-FR.json" // Langue française
-                },
-                responsive: true,
-                paging: true,
-                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Tous"]],
-                pageLength: 10,
-                order: [[0, 'asc']] // Tri par défaut sur la première colonne
-            });
-
-            // Gestion des messages de succès et d'erreur
-            const successMessage = document.getElementById('success-message');
-            const deleteMessage = document.getElementById('delete-message');
-
-            if (successMessage) {
-                successMessage.style.opacity = 1;
-                setTimeout(() => {
-                    successMessage.style.transition = 'opacity 0.3s ease';
-                    successMessage.style.opacity = 0;
-                }, 2000);
-            }
-
-            if (deleteMessage) {
-                deleteMessage.style.opacity = 1;
-                setTimeout(() => {
-                    deleteMessage.style.transition = 'opacity 0.3s ease';
-                    deleteMessage.style.opacity = 0;
-                }, 2000);
-            }
-        });
-    </script>
-	<?php $__env->stopPush(); ?>
-<?php $__env->stopSection(); ?> 
 
 
 

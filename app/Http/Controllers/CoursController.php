@@ -9,59 +9,70 @@ use Illuminate\Http\Request;
 
 class CoursController extends Controller
 {
-    /**
-     * Afficher la liste des cours.
-     */
+  
     public function index()
     {
         $cours = Cours::with('user', 'formation')->get();
         return view('admin.apps.cours.cours', compact('cours'));
     }
 
-    /**
-     * Afficher le formulaire de création d'un cours.
-     */
-    public function create()
+  
+    // public function create()
+    // {
+    //     $users = User::all();
+    //     $formations = Formation::all();
+    //     return view('admin.apps.cours.courscreate', compact('users', 'formations'));
+    // }
+
+    //code jdid
+    public function create(Request $request)
     {
         $users = User::all();
         $formations = Formation::all();
-        return view('admin.apps.cours.courscreate', compact('users', 'formations'));
+        $coursId = $request->query('cours_id') ?: session('cours_id');
+        return view('admin.apps.cours.courscreate', compact('formations','users','coursId'));
     }
 
-    /**
-     * Enregistrer un nouveau cours.
-     */
-    public function store(Request $request)
-    {
-        // dd($request->all());
-
-        $request->validate([
-            'titre' => 'required|string|max:255',
-            'description' => 'required|string',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date|after_or_equal:date_debut',
-            'user_id' => 'required|exists:users,id',
-            'formation_id' => 'required|exists:formations,id',
-        ]);
-
-        Cours::create($request->all());
+   
 
 
-        return redirect()->route('cours')->with('success', 'Cours ajouté avec succès.');
-    }
+    //zedtou jdid 
+public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'titre' => 'required|string|max:255',
+        'description' => 'required|string',
+        'date_debut' => 'required|date',
+        'date_fin' => 'required|date|after_or_equal:date_debut',
+        'user_id' => 'required|exists:users,id',
+        'formation_id' => 'required|exists:formations,id',
+    ]);
 
-    /**
-     * Afficher les détails d'un cours.
-     */
+    $cours = Cours::create($validatedData);
+
+    // Flasher l'id du cours dans la session pour l'utiliser dans l'alerte
+    session()->flash('cours_id', $cours->id);
+
+    // Rediriger vers la même page pour permettre la persistance des données dans le formulaire
+    return redirect()->route('courscreate')->withInput(); // Utilisez withInput() pour maintenir les anciennes données
+}
+
+
+
+
+
+
+
+
+
+
     public function show($id)
     {
         $cours = Cours::with('user', 'formation')->findOrFail($id);
         return view('admin.apps.cours.coursshow', compact('cours'));
     }
 
-    /**
-     * Afficher le formulaire d'édition d'un cours.
-     */
+ 
     public function edit($id)
     {
         $cours = Cours::findOrFail($id);
@@ -70,9 +81,7 @@ class CoursController extends Controller
         return view('admin.apps.cours.coursedit', compact('cours', 'users', 'formations'));
     }
 
-    /**
-     * Mettre à jour un cours.
-     */
+    
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -86,15 +95,12 @@ class CoursController extends Controller
 
         $cours = Cours::findOrFail($id);
         $cours->update($request->all());
-        // return redirect()->route('coursupdate', ['id' => $cours->id])->with('success', 'Cours mis à jour avec succès.');
 
 
         return redirect()->route('cours')->with('success', 'Cours mis à jour avec succès.');
     }
 
-    /**
-     * Supprimer un cours.
-     */
+   
     public function destroy($id)
     {
         $cours = Cours::findOrFail($id);

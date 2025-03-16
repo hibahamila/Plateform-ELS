@@ -25,7 +25,6 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <!-- Affichage des erreurs -->
                         <?php if($errors->any()): ?>
                             <div class="alert alert-danger">
                                 <ul>
@@ -36,7 +35,6 @@
                             </div>
                         <?php endif; ?>
 
-                        <!-- Affichage du message flash de succès -->
                         <?php if(session('success')): ?>
                             <div class="alert alert-success">
                                 <?php echo e(session('success')); ?>
@@ -44,42 +42,44 @@
                             </div>
                         <?php endif; ?>
 
-                        <!-- Formulaire de modification du chapitre -->
-                        <form action="<?php echo e(route('chapitreupdate', $chapitre->id)); ?>" method="POST">
+                        <form action="<?php echo e(route('chapitreupdate', $chapitre->id)); ?>" method="POST" class="theme-form needs-validation" novalidate>
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('PUT'); ?>
 
-                            <!-- Titre -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="titre" class="form-label">Titre</label>
                                         <input type="text" name="titre" class="form-control" value="<?php echo e(old('titre', $chapitre->titre)); ?>" required>
+                                        <div class="invalid-feedback">Veuillez entrer un titre.</div>
+
                                     </div>
+
                                 </div>
                             </div>
 
-                            <!-- Description -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Description</label>
-                                        <textarea name="description" class="form-control" rows="4" required><?php echo e(old('description', $chapitre->description)); ?></textarea>
+                                        <textarea name="description" class="form-control" rows="4"  required><?php echo e(old('description', $chapitre->description)); ?></textarea>
+                                        <div class="invalid-feedback">Veuillez entrer une description.</div>
+
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Durée -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="duree" class="form-label">Durée (HH:mm)</label>
                                         <input type="text" name="duree" class="form-control" value="<?php echo e(old('duree', \Carbon\Carbon::parse($chapitre->duree)->format('H:i'))); ?>" pattern="\d{2}:\d{2}" title="Format: HH:mm" required>
+                                        <div class="invalid-feedback">Veuillez entrer une durée valide.</div>
+
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Cours avec Select2 -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
@@ -93,11 +93,12 @@
                                                 </option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
+                                        <div class="invalid-feedback">Veuillez selectionnez un cours .</div>
+
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Boutons -->
                             <div class="row">
                                 <div class="col text-end">
                                     <button class="btn btn-secondary me-3" type="submit">Mettre à jour</button>
@@ -114,16 +115,16 @@
 <?php $__env->startPush('scripts'); ?>
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone-script.js')); ?>"></script>
-    <!-- Inclusion de Select2 JS via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <!-- Inclusion du fichier externe pour l'initialisation de Select2 -->
     <script src="<?php echo e(asset('assets/js/select2-init/single-select.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/form-validation/form-validation.js')); ?>"></script>
+
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('styles'); ?>
     <style>
         .custom-btn {
-            background-color: #2b786a; /* Vert foncé */
+            background-color: #2b786a; 
             color: white;
             border-color: #2b786a;
         }

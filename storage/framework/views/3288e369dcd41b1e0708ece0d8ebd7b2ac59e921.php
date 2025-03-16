@@ -1,5 +1,6 @@
 
-   
+
+
 
 <?php $__env->startSection('title'); ?>
     Liste des Formations <?php echo e($title); ?>
@@ -47,6 +48,23 @@
         .custom-btn i {
             margin-right: 8px;
         }
+
+        .formation-image {
+            max-height: 200px;
+            object-fit: contain; 
+            width: 100%;
+        }
+
+        /* Animation sur le cadre */
+        .project-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
     </style>
 <?php $__env->stopPush(); ?>
 
@@ -73,13 +91,11 @@
                                     <a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="check-circle"></i>Published</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="false"><i data-feather="info"></i>Upublished</a>
+                                    <a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="false"><i data-feather="info"></i>Unpublished</a>
                                 </li>
-                               
                             </ul>
                         </div>
                         <div class="col-md-6 p-0">
-                            <div class="form-group mb-0 me-0"></div>
                             <a class="btn btn-primary custom-btn" href="<?php echo e(route('formationcreate')); ?>">
                                 <i data-feather="plus-square"></i>Ajouter une formation
                             </a>
@@ -90,7 +106,6 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        
                         <?php if(session('success')): ?>
                             <div class="alert alert-success" id="success-message">
                                 <?php echo e(session('success')); ?>
@@ -121,6 +136,13 @@
                                                 <span class="badge badge-primary">Published</span>
                                                 <h6><?php echo e($formation->titre); ?></h6>
                                                 <p><?php echo e($formation->description); ?></p>
+
+                                                <?php if($formation->image): ?>
+                                                    <img src="<?php echo e(asset('storage/' . $formation->image)); ?>" alt="<?php echo e($formation->titre); ?>" class="formation-image">
+                                                <?php else: ?>
+                                                    <p>Aucune image disponible</p>
+                                                <?php endif; ?>
+
                                                 <div class="row details">
                                                     <div class="col-6"><span>Durée</span></div>
                                                     <div class="col-6 font-primary"><?php echo e($formation->duree); ?></div>
@@ -131,12 +153,8 @@
                                                     <div class="col-6"><span>Catégorie</span></div>
                                                     <div class="col-6 font-primary"><?php echo e($formation->categorie->titre ?? 'N/A'); ?></div>
                                                 </div>
-                                                
-                                                 <div class="mt-3">
-                                                    <!-- Icône Modifier -->
+                                                <div class="mt-3">
                                                     <i class="icofont icofont-edit edit-icon action-icon" data-edit-url="<?php echo e(route('formationedit', $formation->id)); ?>" style="cursor: pointer;"></i>
-                                                
-                                                    <!-- Icône Supprimer -->
                                                     <i class="icofont icofont-ui-delete delete-icon action-icon" data-delete-url="<?php echo e(route('formationdestroy', $formation->id)); ?>" data-csrf="<?php echo e(csrf_token()); ?>" style="cursor: pointer; color: rgb(204, 28, 28);"></i>
                                                 </div>
                                             </div>
@@ -144,66 +162,42 @@
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
-                                <div class="row">
-                                    <!-- Ajoutez ici les formations en cours -->
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                                <div class="row">
-                                    <!-- Ajoutez ici les formations terminées -->
-                                </div>
-                            </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <?php $__env->startPush('scripts'); ?>
-        <script src="<?php echo e(asset('assets/js/prism/prism.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/js/clipboard/clipboard.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/js/custom-card/custom-card.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/js/height-equal.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/js/actions-icon/actions-icon.js')); ?>"></script>
+<?php $__env->startPush('scripts'); ?>
+    <script src="<?php echo e(asset('assets/js/prism/prism.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/height-equal.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/actions-icon/actions-icon.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/dropdown/dropdown.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/clipboard/clipboard.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/custom-card/custom-card.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/height-equal.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/datatables/datatables.js')); ?>"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 
-        <script>
-            window.onload = function() {
-                // Messages de succès, suppression et création
-                const successMessage = document.getElementById('success-message');
-                const deleteMessage = document.getElementById('delete-message');
-                const createMessage = document.getElementById('create-message');
-
-                if (successMessage) {
-                    successMessage.style.opacity = 1;
+    <script>
+        window.onload = function() {
+            ['success-message', 'delete-message', 'create-message'].forEach(id => {
+                const message = document.getElementById(id);
+                if (message) {
+                    message.style.opacity = 1;
                     setTimeout(() => {
-                        successMessage.style.transition = 'opacity 0.3s ease';
-                        successMessage.style.opacity = 0;
+                        message.style.opacity = 0;
                     }, 2000);
                 }
+            });
+        }
+    </script>
+<?php $__env->stopPush(); ?>
 
-                if (deleteMessage) {
-                    deleteMessage.style.opacity = 1;
-                    setTimeout(() => {
-                        deleteMessage.style.transition = 'opacity 0.3s ease';
-                        deleteMessage.style.opacity = 0;
-                    }, 2000);
-                }
-
-                if (createMessage) {
-                    createMessage.style.opacity = 1;
-                    setTimeout(() => {
-                        createMessage.style.transition = 'opacity 0.3s ease';
-                        createMessage.style.opacity = 0;
-                    }, 2000);
-                }
-            }
-        </script>
-    <?php $__env->stopPush(); ?>
-<?php $__env->stopSection(); ?>
-
-
+<?php $__env->stopSection(); ?> 
 
 
 

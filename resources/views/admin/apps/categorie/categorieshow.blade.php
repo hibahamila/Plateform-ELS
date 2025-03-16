@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -11,4 +11,4 @@
         <p><strong>Catégorie:</strong> {{ $formation->categorie->titre }}</p>
         <a href="{{ route('formations') }}" class="btn btn-secondary">Retour à la lise </a>
     </div>
-@endsection
+@endsection --}}

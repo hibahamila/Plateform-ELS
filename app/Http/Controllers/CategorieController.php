@@ -51,7 +51,6 @@ class CategorieController extends Controller
         return view('admin.apps.categorie.categorieedit', compact('categorie','formations'));
     }
 
-    // Mettre à jour une catégorie
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -64,12 +63,28 @@ class CategorieController extends Controller
         return redirect()->route('categories')->with('success', 'Catégorie mise à jour avec succès.');
     }
 
-    // Supprimer une catégorie
+   
+
     public function destroy($id)
     {
-        $categorie = Categorie::findOrFail($id);
-        $categorie->delete();
-
-        return redirect()->route('categories')->with('delete', 'Catégorie supprimée avec succès.');
+        try {
+            // Trouver la catégorie par son ID ou lever une exception si elle n'existe pas
+            $categorie = Categorie::findOrFail($id);
+            
+            // Récupérer le nom de la catégorie
+            $categorieName = $categorie->titre;  // Remplacez 'nom' par le champ correct
+    
+            // Supprimer la catégorie
+            $categorie->delete();
+    
+            // Retourner un message de succès
+            return response()->json(['successMessage' => "La catégorie '{$categorieName}' a été supprimée avec succès!"]);
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner un message d'erreur
+            return response()->json(['errorMessage' => 'Une erreur est survenue.']);
+        }
     }
+    
+
+
 }

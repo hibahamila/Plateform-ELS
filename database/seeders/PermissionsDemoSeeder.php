@@ -15,27 +15,36 @@ class PermissionsDemoSeeder extends Seeder
     public function run()
     {
         //creer les permissions
-        $permission1= Permission::create(['name'=>'gerer les permissions des admins']);
-        $permission2= Permission::create(['name'=>'gerer des permission']);
-        $permission3= Permission::create(['name'=>'gerer des roles']);
+        $permission1= Permission::create(['name'=>'gérer des permissions']);
+        $permission2= Permission::create(['name'=>'gérer des rôles']);
         //creer les roles + leur donner des permissions
-        $superAdmin= Role::create(['name'=>'super-admin']);
-        $admin = Role::create(['name'=>'admin'])->givePermissionTo($permission2,$permission3);
+        $superAdmin= Role::create(['name'=>'super-admin'])->givePermissionTo($permission1);;
+        $admin = Role::create(['name'=>'admin'])->givePermissionTo($permission2);
         $professeur= Role::create(['name'=>'professeur']);
         $etudiant= Role::create(['name'=>'etudiant']);
         \App\Models\User::factory()->create([
             'name' => 'oumayma',
-            'last_name' => 'zahrouni',
+            'lastname' => 'zahrouni',
             'email' => 'superAdmin@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('superAdmin123')
+            'password' => bcrypt('superAdmin123'),
+            'status' =>'active'
         ])->assignRole($superAdmin);
         \App\Models\User::factory()->create([
             'name' => 'hiba',
-            'last_name' => 'hamila',
+            'lastname' => 'hamila',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('admin123')
+            'password' => bcrypt('admin123'),
+            'status' =>'active'
         ])->assignRole($admin);
+        \App\Models\User::factory()->create([
+            'name' => 'kacem',
+            'lastname' => 'bbbbbb',
+            'email' => 'kacem@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('kacem123'),
+            'status' =>'active'
+        ])->assignRole($etudiant);
     }
 }

@@ -1,45 +1,47 @@
 
 
 
-
-
-
 <?php $__env->startSection('title'); ?> Ajouter un Cours <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
+    <link href="<?php echo e(asset('assets/css/custom-style.css')); ?>" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+    <?php if(session()->has('cours_id')): ?>
+    <p>Session cours_id: <?php echo e(session('cours_id')); ?></p>
+    <?php endif; ?>
+
     <style>
-        /* Styles pour les messages d'alerte et boutons */
-        #success-message, #delete-message, #create-message {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .alert-success {
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-            color: #155724;
-        }
-        .alert-danger {
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-            color: #721c24;
-        }
-        .alert-info {
-            background-color: #d1ecf1;
-            border-color: #bee5eb;
-            color: #0c5460;
-        }
-        .custom-btn {
-            background-color: #2b786a;
-            color: white;
-            border-color: #2b786a;
-        }
-        .custom-btn:hover {
-            background-color: #1f5c4d;
-            border-color: #1f5c4d;
-            color: white;
-        }
+   
+
+/* Personnaliser la croix de fermeture de SweetAlert2 */
+.swal2-close {
+    color: red; /* Couleur de la croix en rouge */
+    font-size: 40px; /* Taille de la croix */
+    background-color: transparent; /* Aucune couleur de fond */
+    border: none; /* Aucune bordure */
+    position: absolute; /* Permet de positionner la croix de manière absolue */
+    top: 10px; /* Distance par rapport au haut de l'alerte */
+    right: 10px; /* Distance par rapport à la droite de l'alerte */
+    cursor: pointer; /* Change le curseur en pointeur */
+    outline: none; /* Supprime le contour autour de la croix */
+}
+
+/* Optionnel : ajouter un style au survol */
+.swal2-close:hover {
+    color: red; /* Garder la couleur rouge au survol */
+    background-color: transparent; /* Assurer qu'il n'y a pas de fond au survol */
+}
+
+/* Supprimer les effets de bordure au clic */
+.swal2-close:focus {
+    outline: none; /* Enlever l'effet de focus (bordure noire ou bleue) */
+    box-shadow: none; /* Supprimer l'ombre au focus */
+}
+
+
+
     </style>
 <?php $__env->stopPush(); ?>
 
@@ -57,7 +59,6 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <!-- Affichage des erreurs côté serveur -->
                         <?php if($errors->any()): ?>
                             <div class="alert alert-danger">
                                 <ul>
@@ -68,12 +69,10 @@
                             </div>
                         <?php endif; ?>
                         
-                        <!-- Formulaire d'ajout de cours avec validation Bootstrap -->
                         <div class="form theme-form">
                             <form action="<?php echo e(route('coursstore')); ?>" method="POST" class="needs-validation" novalidate>
                                 <?php echo csrf_field(); ?>
                                 
-                                <!-- Titre -->
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
@@ -84,18 +83,15 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Description -->
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="description">Description</label>
                                             <textarea id="description" class="form-control" rows="4" name="description" placeholder="Description" required><?php echo e(old('description')); ?></textarea>
-                                            <div class="invalid-feedback">Veuillez entrer une description valide.</div>
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <!-- Dates -->
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
@@ -112,8 +108,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <!-- Sélection des professeurs et formations -->
+
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
@@ -146,8 +141,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <!-- Boutons -->
+
                                 <div class="row">
                                     <div class="col">
                                         <div class="text-end">
@@ -158,12 +152,12 @@
                                 </div>
                             </form>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts'); ?>
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
@@ -171,29 +165,38 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="<?php echo e(asset('assets/js/select2-init/single-select.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/form-validation/form-validation.js')); ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Écoutez l'événement de soumission du formulaire
-            document.querySelector('form.needs-validation').addEventListener('submit', function (event) {
-                event.preventDefault(); // Empêchez la soumission par défaut du formulaire
+        document.addEventListener("DOMContentLoaded", function() {
+            let coursId = "<?php echo e(session('cours_id')); ?>";
 
-                // Simulez une soumission réussie (remplacez ceci par votre logique de soumission réelle)
-                setTimeout(function () {
-                    // Affichez l'alerte de succès
-                    alert('Cours créé avec succès !');
-
-                    // Demandez à l'utilisateur s'il souhaite créer un chapitre
-                    if (confirm('Voulez-vous créer un chapitre pour ce cours ?')) {
-                        // Redirigez vers la page de création de chapitre
-                        window.location.href = '<?php echo e(route("chapitrecreate")); ?>';
-                    } else {
-                        // Redirigez vers la page des cours
-                        window.location.href = '<?php echo e(route("cours")); ?>';
+            if (coursId) {
+                Swal.fire({
+                    title: "Cours ajouté avec succès !",
+                    text: "Voulez-vous ajouter un chapitre à ce cours ?",
+                    icon: "success",
+                    showCancelButton: true,
+                    confirmButtonText: "Oui, ajouter un chapitre",
+                    cancelButtonText: "Non, revenir à la liste",
+                    showCloseButton: true, // Afficher la croix de fermeture
+                    customClass: {
+                        confirmButton: 'custom-confirm-btn'
                     }
-                }, 1000); // Simule un délai de soumission
-            });
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Rediriger vers la page de création de chapitre
+                        window.location.href = "<?php echo e(route('chapitrecreate')); ?>?cours_id=" + coursId;
+                    } else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
+                        // Rediriger vers la liste des cours si l'utilisateur clique sur "Non"
+                        window.location.href = "<?php echo e(route('cours')); ?>";
+                    }
+                    // Si l'utilisateur clique sur la croix, ne rien faire (rester sur la même page)
+                });
+            }
         });
     </script>
 <?php $__env->stopPush(); ?>
+
+<?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/cours/courscreate.blade.php ENDPATH**/ ?>
