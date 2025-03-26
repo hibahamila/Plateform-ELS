@@ -18,9 +18,9 @@ class CreatePaiementsTable extends Migration
             $table->unsignedBigInteger('user_id'); 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
             
-            $table->float('montant');
-            $table->date('date_paiement');
-            $table->string('statut'); // Ex: "En attente", "Payé", "Échoué
+            $table->float('amount');
+            $table->date('payment_date');
+            $table->string('status'); // Ex: "En attente", "Payé", "Échoué
             $table->timestamps();
         });
     }

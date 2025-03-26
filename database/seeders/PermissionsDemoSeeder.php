@@ -15,6 +15,7 @@ class PermissionsDemoSeeder extends Seeder
     public function run()
     {
         //creer les permissions
+
         $permission1= Permission::create(['name'=>'gérer des permissions']);
         $permission2= Permission::create(['name'=>'gérer des rôles']);
         //creer les roles + leur donner des permissions
@@ -25,6 +26,7 @@ class PermissionsDemoSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'oumayma',
             'lastname' => 'zahrouni',
+            'phone'=>'90120430',
             'email' => 'superAdmin@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('superAdmin123'),
@@ -33,18 +35,12 @@ class PermissionsDemoSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'hiba',
             'lastname' => 'hamila',
+            'phone'=>'99125430',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('admin123'),
             'status' =>'active'
         ])->assignRole($admin);
-        \App\Models\User::factory()->create([
-            'name' => 'kacem',
-            'lastname' => 'bbbbbb',
-            'email' => 'kacem@gmail.com',
-            'email_verified_at' => now(),
-            'password' => bcrypt('kacem123'),
-            'status' =>'active'
-        ])->assignRole($etudiant);
+
     }
 }

@@ -19,7 +19,7 @@ class CreateFeedbackTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->unsignedBigInteger('formation_id');
             $table->foreign('formation_id')->references('id')->on('formations')->onDelete('cascade');;
-            $table->decimal('nombre_rate', 2, 1)->nullable();
+            $table->decimal('rating_count', 2, 1)->nullable();
             $table->timestamps();
         });
     }

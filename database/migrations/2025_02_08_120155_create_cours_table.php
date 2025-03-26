@@ -15,10 +15,10 @@ class CreateCoursTable extends Migration
     {
         Schema::create('cours', function (Blueprint $table) {
             $table->id();
-            $table->string('titre'); 
-            $table->string('description');
-            $table->date('date_debut'); 
-            $table->date('date_fin'); 
+            $table->string('title'); 
+            $table->longText('description');
+            $table->date('start_date'); 
+            $table->date('end_date'); 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('formation_id');

@@ -91,9 +91,9 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: #24695c;
+                color: #2B6ED4;
                 //- padding:10px;
-                background-color: #24695c3d;
+                background-color: #2B6ED43d;
                 transition: all 0.5s ease;
             }
             .temp-social td:nth-child(n + 2) {
@@ -126,7 +126,7 @@
                 left: 0;
                 width: 100%;
                 height: 5px;
-                background-color: #24695c;
+                background-color: #2B6ED4;
             }
             .deliver-status li:first-child::before,
             .deliver-status li:last-child::before {
@@ -159,7 +159,7 @@
                 font-size: 14px;
             }
             .deliver-status li .order-icon.active {
-                background-color: #24695c;
+                background-color: #2B6ED4;
             }
             .deliver-status li .order-icon.active i {
                 color: #ffffff;
@@ -356,7 +356,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 20px auto 0;">
                                             <tbody>
                                                 <tr>
-                                                    <td><a href="javascript:void(0)" style="color: #24695c; font-size: 14px; text-transform: capitalize; font-weight: 600;">Want to change how you receive these emails?</a></td>
+                                                    <td><a href="javascript:void(0)" style="color: #2B6ED4; font-size: 14px; text-transform: capitalize; font-weight: 600;">Want to change how you receive these emails?</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -364,7 +364,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><a href="javascript:void(0)" style="color: #24695c; font-size: 14px; text-transform: capitalize; font-weight: 600; margin: 0; text-decoration: underline;">Unsubscribe</a></td>
+                                                    <td><a href="javascript:void(0)" style="color: #2B6ED4; font-size: 14px; text-transform: capitalize; font-weight: 600; margin: 0; text-decoration: underline;">Unsubscribe</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>

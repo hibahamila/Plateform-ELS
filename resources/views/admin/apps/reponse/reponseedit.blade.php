@@ -50,7 +50,7 @@
                                         <select class="form-select select2-question" name="question_id" required>
                                             @foreach($questions as $question)
                                                 <option value="{{ $question->id }}" {{ old('question_id', $reponse->question_id) == $question->id ? 'selected' : '' }}>
-                                                    {{ $question->enonce }}
+                                                    {{ $question->statement }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -61,8 +61,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label class="form-label">Contenu</label>
-                                        <input class="form-control" type="text" name="contenu" value="{{ old('contenu', $reponse->contenu) }}" required />
+                                        <label class="form-label">content</label>
+                                        <input class="form-control" type="text" name="content" value="{{ old('content', $reponse->content) }}" required />
                                     </div>
                                 </div>
                             </div>
@@ -71,9 +71,9 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label class="form-label">Est correcte ?</label>
-                                        <select class="form-select" name="est_correcte" required>
-                                            <option value="1" {{ old('est_correcte', $reponse->est_correcte) == 1 ? 'selected' : '' }}>Oui</option>
-                                            <option value="0" {{ old('est_correcte', $reponse->est_correcte) == 0 ? 'selected' : '' }}>Non</option>
+                                        <select class="form-select" name="is_correct" required>
+                                            <option value="1" {{ old('is_correct', $reponse->is_correct) == 1 ? 'selected' : '' }}>Oui</option>
+                                            <option value="0" {{ old('is_correct', $reponse->is_correct) == 0 ? 'selected' : '' }}>Non</option>
                                         </select>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
     <script src="{{ asset('assets/js/dropzone/dropzone.js') }}"></script>
     <script src="{{ asset('assets/js/dropzone/dropzone-script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <script src="{{ asset('assets/js/select2-init/single-select.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/select2-init/single-select.js') }}"></script>
     @endpush
 
 @endsection

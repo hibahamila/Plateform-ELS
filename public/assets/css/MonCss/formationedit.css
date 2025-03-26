@@ -1,0 +1,42 @@
+/* Style pour centrer et agrandir les images */
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.centered-image {
+    width: 400px; /* Image agrandie */
+    height:200px;
+    margin-bottom: 15px;
+    object-fit: contain;
+}
+.image-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+/* Style pour l'icône de poubelle */
+.trash-icon {
+    color: #dc3545;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.trash-icon:hover {
+    transform: scale(1.2);
+}
+/* Style pour le bouton de restauration */
+#restoreImage {
+    display: none; /* Caché par défaut */
+    width: 40%; /* Largeur automatique au lieu de 100% */
+    margin-top: 10px; /* Espacement par rapport à l'élément au-dessus */
+    background-color: #808080; /* Couleur grise */
+    color: white; /* Couleur du texte */
+    border-color: #707070; /* Couleur de la bordure */
+}
+/* Container pour le file upload et le bouton de restauration */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+}

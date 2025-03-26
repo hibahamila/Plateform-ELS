@@ -103,11 +103,24 @@ class UserController extends Controller
         $user->status = $user->status === 'active' ? 'inactive' : 'active';
         $user->save();
         return response()->json([
-            'message' => 'Statut modifié avec succès.',
+            'message' => 'status modifié avec succès.',
             'success' => true,
             'status' => $user->status
         ]);
     }
+
+    //zedthomm 
+
+    public function edit()
+{
+    // Récupérer l'utilisateur connecté
+    $user = auth()->user();
+
+    // Retourner la vue d'édition du profil avec les données de l'utilisateur
+    return view('admin.user.useredit', compact('user'));
+}
+
+
 
 }
 

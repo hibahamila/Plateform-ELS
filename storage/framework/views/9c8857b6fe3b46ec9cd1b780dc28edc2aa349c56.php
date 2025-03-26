@@ -77,19 +77,19 @@
                                         <select class="form-select select2-question" name="question_id" required>
                                             <option value="" disabled selected>Choisir une question</option>
                                             <?php $__currentLoopData = $questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option value="<?php echo e($question->id); ?>"><?php echo e($question->enonce); ?></option>
+                                                <option value="<?php echo e($question->id); ?>"><?php echo e($question->statement); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Champ Contenu -->
+                            <!-- Champ content -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="contenu" class="form-label">Contenu</label>
-                                        <input type="text" class="form-control" name="contenu" placeholder="Contenu" required>
+                                        <label for="content" class="form-label">content</label>
+                                        <input type="text" class="form-control" name="content" placeholder="content" required>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label class="form-label">Est correcte ?</label>
-                                        <select class="form-select" name="est_correcte" required>
+                                        <select class="form-select" name="is_correct" required>
                                             <option value="1">Oui</option>
                                             <option value="0">Non</option>
                                         </select>

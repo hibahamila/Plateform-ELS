@@ -146,7 +146,7 @@
                                     <tr>
                                         <td><?php echo e($chapitre->titre); ?></td>
                                         <td><?php echo e($chapitre->description); ?></td>
-                                        <td><?php echo e($chapitre->duree); ?></td>
+                                        <td><?php echo e($chapitre->duration); ?></td>
                                         <td><?php echo e($chapitre->cours->titre); ?></td>
                                         <td>
                                             <i class="icofont icofont-edit edit-icon action-icon" data-edit-url="<?php echo e(route('chapitreedit', $chapitre->id)); ?>" style="cursor: pointer;"></i>

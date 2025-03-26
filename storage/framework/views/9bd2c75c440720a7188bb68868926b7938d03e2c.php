@@ -119,7 +119,7 @@
                                     <tr>
                                         <td><?php echo e($lesson->titre); ?></td>
                                         <td><?php echo e($lesson->description); ?></td>
-                                        <td><?php echo e($lesson->duree); ?></td>
+                                        <td><?php echo e($lesson->duration); ?></td>
                                         <td><?php echo e($lesson->chapitre->titre ?? 'Non attribué'); ?></td>
                                         <td>
                                             <?php if($lesson->file_path): ?>

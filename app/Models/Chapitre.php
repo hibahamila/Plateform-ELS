@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Chapitre extends Model
 {
     use HasFactory;
-    protected $fillable = ['titre', 'description','duree', 'cours_id'];
+    protected $fillable = ['title', 'description','duration', 'cours_id'];
 
     public function cours()
     {

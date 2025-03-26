@@ -707,7 +707,7 @@
                             <div class="card-body align-items-center">
                                 <div class="round-progress knob-block text-center">
                                     <div class="progress-circle">
-                                        <input class="knob1" data-width="10" data-height="70" data-thickness=".3" data-angleoffset="0" data-linecap="round" data-fgcolor="#ba895d" data-bgcolor="#e0e9ea" value="60">
+                                        <input class="knob1" data-width="10" data-height="70" data-thickness=".3" data-angleoffset="0" data-linecap="round" data-fgcolor="#717171" data-bgcolor="#e0e9ea" value="60">
                                     </div>
                                     <h5>$9,84,235</h5>
                                     <p>Our Annual Income</p>
@@ -720,7 +720,7 @@
                             <div class="card-body">
                                 <div class="round-progress knob-block text-center">
                                     <div class="progress-circle">
-                                        <input class="knob1" data-width="50" data-height="70" data-thickness=".3" data-fgcolor="#24695c" data-linecap="round" data-angleoffset="0" value="60">
+                                        <input class="knob1" data-width="50" data-height="70" data-thickness=".3" data-fgcolor="#2B6ED4" data-linecap="round" data-angleoffset="0" value="60">
                                     </div>
                                     <h5>$4,55,462</h5>
                                     <p>Our Annual Income</p>

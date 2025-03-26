@@ -11,12 +11,12 @@ class Quiz extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'titre',
+        'title',
         'description',
-        'date_limite',
-        'date_fin',
+        'deadline',
+        'end_date',
         'cours_id',
-        'score_minimum',
+        'minimum_score',
     ];
 
     // Relation avec le modèle `Cours`

@@ -15,13 +15,16 @@ class CreateQuizzesTable extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->string('titre'); 
-            $table->string('description'); 
-            $table->date('date_limite'); 
-            $table->date('date_fin'); 
+            $table->string('title'); 
+            $table->longText('description'); 
+            $table->date('deadline'); 
+            $table->date('end_date'); 
             $table->unsignedBigInteger('cours_id'); 
             $table->foreign('cours_id')->references('id')->on('cours')->onDelete('cascade');
-            $table->integer('score_minimum'); 
+            // $table->integer('minimum_score'); 
+            $table->unsignedInteger('minimum_score'); 
+            //unsignedInteger pour empêcher les valeurs négatives 
+
             $table->timestamps(); 
 
         });

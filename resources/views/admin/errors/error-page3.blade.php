@@ -25,7 +25,7 @@
                                     fill: #e0e0e0;
                                 }
                                 .shp2 {
-                                    fill: #24695c;
+                                    fill: #2B6ED4;
                                 }
                                 .shp3 {
                                     fill: #ffffff;
@@ -38,7 +38,7 @@
                                     fill: #000000;
                                 }
                                 .shp6 {
-                                    fill: #ba895d;
+                                    fill: #717171;
                                 }
                                 .shp7 {
                                     fill: #263238;

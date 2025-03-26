@@ -17,13 +17,18 @@ class CreateCertificationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('formation_id');
-            $table->date('date_obtention');
-            $table->string('statut'); // Ex: "Délivrée", "Validée", "Refusée"
-            $table->timestamps();
+            $table->date('obtained_date');
+            $table->string('status'); // Ex: "Délivrée", "Validée", "Refusée"
 
             // Définition des clés étrangères
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('formation_id')->references('id')->on('formations')->onDelete('cascade');        });
+            $table->foreign('formation_id')->references('id')->on('formations')->onDelete('cascade'); 
+            $table->timestamps();
+      
+        
+        
+        
+        });
     }
 
     /**

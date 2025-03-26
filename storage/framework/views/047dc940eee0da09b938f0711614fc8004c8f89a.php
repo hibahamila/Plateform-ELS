@@ -68,7 +68,7 @@
                         <table class="display dataTable" id="chapitres-table">
                             <thead>
                                 <tr>
-                                    <th>Titre</th>
+                                    <th>title</th>
                                     <th>Description</th>
                                     <th>Durée</th>
                                     <th>Cours</th>
@@ -78,12 +78,12 @@
                             <tbody>
                                 <?php $__currentLoopData = $chapitres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $chapitre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td><?php echo e($chapitre->titre); ?></td>
-                                        <td><?php echo e($chapitre->description); ?></td>
-                                        <td><?php echo e($chapitre->duree); ?></td>
+                                        <td><?php echo e($chapitre->title); ?></td>
+                                        <td><?php echo $chapitre->description; ?></td>
+                                        <td><?php echo e($chapitre->duration); ?></td>
                                         <td>
                                             <a href="<?php echo e(route('cours', ['selected_cours' => $chapitre->cours->id])); ?>" class="cours-link" data-cours-id="<?php echo e($chapitre->cours->id); ?>">
-                                                <?php echo e($chapitre->cours->titre); ?>
+                                                <?php echo e($chapitre->cours->title); ?>
 
                                             </a>
                                         </td>
@@ -131,5 +131,7 @@
 </script>
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
+
+
 
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/chapitre/chapitres.blade.php ENDPATH**/ ?>

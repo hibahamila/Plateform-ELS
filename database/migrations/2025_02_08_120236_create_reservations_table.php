@@ -20,8 +20,8 @@ class CreateReservationsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->foreign('formation_id')->references('id')->on('formations')->onDelete('cascade');;
 
-            $table->date('date_reservation');
-            $table->time('heure');
+            $table->date('reservation_date');
+            $table->time('reservation_time');
             $table->timestamps();        
         });
     }

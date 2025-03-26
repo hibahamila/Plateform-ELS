@@ -67,7 +67,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach($feedbacks as $feedback)
-                                                <tr data-rate="{{ $feedback->nombre_rate !== null ? number_format($feedback->nombre_rate, 1) : 'null' }}" data-id="{{ $feedback->id }}">
+                                                <tr data-rate="{{ $feedback->rating_count !== null ? number_format($feedback->rating_count, 1) : 'null' }}" data-id="{{ $feedback->id }}">
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input feedback-checkbox" id="feedback-{{ $feedback->id }}" name="feedbacks[]" value="{{ $feedback->id }}">
@@ -79,7 +79,7 @@
                                                             <div class="avatar-sm bg-light rounded mr-3 text-center">
                                                             </div>
                                                             <div>
-                                                                <h6 class="mb-0">{{ $feedback->formation->titre }}</h6>
+                                                                <h6 class="mb-0">{{ $feedback->formation->title }}</h6>
                                                                 @if(isset($feedback->user))
                                                                     <small class="text-muted">Par: {{ $feedback->user->name ?? 'Anonyme' }}</small>
                                                                 @endif
@@ -87,19 +87,19 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        @if ($feedback->nombre_rate !== null)
-                                                            <span class="d-none">{{ number_format($feedback->nombre_rate, 1) }}</span>
+                                                        @if ($feedback->rating_count !== null)
+                                                            <span class="d-none">{{ number_format($feedback->rating_count, 1) }}</span>
                                                             <div class="rating-stars">
                                                                 @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($feedback->nombre_rate >= $i)
+                                                                    @if ($feedback->rating_count >= $i)
                                                                         <i class="fa fa-star filled"></i>
-                                                                    @elseif ($feedback->nombre_rate >= ($i - 0.5))
+                                                                    @elseif ($feedback->rating_count >= ($i - 0.5))
                                                                         <i class="fa fa-star-half-o filled"></i>
                                                                     @else
                                                                         <i class="fa fa-star-o"></i>
                                                                     @endif
                                                                 @endfor
-                                                                <span class="rating-value ml-2">({{ number_format($feedback->nombre_rate, 1) }})</span>
+                                                                <span class="rating-value ml-2">({{ number_format($feedback->rating_count, 1) }})</span>
                                                             </div>
                                                         @else
                                                             <span class="d-none">null</span>
@@ -153,8 +153,8 @@
                                                         $totalRating = 0;
                                                         $ratedCount = 0;
                                                         foreach($feedbacks as $feedback) {
-                                                            if ($feedback->nombre_rate !== null) {
-                                                                $totalRating += $feedback->nombre_rate;
+                                                            if ($feedback->rating_count !== null) {
+                                                                $totalRating += $feedback->rating_count;
                                                                 $ratedCount++;
                                                             }
                                                         }
@@ -181,7 +181,7 @@
                                                     @php
                                                         $ratedFormations = [];
                                                         foreach($feedbacks as $feedback) {
-                                                            if ($feedback->nombre_rate !== null) {
+                                                            if ($feedback->rating_count !== null) {
                                                                 $ratedFormations[$feedback->formation->id] = true;
                                                             }
                                                         }
@@ -236,7 +236,7 @@
     <script src="{{ asset('assets/js/tooltip-init.js') }}"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-    <script src="{{ asset('assets/js/feedback/feedback.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/feedback/feedback.js') }}"></script>
 @endpush
 
 @push('css')

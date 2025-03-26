@@ -19,58 +19,12 @@ class QuizController extends Controller
     }
 
 
-    // public function create(Request $request)
-    // {
-    //     $cours = Cours::all(); // Récupérer tous les cours
-    //     $quizId = $request->query('quiz_id') ?: session('quiz_id');
-    //     return view('admin.apps.quiz.quizcreate', compact('cours','quizId'));
-    // }
+    public function create(Request $request)
+{
+    $cours = Cours::all(); // Récupérer tous les cours
+    return view('admin.apps.quiz.quizcreate', compact('cours'));
+}
 
-    
-
-   
-
-
-// public function store(Request $request)
-// {
-//     $request->validate([
-//         'titre' => 'required|string',
-//         'description' => 'required|string',
-//         'date_limite' => 'required|date',
-//         'date_fin' => 'required|date|after_or_equal:date_limite',
-//         'cours_id' => 'required|exists:cours,id',
-//         'score_minimum' => 'required|integer',
-//     ]);
-
-//     // Créez un quiz et assignez-le à une variable pour récupérer l'ID
-//     $quiz = Quiz::create($request->all());
-
-//     // Enregistrez l'ID du quiz dans la session
-//     session()->flash('quiz_id', $quiz->id);
-
-//     // Redirigez vers la page des quizzes avec un message de succès
-//     return redirect()->route('quizzes')->with('success', 'Quiz ajouté avec succès');
-// }
-
-
-// //jdid
-// public function store(Request $request)
-// {
-//     $request->validate([
-//         'titre' => 'required|string',
-//         'description' => 'required|string',
-//         'date_limite' => 'required|date',
-//         'date_fin' => 'required|date|after_or_equal:date_limite',
-//         'cours_id' => 'required|exists:cours,id',
-//         'score_minimum' => 'required|integer',
-//     ]);
-
-//     // Créer le quiz
-//     $quiz = Quiz::create($request->all());
-
-//     // Enregistrer l'ID du quiz dans la session
-//     return redirect()->route('quizcreate')->with('quiz_id', $quiz->id);
-// }
 
 
 
@@ -88,12 +42,12 @@ class QuizController extends Controller
     public function update(Request $request, Quiz $quiz)
     {
         $request->validate([
-            'titre' => 'required|string',
+            'title' => 'required|string',
             'description' => 'required|string',
-            'date_limite' => 'required|date',
-            'date_fin' => 'required|date|after_or_equal:date_limite',
+            'deadline' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:deadline',
             'cours_id' => 'required|exists:cours,id', // Validation de la clé étrangère
-            'score_minimum' => 'required|integer',
+            'minimum_score' => 'required|integer|min:1',
         ]);
 
         $quiz->update($request->all());
@@ -110,12 +64,12 @@ class QuizController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'titre' => 'required|string',
+        'title' => 'required|string',
         'description' => 'required|string',
-        'date_limite' => 'required|date',
-        'date_fin' => 'required|date|after_or_equal:date_limite',
+        'deadline' => 'required|date',
+        'end_date' => 'required|date|after_or_equal:deadline',
         'cours_id' => 'required|exists:cours,id',
-        'score_minimum' => 'required|integer',
+        'minimum_score' => 'required|integer|min:1',
     ]);
 
     // Créer le quiz
@@ -127,13 +81,6 @@ class QuizController extends Controller
                      ->with('quiz_id', $quiz->id)->withInput();;
 }
 
-public function create(Request $request)
-{
-    $cours = Cours::all(); // Récupérer tous les cours
-    return view('admin.apps.quiz.quizcreate', compact('cours'));
 }
-}
-
-
 
 

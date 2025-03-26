@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ChapitreController;
 use App\Http\Controllers\CoursController;
+use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\LessonController;
@@ -25,21 +26,22 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-
-
-
-
-
-
 Route::group(['middleware' => 'auth'], function () {
+
 	Route::prefix('admin')->group(function () {
 	});
+	Route::get('profile/edit', [EditProfileController::class, 'edit'])->name('profile.edit');
+
+// Mettre à jour le profil
+	Route::put('profile/{user}', [EditProfileController::class, 'update'])->name('profile.update');
 	
+
+
 	Route::prefix('dashboard')->group(function () {
 		Route::view('dashboard-02', 'admin.dashboard.dashboard-02')->name('dashboard-02');
+		
 	});
-	
+		
 	Route::prefix('widgets')->group(function () {
 		Route::view('general-widget', 'admin.widgets.general-widget')->name('general-widget');
 		Route::view('chart-widget', 'admin.widgets.chart-widget')->name('chart-widget');
@@ -259,7 +261,29 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{lesson}/edit', [LessonController::class, 'edit'])->name('lessonedit');
         Route::put('/{lesson}', [LessonController::class, 'update'])->name('lessonupdate');
         Route::delete('/{lesson}', [LessonController::class, 'destroy'])->name('lessondestroy');
+	
     });
+	
+
+	Route::get('/get-file', [LessonController::class, 'getFile'])->name('get.file');
+	Route::post('/upload-temp', [LessonController::class, 'uploadTemp'])->name('upload.temp');
+	Route::post('/delete-temp', [LessonController::class, 'deleteTemp'])->name('delete.temp');
+	// Route::post('/delete-file', [LessonController::class, 'deleteFile'])->name('delete.file');
+	// Route::post('/deletefile', [LessonController::class, 'deleteFile'])->name('deletefile');
+	Route::delete('/admin/lesson/delete-file/{lessonId}', [LessonController::class, 'deleteFile']);
+
+
+	//zedtou tw 
+	Route::delete('/admin/lesson/delete-file/{fileId}', 'App\Http\Controllers\LessonController@deleteFile')->name('lesson.deleteFile');
+
+	// Route::post('/convert-pptx-to-pdf', [LessonController::class, 'convertPptxToPdf']);
+
+	Route::get('/api/preview/docx', 'App\Http\Controllers\LessonControllerr@previewDocx');
+	Route::get('/api/preview/zip', 'App\Http\Controllers\LessonControllerr@previewZip');
+
+
+	
+	
 
 	Route::prefix('quizzes')->group(function () {
 		Route::get('quizzes', [QuizController::class, 'index'])->name('quizzes');
@@ -282,15 +306,15 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 
 
-	// Route::prefix('reponses')->group(function () {
-    //     Route::get('reponses', [ReponseController::class, 'index'])->name('reponses'); 
-    //     Route::get('reponsecreate', [ReponseController::class, 'create'])->name('reponsecreate'); 
-    //     Route::post('store', [ReponseController::class, 'store'])->name('reponsestore'); 
-    //     Route::get('/{reponse}', [ReponseController::class, 'show'])->name('reponseshow'); 
-    //     Route::get('/{reponse}/edit', [ReponseController::class, 'edit'])->name('reponseedit'); 
-    //     Route::put('/{reponse}', [ReponseController::class, 'update'])->name('reponseupdate'); 
-    //     Route::delete('/{reponse}', [ReponseController::class, 'destroy'])->name('reponsedestroy'); 
-    // });
+	Route::prefix('reponses')->group(function () {
+        Route::get('reponses', [ReponseController::class, 'index'])->name('reponses'); 
+        Route::get('reponsecreate', [ReponseController::class, 'create'])->name('reponsecreate'); 
+        Route::post('store', [ReponseController::class, 'store'])->name('reponsestore'); 
+        Route::get('/{reponse}', [ReponseController::class, 'show'])->name('reponseshow'); 
+        Route::get('/{reponse}/edit', [ReponseController::class, 'edit'])->name('reponseedit'); 
+        Route::put('/{reponse}', [ReponseController::class, 'update'])->name('reponseupdate'); 
+        Route::delete('/{reponse}', [ReponseController::class, 'destroy'])->name('reponsedestroy'); 
+    });
 
 	Route::prefix('feedbacks')->group(function () {
 		Route::get('/', [FeedbackController::class, 'index'])->name('feedbacks');
@@ -337,11 +361,11 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::view('chat-video', 'admin.apps.chat-video')->name('chat-video');
 	});
 	
-	Route::prefix('users')->group( function(){
-		Route::view('user-profile', 'admin.apps.user-profile')->name('user-profile');
-		Route::view('edit-profile', 'admin.apps.edit-profile')->name('edit-profile');
-		Route::view('user-cards', 'admin.apps.user-cards')->name('user-cards');
-	});
+	// Route::prefix('users')->group( function(){
+	// 	Route::view('user-profile', 'admin.apps.user-profile')->name('user-profile');
+	// 	Route::view('edit-profile', 'admin.apps.edit-profile')->name('edit-profile');
+	// 	Route::view('user-cards', 'admin.apps.user-cards')->name('user-cards');
+	// });
 	
 	Route::view('bookmark', 'admin.apps.bookmark')->name('bookmark');
 	Route::view('contacts', 'admin.apps.contacts')->name('contacts');

@@ -47,7 +47,7 @@
 					<div class="card-header pb-0">
 						<h5>Bar Chart 1</h5>
 					</div>
-					<div class="card-body peity-charts"><span class="bar" data-peity='{ "fill": ["#24695c", "#ba895d"]}'>5,3,9,6,5,9,7,3,5,2</span></div>
+					<div class="card-body peity-charts"><span class="bar" data-peity='{ "fill": ["#2B6ED4", "#717171"]}'>5,3,9,6,5,9,7,3,5,2</span></div>
 				</div>
 			</div>
 			<div class="col-xl-6 box-col-6">
@@ -55,7 +55,7 @@
 					<div class="card-header pb-0">
 						<h5>Bar Chart 2</h5>
 					</div>
-					<div class="card-body peity-charts peity-chart-primary"><span class="bar" data-peity='{ "fill": ["#24695c", "#ba895d"]}'>5,3,2,-1,-3,-2,2,3,5,2</span></div>
+					<div class="card-body peity-charts peity-chart-primary"><span class="bar" data-peity='{ "fill": ["#2B6ED4", "#717171"]}'>5,3,2,-1,-3,-2,2,3,5,2</span></div>
 				</div>
 			</div>
 			<div class="col-xl-6 box-col-6">
@@ -63,7 +63,7 @@
 					<div class="card-header pb-0">
 						<h5>Donut Chart 1</h5>
 					</div>
-					<div class="card-body peity-charts"><span class="donut" data-peity='{ "fill": ["#24695c", "#efefef"]}'>226/360</span></div>
+					<div class="card-body peity-charts"><span class="donut" data-peity='{ "fill": ["#2B6ED4", "#efefef"]}'>226/360</span></div>
 				</div>
 			</div>
 			<div class="col-xl-6 box-col-6">
@@ -71,7 +71,7 @@
 					<div class="card-header pb-0">
 						<h5>Donut Chart 2</h5>
 					</div>
-					<div class="card-body peity-charts"><span class="donut" data-peity='{ "fill": ["#24695c", "#efefef"]}'>1,2,3,2,2</span></div>
+					<div class="card-body peity-charts"><span class="donut" data-peity='{ "fill": ["#2B6ED4", "#efefef"]}'>1,2,3,2,2</span></div>
 				</div>
 			</div>
 			<div class="col-xl-6 box-col-6">
@@ -79,7 +79,7 @@
 					<div class="card-header pb-0">
 						<h5>Pie Chart 1</h5>
 					</div>
-					<div class="card-body peity-charts"><span class="pie" data-peity='{ "fill": ["#24695c", "#ba895d"]}'>226,134</span></div>
+					<div class="card-body peity-charts"><span class="pie" data-peity='{ "fill": ["#2B6ED4", "#717171"]}'>226,134</span></div>
 				</div>
 			</div>
 			<div class="col-xl-6 box-col-6">
@@ -87,7 +87,7 @@
 					<div class="card-header pb-0">
 						<h5>Pie Chart 2</h5>
 					</div>
-					<div class="card-body peity-charts"><span class="pie" data-peity='{ "fill": ["#24695c", "#ba895d"]}'>1,2,3,2,2</span></div>
+					<div class="card-body peity-charts"><span class="pie" data-peity='{ "fill": ["#2B6ED4", "#717171"]}'>1,2,3,2,2</span></div>
 				</div>
 			</div>
 			<div class="col-xl-6 xl-100 box-col-12">
@@ -97,7 +97,7 @@
 					</div>
 					<div class="card-body">
 						<p class="data-attributes">
-							<span data-peity='{ "fill": ["#24695c", "#efefef"],    "innerRadius": 10, "radius": 40 }'>1/7</span><span data-peity='{ "fill": ["#ba895d", "#efefef"], "innerRadius": 14, "radius": 36 }'>2/7</span>
+							<span data-peity='{ "fill": ["#2B6ED4", "#efefef"],    "innerRadius": 10, "radius": 40 }'>1/7</span><span data-peity='{ "fill": ["#717171", "#efefef"], "innerRadius": 14, "radius": 36 }'>2/7</span>
 							<span data-peity='{ "fill": ["#222222", "#efefef"], "innerRadius": 16, "radius": 32 }'>3/7</span><span data-peity='{ "fill": ["#717171", "#efefef"],  "innerRadius": 18, "radius": 28 }'>4/7</span>
 							<span data-peity='{ "fill": ["#e2c636", "#efefef"],   "innerRadius": 20, "radius": 24 }'>5/7</span><span data-peity='{ "fill": ["#d22d3d", "#efefef"], "innerRadius": 18, "radius": 20 }'>6/7</span>
 							<span data-peity='{ "fill": ["#e6edef", "#efefef"], "innerRadius": 15, "radius": 16 }'>7/7</span>

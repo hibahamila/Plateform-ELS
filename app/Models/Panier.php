@@ -14,7 +14,7 @@ class Panier extends Model
     protected $fillable = [
         'user_id',
         // 'date_de_creation',
-        // 'montant_total',
+        // 'amount_total',
         // 'quantite_totale',
     ];
 

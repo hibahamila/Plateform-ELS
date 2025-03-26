@@ -145,7 +145,7 @@
                             <tbody>
                                 <?php $__currentLoopData = $questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td><?php echo e($question->enonce); ?></td>
+                                        <td><?php echo e($question->statement); ?></td>
                                         <td><?php echo e($question->quiz->titre); ?></td>
                                         <td>
                                             <i class="icofont icofont-edit edit-icon action-icon" data-edit-url="<?php echo e(route('questionedit', $question->id)); ?>" style="cursor: pointer;"></i>

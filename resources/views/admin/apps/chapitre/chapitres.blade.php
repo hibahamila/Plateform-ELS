@@ -65,7 +65,7 @@
                         <table class="display dataTable" id="chapitres-table">
                             <thead>
                                 <tr>
-                                    <th>Titre</th>
+                                    <th>title</th>
                                     <th>Description</th>
                                     <th>Durée</th>
                                     <th>Cours</th>
@@ -75,12 +75,12 @@
                             <tbody>
                                 @foreach ($chapitres as $chapitre)
                                     <tr>
-                                        <td>{{ $chapitre->titre }}</td>
-                                        <td>{{ $chapitre->description }}</td>
-                                        <td>{{ $chapitre->duree }}</td>
+                                        <td>{{ $chapitre->title }}</td>
+                                        <td>{!! $chapitre->description !!}</td>
+                                        <td>{{ $chapitre->duration }}</td>
                                         <td>
                                             <a href="{{ route('cours', ['selected_cours' => $chapitre->cours->id]) }}" class="cours-link" data-cours-id="{{ $chapitre->cours->id }}">
-                                                {{ $chapitre->cours->titre }}
+                                                {{ $chapitre->cours->title }}
                                             </a>
                                         </td>
                                         <td>
@@ -127,3 +127,11 @@
 </script>
 @endpush
 @endsection
+
+
+{{-- La directive {!! !!} est utilisée pour 
+
+afficher le contenu de la description sans échapper les balises HTML. 
+Cela permet de conserver le style (comme les sauts de ligne, les listes,
+ les balises <strong>, etc.) qui pourrait 
+    être présent dans la description. --}}

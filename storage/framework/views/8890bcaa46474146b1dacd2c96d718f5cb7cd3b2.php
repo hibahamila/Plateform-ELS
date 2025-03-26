@@ -67,7 +67,7 @@
                                         </thead>
                                         <tbody>
                                             <?php $__currentLoopData = $feedbacks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $feedback): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <tr data-rate="<?php echo e($feedback->nombre_rate !== null ? number_format($feedback->nombre_rate, 1) : 'null'); ?>" data-id="<?php echo e($feedback->id); ?>">
+                                                <tr data-rate="<?php echo e($feedback->rating_cout !== null ? number_format($feedback->rating_cout, 1) : 'null'); ?>" data-id="<?php echo e($feedback->id); ?>">
                                                     <td class="text-center">
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input feedback-checkbox" id="feedback-<?php echo e($feedback->id); ?>" name="feedbacks[]" value="<?php echo e($feedback->id); ?>">
@@ -87,19 +87,19 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <?php if($feedback->nombre_rate !== null): ?>
-                                                            <span class="d-none"><?php echo e(number_format($feedback->nombre_rate, 1)); ?></span>
+                                                        <?php if($feedback->rating_cout !== null): ?>
+                                                            <span class="d-none"><?php echo e(number_format($feedback->rating_cout, 1)); ?></span>
                                                             <div class="rating-stars">
                                                                 <?php for($i = 1; $i <= 5; $i++): ?>
-                                                                    <?php if($feedback->nombre_rate >= $i): ?>
+                                                                    <?php if($feedback->rating_cout >= $i): ?>
                                                                         <i class="fa fa-star filled"></i>
-                                                                    <?php elseif($feedback->nombre_rate >= ($i - 0.5)): ?>
+                                                                    <?php elseif($feedback->rating_cout >= ($i - 0.5)): ?>
                                                                         <i class="fa fa-star-half-o filled"></i>
                                                                     <?php else: ?>
                                                                         <i class="fa fa-star-o"></i>
                                                                     <?php endif; ?>
                                                                 <?php endfor; ?>
-                                                                <span class="rating-value ml-2">(<?php echo e(number_format($feedback->nombre_rate, 1)); ?>)</span>
+                                                                <span class="rating-value ml-2">(<?php echo e(number_format($feedback->rating_cout, 1)); ?>)</span>
                                                             </div>
                                                         <?php else: ?>
                                                             <span class="d-none">null</span>
@@ -153,8 +153,8 @@
                                                         $totalRating = 0;
                                                         $ratedCount = 0;
                                                         foreach($feedbacks as $feedback) {
-                                                            if ($feedback->nombre_rate !== null) {
-                                                                $totalRating += $feedback->nombre_rate;
+                                                            if ($feedback->rating_cout !== null) {
+                                                                $totalRating += $feedback->rating_cout;
                                                                 $ratedCount++;
                                                             }
                                                         }
@@ -181,7 +181,7 @@
                                                     <?php
                                                         $ratedFormations = [];
                                                         foreach($feedbacks as $feedback) {
-                                                            if ($feedback->nombre_rate !== null) {
+                                                            if ($feedback->rating_cout !== null) {
                                                                 $ratedFormations[$feedback->formation->id] = true;
                                                             }
                                                         }

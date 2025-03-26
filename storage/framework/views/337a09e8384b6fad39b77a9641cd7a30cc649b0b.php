@@ -549,7 +549,7 @@
 	                                                        </div>
 	                                                        <div class="form-group col-md-12 mb-0">
 	                                                            <label>Tag color</label>
-	                                                            <input class="form-control fill-color" type="color" value="#24695c" />
+	                                                            <input class="form-control fill-color" type="color" value="#2B6ED4" />
 	                                                        </div>
 	                                                    </div>
 	                                                    <button class="btn btn-secondary" type="button">Save</button>

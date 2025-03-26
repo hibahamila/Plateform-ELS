@@ -12,10 +12,10 @@ class Cours extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'titre',
+        'title',
         'description',
-        'date_debut',
-        'date_fin',
+        'start_date',
+        'end_date',
         'user_id',
         'formation_id',
     ];

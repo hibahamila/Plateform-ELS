@@ -37,7 +37,7 @@
                                 }
                                 .shp6 {
                                     opacity: 0.2;
-                                    fill: #24695c;
+                                    fill: #2B6ED4;
                                 }
                                 .shp7 {
                                     opacity: 0.302;
@@ -48,7 +48,7 @@
                                     fill: #ffffff;
                                 }
                                 .shp9 {
-                                    fill: #ba895d;
+                                    fill: #717171;
                                 }
                                 .shp10 {
                                     fill: #ffffff;

@@ -26,10 +26,10 @@ class ChapitreController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'titre' => 'required|string|max:255',
+        'title' => 'required|string|max:255',
         'description' => 'required|string',
         'cours_id' => 'required|exists:cours,id',
-        'duree' => 'required|date_format:H:i',
+        'duration' => 'required|date_format:H:i',
     ]);
     $chapitre = Chapitre::create($request->all());
     // pour passe l id a la vue suivante 
@@ -59,10 +59,10 @@ class ChapitreController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'titre' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'description' => 'required|string',
             'cours_id' => 'required|exists:cours,id',
-            'duree' => 'required|date_format:H:i',
+            'duration' => 'required|date_format:H:i',
         ]);
 
         $chapitre = Chapitre::findOrFail($id);

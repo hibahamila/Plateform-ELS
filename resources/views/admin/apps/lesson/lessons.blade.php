@@ -50,7 +50,7 @@
                         <table class=" dataTable display" id="lessons-table">
                             <thead>
                                 <tr>
-                                    <th>Titre</th>
+                                    <th>title</th>
                                     <th>Description</th>
                                     <th>Durée</th>
                                     <th>Chapitre</th>
@@ -63,10 +63,10 @@
                                 <meta name="csrf-token" content="{{ csrf_token() }}">
                                 @foreach ($lessons as $lesson)
                                     <tr>
-                                        <td>{{ $lesson->titre }}</td>
+                                        <td>{{ $lesson->title }}</td>
                                         <td>{{ $lesson->description }}</td>
-                                        <td>{{ $lesson->duree }}</td>
-                                        <td>{{ $lesson->chapitre->titre ?? 'Non attribué' }}</td>
+                                        <td>{{ $lesson->duration }}</td>
+                                        <td>{{ $lesson->chapitre->title ?? 'Non attribué' }}</td>
                                         <td>
                                             @if ($lesson->file_path)
                                                 <a href="{{ asset('storage/' . $lesson->file_path) }}" target="_blank">Voir le fichier</a>
@@ -103,7 +103,7 @@
                                                         <i class="icofont icofont-edit"></i> Modifier
                                                     </a>
 
-                                                    <a class="dropdown-item text-danger delete-action" href="javascript:void(0);" data-delete-url="{{ route('lessondestroy', $lesson->id) }}" data-type="lesson" data-name="{{ $lesson->titre }}" data-csrf="{{ csrf_token() }}">
+                                                    <a class="dropdown-item text-danger delete-action" href="javascript:void(0);" data-delete-url="{{ route('lessondestroy', $lesson->id) }}" data-type="lesson" data-name="{{ $lesson->title }}" data-csrf="{{ csrf_token() }}">
                                                         <i class="icofont icofont-ui-delete"></i> Supprimer
                                                     </a>
                                                 </div>
@@ -148,8 +148,8 @@
 @endsection
 
 @push('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/table.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom-style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/MonCss/table.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/MonCss/custom-style.css') }}">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/prism.css') }}">
@@ -192,7 +192,7 @@
                         <table class=" dataTable display" id="lessons-table">
                             <thead>
                                 <tr>
-                                    <th>Titre</th>
+                                    <th>title</th>
                                     <th>Description</th>
                                     <th>Durée</th>
                                     <th>Chapitre</th>
@@ -205,16 +205,30 @@
                                 <meta name="csrf-token" content="{{ csrf_token() }}">
                                 @foreach ($lessons as $lesson)
                                     <tr>
-                                        <td>{{ $lesson->titre }}</td>
-                                        <td>{{ $lesson->description }}</td>
-                                        <td>{{ $lesson->duree }}</td>
-                                        <td>{{ $lesson->chapitre->titre ?? 'Non attribué' }}</td>
+                                        <td>{{ $lesson->title }}</td>
+                                        <td>{!! $lesson->description !!}</td> <!-- Modification ici -->
+
+                                        <td>{{ $lesson->duration }}</td>
+                                        <td>{{ $lesson->chapitre->title ?? 'Non attribué' }}</td>
                                         <td>
-                                            @if ($lesson->file_path)
+                                            {{-- @if ($lesson->file_path)
                                                 <a href="{{ asset('storage/' . $lesson->file_path) }}" target="_blank">Voir le fichier</a>
                                             @else
                                                 Aucun fichier
-                                            @endif
+                                            @endif --}}
+                                            @php
+                                            // Décoder le champ file_path (qui est un tableau JSON)
+                                            $files = json_decode($lesson->file_path) ?? []; // Utiliser un tableau vide si file_path est null
+                                        @endphp
+                        
+                                        @if (count($files) > 0)
+                                            @foreach ($files as $file)
+                                                <!-- Afficher un lien pour chaque fichier -->
+                                                <a href="{{ asset('storage/' . $file) }}" target="_blank">{{ basename($file) }}</a><br>
+                                            @endforeach
+                                        @else
+                                            Aucun fichier
+                                        @endif
                                         </td>
                                         <td>
                                             @if ($lesson->link)
@@ -245,7 +259,7 @@
                                                         <i class="icofont icofont-edit"></i> Modifier
                                                     </a>
 
-                                                    <a class="dropdown-item text-danger delete-action" href="javascript:void(0);" data-delete-url="{{ route('lessondestroy', $lesson->id) }}" data-type="lesson" data-name="{{ $lesson->titre }}" data-csrf="{{ csrf_token() }}">
+                                                    <a class="dropdown-item text-danger delete-action" href="javascript:void(0);" data-delete-url="{{ route('lessondestroy', $lesson->id) }}" data-type="lesson" data-name="{{ $lesson->title }}" data-csrf="{{ csrf_token() }}">
                                                         <i class="icofont icofont-ui-delete"></i> Supprimer
                                                     </a>
                                                 </div>
@@ -264,7 +278,7 @@
 
 @push('scripts')
     
-<script src="{{ asset('assets/js/dropdown/dropdown.js') }}"></script>
+<script src="{{ asset('assets/js/MonJs/dropdown/dropdown.js') }}"></script>
 <script src="{{ asset('assets/js/prism/prism.min.js') }}"></script>
 <script src="{{ asset('assets/js/clipboard/clipboard.min.js') }}"></script>
 <script src="{{ asset('assets/js/custom-card/custom-card.js') }}"></script>

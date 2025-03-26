@@ -1,5 +1,5 @@
 var primary = localStorage.getItem("primary") || '#24695c';
-var secondary = localStorage.getItem("secondary") || '#ba895d';
+var secondary = localStorage.getItem("secondary") || '#717171';
 
 window.vihoAdminConfig = {
 	// Theme Primary Color

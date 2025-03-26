@@ -33,17 +33,20 @@ class CoursController extends Controller
         return view('admin.apps.cours.courscreate', compact('formations','users','coursId'));
     }
 
-   
+
 
 
     //zedtou jdid 
 public function store(Request $request)
 {
     $validatedData = $request->validate([
-        'titre' => 'required|string|max:255',
+        'title' => 'required|string|max:255',
         'description' => 'required|string',
-        'date_debut' => 'required|date',
-        'date_fin' => 'required|date|after_or_equal:date_debut',
+        // 'start_date' => 'required|date',
+        // 'end_date' => 'required|date|after_or_equal:start_date',
+        
+        'start_date' => 'required|date_format:Y-m-d',
+        'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
         'user_id' => 'required|exists:users,id',
         'formation_id' => 'required|exists:formations,id',
     ]);
@@ -56,13 +59,6 @@ public function store(Request $request)
     // Rediriger vers la même page pour permettre la persistance des données dans le formulaire
     return redirect()->route('courscreate')->withInput(); // Utilisez withInput() pour maintenir les anciennes données
 }
-
-
-
-
-
-
-
 
 
 
@@ -85,10 +81,13 @@ public function store(Request $request)
     public function update(Request $request, $id)
     {
         $request->validate([
-            'titre' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date|after_or_equal:date_debut',
+            // 'start_date' => 'required|date',
+            // 'end_date' => 'required|date|after_or_equal:start_date',
+            'start_date' => 'required|date_format:Y-m-d',
+            'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
+    
             'user_id' => 'required|exists:users,id',
             'formation_id' => 'required|exists:formations,id',
         ]);

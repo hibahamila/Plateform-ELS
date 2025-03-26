@@ -65,8 +65,8 @@
                              <div class="row">
                                  <div class="col">
                                      <div class="mb-3">
-                                         <label class="form-label" for="enonce">Enoncé</label>
-                                         <input class="form-control" id="enonce" type="text" name="enonce" placeholder="Enoncé" value="<?php echo e(old('enonce')); ?>" required />
+                                         <label class="form-label" for="statement">Enoncé</label>
+                                         <input class="form-control" id="statement" type="text" name="statement" placeholder="Enoncé" value="<?php echo e(old('statement')); ?>" required />
                                          <div class="invalid-feedback">Veuillez entrer un énoncé valide.</div>
                                      </div>
                                  </div>

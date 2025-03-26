@@ -1,8 +1,6 @@
 
 
 
-
-
 <?php $__env->startSection('title'); ?> Liste des Questions
 <?php echo e($title); ?>
 
@@ -29,7 +27,6 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <h5>Questions Disponibles</h5>
-                    <span>Ce tableau affiche la liste des questions disponibles.</span>
                 </div>
                 <div class="card-body">
                     <?php if(session('success')): ?>
@@ -61,8 +58,8 @@
                             <tbody>
                                 <?php $__currentLoopData = $questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td><?php echo e($question->enonce); ?></td>
-                                        <td><?php echo e($question->quiz->titre); ?></td>
+                                        <td><?php echo e($question->statement); ?></td>
+                                        <td><?php echo e($question->quiz->title); ?></td>
                                         <td>
                                             <i class="icofont icofont-edit edit-icon action-icon" data-edit-url="<?php echo e(route('questionedit', $question->id)); ?>" style="cursor: pointer;"></i>
                                             <i class="icofont icofont-ui-delete delete-icon action-icon" data-delete-url="<?php echo e(route('questiondestroy', $question->id)); ?>" data-csrf="<?php echo e(csrf_token()); ?>" style="cursor: pointer;"></i>

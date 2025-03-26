@@ -4,9 +4,9 @@
     <div class="container">
         <h1><?php echo e($formation->titre); ?></h1>
         <p><strong>Description:</strong> <?php echo e($formation->description); ?></p>
-        <p><strong>Durée:</strong> <?php echo e($formation->duree); ?></p>
+        <p><strong>Durée:</strong> <?php echo e($formation->duration); ?></p>
         <p><strong>Type:</strong> <?php echo e($formation->type); ?></p>
-        <p><strong>Prix:</strong> <?php echo e($formation->prix); ?></p>
+        <p><strong>price:</strong> <?php echo e($formation->price); ?></p>
 
         <p><strong>Catégorie:</strong> <?php echo e($formation->categorie->titre); ?></p>
         <a href="<?php echo e(route('formations')); ?>" class="btn btn-secondary">Retour à la lise </a>

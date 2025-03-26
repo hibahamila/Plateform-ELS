@@ -18,8 +18,8 @@ class ReservationController extends Controller
         $request->validate([
             'etudiant_id' => 'required|exists:users,id',
             'formation_id' => 'required|exists:formations,id',
-            'date' => 'required|date',
-            'heure' => 'required|date_format:H:i',
+            'reservation_date' => 'required|date',
+            'reservation_time' => 'required|date_format:H:i',
         ]);
 
         $reservation = Reservation::create($request->all());
@@ -37,8 +37,8 @@ class ReservationController extends Controller
         $request->validate([
             'etudiant_id' => 'required|exists:users,id',
             'formation_id' => 'required|exists:formations,id',
-            'date' => 'required|date',
-            'heure' => 'required|date_format:H:i',
+            'reservation_date' => 'required|date',
+            'reservation_time' => 'required|date_format:H:i',
         ]);
 
         $reservation = Reservation::findOrFail($id);

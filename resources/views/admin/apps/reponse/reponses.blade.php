@@ -92,7 +92,7 @@
                         <thead>
                             <tr>
                                 <th>Question</th>
-                                <th>Contenu</th>
+                                <th>content</th>
                                 <th>Correcte</th>
                                 <th>Actions</th>
                             </tr>
@@ -100,9 +100,9 @@
                         <tbody>
                             @foreach ($reponses as $reponse)
                                 <tr>
-                                    <td>{{ $reponse->question->enonce }}</td>
-                                    <td>{{ $reponse->contenu }}</td>
-                                    <td>{{ $reponse->est_correcte ? 'Oui' : 'Non' }}</td>
+                                    <td>{{ $reponse->question->statement }}</td>
+                                    <td>{{ $reponse->content }}</td>
+                                    <td>{{ $reponse->is_correct ? 'Oui' : 'Non' }}</td>
                                     <td>
                                         <i class="icofont icofont-edit edit-icon action-icon" data-edit-url="{{ route('reponseedit', $reponse->id) }}" style="cursor: pointer;"></i>
                                             <i class="icofont icofont-ui-delete delete-icon action-icon" data-delete-url="{{ route('reponsedestroy', $reponse->id) }}" data-csrf="{{ csrf_token() }}" style="cursor: pointer; color: rgb(204, 28, 28);"></i>
@@ -129,7 +129,7 @@
     <script src="{{asset('assets/js/clipboard/clipboard.min.js')}}"></script>
     <script src="{{asset('assets/js/custom-card/custom-card.js')}}"></script>
     <script src="{{asset('assets/js/height-equal.js')}}"></script>
-    <script src="{{ asset('assets/js/actions-icon/actions-icon.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/actions-icon/actions-icon.js') }}"></script>
 
     <script>
         window.onload = function() {

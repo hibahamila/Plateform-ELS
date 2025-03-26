@@ -21,6 +21,11 @@ class FormationController extends Controller
         return view('admin.apps.formation.formations', compact('formations'));
     }
 
+
+
+
+
+
     // Afficher le formulaire de création
     public function create()
     {
@@ -30,51 +35,51 @@ class FormationController extends Controller
     }
 
 
-    //methode store el aadia menghir dropzone 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'titre' => 'required|string|max:255',
-            'description' => 'required|string',
-            'duree' => 'required|date_format:H:i',
-            'type' => 'required|string',
-            'prix' => 'required|numeric|regex:/^\d+(\.\d{1,3})?/',
-            'categorie_id' => 'required|integer|exists:categories,id',
-        ]);
 
-        // Créer une formation avec les données de base
-        $formationData = $request->except('image');
+public function store(Request $request)
+{
+    // Définir une valeur par défaut pour le statut
+    $request->merge(['status' => $request->has('status') ? 1 : 0]);
 
-        // Vérifier et traiter l'image téléchargée via Dropzone
-        if ($request->hasFile('image')) {
-            // Stocke l'image dans storage/app/public/images
-            $imagePath = $request->file('image')->store('images', 'public');
-            // Ajoute le chemin de l'image aux données de formation
-            $formationData['image'] = $imagePath;
-        }
+    // Valider les données
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'duration' => 'required|string',
+        'type' => 'required|string',
+        'price' => 'required|numeric',
+        'categorie_id' => 'required|exists:categories,id',
+        'image' => 'required|image|mimes:jpg,png,gif|max:2048',
+        'status' => 'required|boolean', // Le statut est obligatoire et doit être un booléen
+    ]);
 
-        // Créer la formation avec toutes les données, y compris le chemin de l'image
-        Formation::create($formationData);
-
-        session()->flash('success', 'Formation créée avec succès !');
-        return redirect()->route('formations')->withInput();;
+    // Enregistrer l'image
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('formations', 'public');
+        $validatedData['image'] = $imagePath;
     }
+
+    // Créer la formation
+    Formation::create($validatedData);
+
+    return redirect()->route('formations')->with('success', 'Formation créée avec succès.');
+}
 
 
 
 public function update(Request $request, $id)
 {
     $formation = Formation::findOrFail($id);
-    
-    // Validation
-    $request->validate([
-        'titre' => 'required|string|max:255',
+
+    $data = $request->validate([
+        'title' => 'required|string|max:255',
         'description' => 'required|string',
-        'duree' => 'required|regex:/\d{2}:\d{2}/',
+        'duration' => 'required|string',
         'type' => 'required|string',
-        'prix' => 'required|numeric',
+        'price' => 'required|numeric',
         'categorie_id' => 'required|exists:categories,id',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'status' => 'nullable|boolean',
     ]);
 
     // Gestion de l'image
@@ -86,26 +91,27 @@ public function update(Request $request, $id)
 
         // Télécharger la nouvelle image
         $imagePath = $request->file('image')->store('formations', 'public');
-        $formation->image = $imagePath;
+        $data['image'] = $imagePath; // Ajouter le chemin de l'image au tableau $data
     } elseif ($request->delete_image == 1) {
         // Supprimer l'image si demandé
         if ($formation->image) {
             Storage::delete('public/' . $formation->image);
-            $formation->image = null;
+            $data['image'] = null; // Ajouter la valeur null au tableau $data
         }
     }
 
-    // Mise à jour des autres informations
-    $formation->titre = $request->titre;
-    $formation->description = $request->description;
-    $formation->duree = $request->duree;
-    $formation->type = $request->type;
-    $formation->prix = $request->prix;
-    $formation->categorie_id = $request->categorie_id;
-    $formation->save();
+    // Mettre à jour le statut
+    $data['status'] = (bool)$request->input('status', false);
 
-    return redirect()->route('formations')->with('success', 'Formation mise à jour avec succès');
+    // Mettre à jour la formation avec les données validées
+    $formation->update($data);
+
+    return redirect()->route('formations')->with('success', 'Formation mise à jour avec succès.');
 }
+
+
+
+
 
 
     // Afficher une formation spécifique
@@ -117,6 +123,11 @@ public function update(Request $request, $id)
         return view('admin.apps.formation.formationshow', compact('formation'));
     }
 
+
+
+
+
+
     // Afficher le formulaire de modification
     public function edit($id)
     {
@@ -124,6 +135,12 @@ public function update(Request $request, $id)
         $categories = Categorie::all();
         return view('admin.apps.formation.formationedit', compact('formation', 'categories'));
     }
+
+
+
+
+
+
 
     // Supprimer une formation
     public function destroy($id)

@@ -95,7 +95,7 @@
                         <thead>
                             <tr>
                                 <th>Question</th>
-                                <th>Contenu</th>
+                                <th>content</th>
                                 <th>Correcte</th>
                                 <th>Actions</th>
                             </tr>
@@ -103,9 +103,9 @@
                         <tbody>
                             <?php $__currentLoopData = $reponses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reponse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td><?php echo e($reponse->question->enonce); ?></td>
-                                    <td><?php echo e($reponse->contenu); ?></td>
-                                    <td><?php echo e($reponse->est_correcte ? 'Oui' : 'Non'); ?></td>
+                                    <td><?php echo e($reponse->question->statement); ?></td>
+                                    <td><?php echo e($reponse->content); ?></td>
+                                    <td><?php echo e($reponse->is_correct ? 'Oui' : 'Non'); ?></td>
                                     <td>
                                         <i class="icofont icofont-edit edit-icon action-icon" data-edit-url="<?php echo e(route('reponseedit', $reponse->id)); ?>" style="cursor: pointer;"></i>
                                             <i class="icofont icofont-ui-delete delete-icon action-icon" data-delete-url="<?php echo e(route('reponsedestroy', $reponse->id)); ?>" data-csrf="<?php echo e(csrf_token()); ?>" style="cursor: pointer; color: rgb(204, 28, 28);"></i>

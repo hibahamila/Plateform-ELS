@@ -60,9 +60,9 @@ function hexToRGBA(hex) {
     calendar.id = String(id);
     calendar.name = 'Company';
     calendar.color = '#ffffff';
-    calendar.bgColor = '#ba895d';
-    calendar.dragBgColor = '#ba895d';
-    calendar.borderColor = '#ba895d';
+    calendar.bgColor = '#717171';
+    calendar.dragBgColor = '#717171';
+    calendar.borderColor = '#717171';
     addCalendar(calendar);
 
     calendar = new CalendarInfo();

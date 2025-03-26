@@ -161,10 +161,10 @@
                                     <tr>
                                         <td><?php echo e($quiz->titre); ?></td>
                                         <td><?php echo e($quiz->description); ?></td>
-                                        <td><?php echo e($quiz->date_limite); ?></td>
-                                        <td><?php echo e($quiz->date_fin); ?></td>
+                                        <td><?php echo e($quiz->deadline); ?></td>
+                                        <td><?php echo e($quiz->end_date); ?></td>
                                         <td><?php echo e($quiz->cours->titre ?? 'N/A'); ?></td>
-                                        <td><?php echo e($quiz->score_minimum); ?></td>
+                                        <td><?php echo e($quiz->minimum_score); ?></td>
                                         <td>
                                             <i class="icofont icofont-edit edit-icon action-icon" data-edit-url="<?php echo e(route('quizedit', $quiz->id)); ?>" style="cursor: pointer;"></i>
                                             <i class="icofont icofont-ui-delete delete-icon action-icon" data-delete-url="<?php echo e(route('quizdestroy', $quiz->id)); ?>" data-csrf="<?php echo e(csrf_token()); ?>" style="cursor: pointer; color: rgb(204, 28, 28);"></i>

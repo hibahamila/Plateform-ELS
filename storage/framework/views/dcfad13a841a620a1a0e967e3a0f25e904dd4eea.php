@@ -75,7 +75,7 @@
                                  <div class="col">
                                      <div class="mb-3">
                                          <label class="form-label">Durée (HH:mm)</label>
-                                         <input class="form-control" type="text" name="duree" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" value="<?php echo e(old('duree')); ?>" required />
+                                         <input class="form-control" type="text" name="duration" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" value="<?php echo e(old('duration')); ?>" required />
                                          <div class="invalid-feedback">Veuillez entrer la durée au format HH:mm.</div>
                                      </div>
                                  </div>

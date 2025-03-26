@@ -1,0 +1,76 @@
+.badge-primary {
+    background-color: #2B6ED4 !important;
+}
+
+.badge-secondary {
+    background-color: #FF4B59 !important;
+}
+
+        .nav-link#top-home-tab,
+        .nav-link#contact-top-tab,
+        .nav-link#profile-top-tab {
+            color: black !important; /* Couleur du texte en noir */
+        }
+
+        /* Styles pour le survol des liens des onglets */
+        .nav-link#top-home-tab:hover,
+        .nav-link#contact-top-tab:hover,
+        .nav-link#profile-top-tab:hover {
+            color: black !important; /* Couleur du texte en noir au survol */
+        }
+
+
+    #success-message, #delete-message, #create-message {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+
+        .custom-btn {
+            background-color: #2B6ED4;
+            color: white;
+            border-color: #2B6ED4;
+        }
+
+        .custom-btn:hover {
+            background-color: #2B6ED4;
+            border-color: #2B6ED4;
+            color: white;
+        }
+
+        .custom-btn i {
+            margin-right: 8px;
+        }
+
+        .formation-image {
+            max-height: 200px;
+            object-fit: contain; 
+            width: 100%;
+        }
+
+        /* Animation sur le cadre */
+        .project-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }

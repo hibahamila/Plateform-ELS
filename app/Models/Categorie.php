@@ -10,7 +10,7 @@ class Categorie extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['titre'];
+    protected $fillable = ['title'];
 
     public function formations()
     {

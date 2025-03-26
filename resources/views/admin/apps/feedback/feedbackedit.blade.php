@@ -58,7 +58,7 @@
                     <option value="">-- Sélectionnez une formation --</option>
                     @foreach($formations as $formation)
                         <option value="{{ $formation->id }}" {{ old('formation_id', $feedback->formation_id) == $formation->id ? 'selected' : '' }}>
-                            {{ $formation->titre }}
+                            {{ $formation->title }}
                         </option>
                     @endforeach
                 </select>
@@ -76,7 +76,7 @@
                     <i class="fa fa-star-o" data-value="1" title="1 étoile"></i>
                 </div>
                 <!-- Champ caché pour stocker la note. Valeur par défaut 1 -->
-                <input type="hidden" name="rating" id="rating" value="{{ old('rating', $feedback->nombre_rate) }}">
+                <input type="hidden" name="rating" id="rating" value="{{ old('rating', $feedback->rating_cout) }}">
             </div>
 
             <!-- Boutons -->
@@ -91,7 +91,7 @@
     <script>
         $(document).ready(function(){
             // Initialiser les étoiles en fonction de la note existante
-            var initialRating = {{ $feedback->nombre_rate }};
+            var initialRating = {{ $feedback->rating_cout }};
             $('#rating').val(initialRating);
 
             $('.star-rating .fa').each(function(){
@@ -203,7 +203,7 @@
                     <option value="">-- Sélectionnez une formation --</option>
                     @foreach($formations as $formation)
                         <option value="{{ $formation->id }}" {{ old('formation_id', $feedback->formation_id) == $formation->id ? 'selected' : '' }}>
-                            {{ $formation->titre }}
+                            {{ $formation->title }}
                         </option>
                     @endforeach
                 </select>
@@ -221,7 +221,7 @@
                     <i class="fa fa-star-o" data-value="1" title="1 étoile"></i>
                 </div>
                 <!-- Champ caché pour stocker la note. Valeur par défaut 0 si la note est vide -->
-                <input type="hidden" name="rating" id="rating" value="{{ old('rating', $feedback->nombre_rate ?? 0) }}">
+                <input type="hidden" name="rating" id="rating" value="{{ old('rating', $feedback->rating_cout ?? 0) }}">
             </div>
 
             <!-- Boutons -->
@@ -236,7 +236,7 @@
     <script>
         $(document).ready(function(){
             // Initialiser les étoiles en fonction de la note existante
-            var initialRating = {{ $feedback->nombre_rate ?? 0 }}; // Définit la note à 0 si elle est nulle
+            var initialRating = {{ $feedback->rating_cout ?? 0 }}; // Définit la note à 0 si elle est nulle
             $('#rating').val(initialRating);
 
             $('.star-rating .fa').each(function(){

@@ -71,8 +71,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="date_debut" class="form-label">Date de Début</label>
-                                        <input type="date" name="date_debut" class="form-control" value="<?php echo e(old('date_debut', $cours->date_debut)); ?>" required>
+                                        <label for="start_date" class="form-label">Date de Début</label>
+                                        <input type="date" name="start_date" class="form-control" value="<?php echo e(old('start_date', $cours->start_date)); ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -81,8 +81,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="date_fin" class="form-label">Date de Fin</label>
-                                        <input type="date" name="date_fin" class="form-control" value="<?php echo e(old('date_fin', $cours->date_fin)); ?>" required>
+                                        <label for="end_date" class="form-label">Date de Fin</label>
+                                        <input type="date" name="end_date" class="form-control" value="<?php echo e(old('end_date', $cours->end_date)); ?>" required>
                                     </div>
                                 </div>
                             </div>

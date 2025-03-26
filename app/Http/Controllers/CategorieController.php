@@ -26,7 +26,7 @@ class CategorieController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titre' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
         ]);
 
         Categorie::create($request->all());
@@ -54,7 +54,7 @@ class CategorieController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'titre' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
         ]);
 
         $categorie = Categorie::findOrFail($id);
@@ -72,7 +72,7 @@ class CategorieController extends Controller
             $categorie = Categorie::findOrFail($id);
             
             // Récupérer le nom de la catégorie
-            $categorieName = $categorie->titre;  // Remplacez 'nom' par le champ correct
+            $categorieName = $categorie->title;  // Remplacez 'nom' par le champ correct
     
             // Supprimer la catégorie
             $categorie->delete();

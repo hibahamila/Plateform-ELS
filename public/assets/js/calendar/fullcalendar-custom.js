@@ -277,7 +277,7 @@ var basic_calendar = {
                 title: 'Meeting',
                 start: '2018-02-13T11:00:00',
                 constraint: 'availableForMeeting', 
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 title: 'Conference',
@@ -305,14 +305,14 @@ var basic_calendar = {
                 end: '2018-02-28',
                 overlap: false,
                 rendering: 'background',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 start: '2018-02-06',
                 end: '2018-02-08',
                 overlap: false,
                 rendering: 'background',
-                color: '#ba895d'
+                color: '#717171'
             }   
             ]
         }), $('#cal-event-colors').fullCalendar({
@@ -353,13 +353,13 @@ var basic_calendar = {
                 title: 'Long Event',
                 start: '2016-06-07',
                 end: '2016-06-10',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 id: 999,
                 title: 'Repeating Event',
                 start: '2016-06-09T16:00:00',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 id: 999,
@@ -371,38 +371,38 @@ var basic_calendar = {
                 title: 'Conference',
                 start: '2016-06-11',
                 end: '2016-06-13',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 title: 'Meeting',
                 start: '2016-06-12T10:30:00',
                 end: '2016-06-12T12:30:00',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 title: 'Lunch',
                 start: '2016-06-12T12:00:00',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 title: 'Meeting',
                 start: '2016-06-12T14:30:00',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 title: 'Happy Hour',
                 start: '2016-06-12T17:30:00',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 title: 'Dinner',
                 start: '2016-06-12T20:00:00',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 title: 'Birthday Party',
                 start: '2016-06-13T07:00:00',
-                color: '#ba895d'
+                color: '#717171'
             },
             {
                 title: 'Click for Google',
@@ -515,7 +515,7 @@ var basic_calendar = {
                 title: 'Click for Google',
                 url: 'http://google.com/',
                 start: '2018-06-28',
-                color: '#ba895d'
+                color: '#717171'
             }
             ],
             drop: function() {
@@ -627,7 +627,7 @@ var basic_calendar = {
                 title: 'Click for Google',
                 url: 'http://google.com/',
                 start: '2018-06-28',
-                color: '#ba895d'
+                color: '#717171'
             }
             ],
             drop: function() {

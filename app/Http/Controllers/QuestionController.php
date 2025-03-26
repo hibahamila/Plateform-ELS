@@ -83,23 +83,23 @@ public function create(Request $request)
 {
     // Validation des champs
     $request->validate([
-        'enonce' => 'required|string',
+        'statement' => 'required|string',
         'quiz_id' => 'required|exists:quizzes,id',
         'response_count' => 'required|integer|min:1|max:10',
         'reponses' => 'required|array|size:' . $request->response_count,         
         // Vérifier que le nombre de réponses correspond à response_count
         //reponses howa  tableau obligatoire, w lezm taille  mteeou tkoun nfsha  à response_count 
        // (l'utilisateur doit fournir exactement ce nombre de réponses).
-        'reponses.*.contenu' => 'required|string',
-        //kol élément ml tableau reponses lezm ykoun andou   champ  esmou contenu, eli howa lezm w type mteeou chaine.
-        'reponses.*.est_correcte' => 'required|in:0,1',
-         // Valider que chaque valeur est 0 ou 1  ,,Chaque réponse doit avoir un champ est_correcte, qui ne peut être que 0 (fausse) ou 1 (correcte).
+        'reponses.*.content' => 'required|string',
+        //kol élément ml tableau reponses lezm ykoun andou   champ  esmou content, eli howa lezm w type mteeou chaine.
+        'reponses.*.is_correct' => 'required|in:0,1',
+         // Valider que chaque valeur est 0 ou 1  ,,Chaque réponse doit avoir un champ is_correct, qui ne peut être que 0 (fausse) ou 1 (correcte).
     ]);
 
     // Vérifier qu'au moins une réponse est correcte
     //Laravel fournit la classe Collection, qui permet de manipuler facilement des tableaux de données.
-    //On convertit $request->reponses en collection et on vérifie si au moins un élément a est_correcte égal à 1.
-    $hasCorrectAnswer = collect($request->reponses)->contains('est_correcte', 1);
+    //On convertit $request->reponses en collection et on vérifie si au moins un élément a is_correct égal à 1.
+    $hasCorrectAnswer = collect($request->reponses)->contains('is_correct', 1);
     if (!$hasCorrectAnswer) {
         return redirect()->back()
             ->withInput() // Conserver les données saisies
@@ -113,7 +113,7 @@ public function create(Request $request)
 
     // Création de la question
     $question = Question::create([
-        'enonce' => $request->enonce,
+        'statement' => $request->statement,
         'quiz_id' => $request->quiz_id,
         'response_count' => $request->response_count,
     ]);
@@ -122,8 +122,8 @@ public function create(Request $request)
     foreach ($request->reponses as $reponse) {
         Reponse::create([
             'question_id' => $question->id,
-            'contenu' => $reponse['contenu'],
-            'est_correcte' => $reponse['est_correcte'],
+            'content' => $reponse['content'],
+            'is_correct' => $reponse['is_correct'],
         ]);
     }
     session()->flash('question_id', $question->id);
@@ -139,16 +139,16 @@ public function create(Request $request)
 // {
 //     // Validation des champs
 //     $request->validate([
-//         'enonce' => 'required|string',
+//         'statement' => 'required|string',
 //         'quiz_id' => 'required|exists:quizzes,id',
 //         'response_count' => 'required|integer|min:1|max:10',
 //         'reponses' => 'required|array|size:' . $request->response_count,
-//         'reponses.*.contenu' => 'required|string',
-//         'reponses.*.est_correcte' => 'required|in:0,1',
+//         'reponses.*.content' => 'required|string',
+//         'reponses.*.is_correct' => 'required|in:0,1',
 //     ]);
 
 //     // Vérifier qu'au moins une réponse est correcte
-//     $hasCorrectAnswer = collect($request->reponses)->contains('est_correcte', 1);
+//     $hasCorrectAnswer = collect($request->reponses)->contains('is_correct', 1);
 //     if (!$hasCorrectAnswer) {
 //         return redirect()->back()
 //             ->withInput() // Conserver les données saisies
@@ -157,7 +157,7 @@ public function create(Request $request)
 
 //     // Création de la question
 //     $question = Question::create([
-//         'enonce' => $request->enonce,
+//         'statement' => $request->statement,
 //         'quiz_id' => $request->quiz_id,
 //         'response_count' => $request->response_count,
 //     ]);
@@ -166,8 +166,8 @@ public function create(Request $request)
 //     foreach ($request->reponses as $reponse) {
 //         Reponse::create([
 //             'question_id' => $question->id,
-//             'contenu' => $reponse['contenu'],
-//             'est_correcte' => $reponse['est_correcte'],
+//             'content' => $reponse['content'],
+//             'is_correct' => $reponse['is_correct'],
 //         ]);
 //     }
 
@@ -198,7 +198,7 @@ public function create(Request $request)
     // public function update(Request $request, $id)
     // {
     //     $request->validate([
-    //         'enonce' => 'required|string|max:255',
+    //         'statement' => 'required|string|max:255',
     //         'quiz_id' => 'required|exists:quizzes,id',
     //     ]);
 
@@ -220,16 +220,16 @@ public function create(Request $request)
 {
     // Validation des champs
     $request->validate([
-        'enonce' => 'required|string|max:255',
+        'statement' => 'required|string|max:255',
         'quiz_id' => 'required|exists:quizzes,id',
         'response_count' => 'required|integer|min:1|max:10',
         'reponses' => 'required|array|size:' . $request->response_count, 
-        'reponses.*.contenu' => 'required|string',
-        'reponses.*.est_correcte' => 'required|in:0,1',
+        'reponses.*.content' => 'required|string',
+        'reponses.*.is_correct' => 'required|in:0,1',
     ]);
 
     // Vérifier qu'au moins une réponse est correcte
-    $hasCorrectAnswer = collect($request->reponses)->contains('est_correcte', 1);
+    $hasCorrectAnswer = collect($request->reponses)->contains('is_correct', 1);
     if (!$hasCorrectAnswer) {
         return redirect()->back()
             ->withInput()
@@ -243,7 +243,7 @@ public function create(Request $request)
 
         // Mise à jour des informations de la question
         $question->update([
-            'enonce' => $request->enonce,
+            'statement' => $request->statement,
             'quiz_id' => $request->quiz_id,
             'response_count' => $request->response_count,
         ]);
@@ -255,8 +255,8 @@ public function create(Request $request)
         foreach ($request->reponses as $reponse) {
             Reponse::create([
                 'question_id' => $question->id,
-                'contenu' => $reponse['contenu'],
-                'est_correcte' => $reponse['est_correcte'],
+                'content' => $reponse['content'],
+                'is_correct' => $reponse['is_correct'],
             ]);
         }
 

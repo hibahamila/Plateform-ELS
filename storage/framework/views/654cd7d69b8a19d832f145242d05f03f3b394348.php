@@ -88,7 +88,7 @@
             </div>
 
             <div class="form-group mt-3">
-                <label for="nombre_rate">Note</label>
+                <label for="rating_cout">Note</label>
                 <div class="star-rating">
                     <div class="star-container" data-value="5">
                         <div class="star-half-right" data-value="5.0"></div>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
                 <div class="current-rating">Note: <span id="rating-value"></span>/5</div>
-                <input type="hidden" name="nombre_rate" id="nombre_rate" >
+                <input type="hidden" name="rating_cout" id="rating_cout" >
             </div>
 
             <button type="submit" class="btn btn-success mt-3">Soumettre</button>

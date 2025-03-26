@@ -97,8 +97,8 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="mb-3">
-                                            <label class="form-label" for="duree">Durée (HH:mm)</label>
-                                            <input class="form-control" type="text" id="duree" name="duree" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" value="<?php echo e(old('duree')); ?>" required />
+                                            <label class="form-label" for="duration">Durée (HH:mm)</label>
+                                            <input class="form-control" type="text" id="duration" name="duration" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" value="<?php echo e(old('duration')); ?>" required />
                                             <div class="invalid-feedback">Veuillez entrer la durée au format HH:mm.</div>
                                         </div>
                                     </div>
@@ -113,9 +113,9 @@
 
                                     <div class="col-sm-4">
                                         <div class="mb-3">
-                                            <label class="form-label" for="prix">Prix</label>
-                                            <input class="form-control" type="number" id="prix" name="prix" placeholder="Prix" step="0.01" value="<?php echo e(old('prix')); ?>" required />
-                                            <div class="invalid-feedback">Veuillez entrer un prix valide.</div>
+                                            <label class="form-label" for="price">price</label>
+                                            <input class="form-control" type="number" id="price" name="price" placeholder="price" step="0.01" value="<?php echo e(old('price')); ?>" required />
+                                            <div class="invalid-feedback">Veuillez entrer un price valide.</div>
                                         </div>
                                     </div>
                                 </div>

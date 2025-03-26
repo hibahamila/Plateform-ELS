@@ -100,8 +100,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="date_limite" class="form-label">Date Limite</label>
-                                        <input type="date" name="date_limite" class="form-control" value="<?php echo e(old('date_limite', $quiz->date_limite)); ?>" required>
+                                        <label for="deadline" class="form-label">Date Limite</label>
+                                        <input type="date" name="deadline" class="form-control" value="<?php echo e(old('deadline', $quiz->deadline)); ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -110,8 +110,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="date_fin" class="form-label">Date de Fin</label>
-                                        <input type="date" name="date_fin" class="form-control" value="<?php echo e(old('date_fin', $quiz->date_fin)); ?>" required>
+                                        <label for="end_date" class="form-label">Date de Fin</label>
+                                        <input type="date" name="end_date" class="form-control" value="<?php echo e(old('end_date', $quiz->end_date)); ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -138,8 +138,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="score_minimum" class="form-label">Score Minimum</label>
-                                        <input type="number" name="score_minimum" class="form-control" value="<?php echo e(old('score_minimum', $quiz->score_minimum)); ?>" required>
+                                        <label for="minimum_score" class="form-label">Score Minimum</label>
+                                        <input type="number" name="minimum_score" class="form-control" value="<?php echo e(old('minimum_score', $quiz->minimum_score)); ?>" required>
                                     </div>
                                 </div>
                             </div>

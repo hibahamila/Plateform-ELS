@@ -80,7 +80,7 @@
                     <option value="">-- Sélectionnez une formation --</option>
                     @foreach($formations as $formation)
                         <option value="{{ $formation->id }}" {{ old('formation_id') == $formation->id ? 'selected' : '' }}>
-                            {{ $formation->titre }}
+                            {{ $formation->title }}
                         </option>
                     @endforeach
                 </select>
@@ -88,7 +88,7 @@
             </div>
 
             <div class="form-group mt-3">
-                <label for="nombre_rate">Note</label>
+                <label for="rating_cout">Note</label>
                 <div class="star-rating">
                     <div class="star-container" data-value="5">
                         <div class="star-half-right" data-value="5.0"></div>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
                 <div class="current-rating">Note: <span id="rating-value">0</span>/5</div>
-                <input type="hidden" name="nombre_rate" id="nombre_rate" value="{{ old('nombre_rate', '') }}" required>
+                <input type="hidden" name="rating_cout" id="rating_cout" value="{{ old('rating_cout', '') }}" required>
             </div>
 
             <button type="submit" class="btn btn-success mt-3">Soumettre</button>
@@ -131,7 +131,7 @@
         $(document).ready(function(){
             $('.star-half-left, .star-half-right').on('click', function(){
                 var rating = parseFloat($(this).data('value'));
-                $('#nombre_rate').val(rating);
+                $('#rating_cout').val(rating);
                 $('#rating-value').text(rating.toFixed(1));
                 updateStars(rating);
             });
@@ -256,7 +256,7 @@
                     <option value="">-- Sélectionnez une formation --</option>
                     @foreach($formations as $formation)
                         <option value="{{ $formation->id }}" {{ old('formation_id') == $formation->id ? 'selected' : '' }}>
-                            {{ $formation->titre }}
+                            {{ $formation->title }}
                         </option>
                     @endforeach
                 </select>
@@ -264,7 +264,7 @@
             </div>
 
             <div class="form-group mt-3">
-                <label for="nombre_rate">Note</label>
+                <label for="rating_count">Note</label>
                 <div class="star-rating">
                     <div class="star-container" data-value="5">
                         <div class="star-half-right" data-value="5.0"></div>
@@ -293,7 +293,7 @@
                     </div>
                 </div>
                 <div class="current-rating">Note: <span id="rating-value"></span>/5</div>
-                <input type="hidden" name="nombre_rate" id="nombre_rate" >
+                <input type="hidden" name="rating_count" id="rating_count" >
             </div>
 
             <button type="submit" class="btn btn-success mt-3">Soumettre</button>
@@ -303,7 +303,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/js/feedback/feedback.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/feedback/feedback.js') }}"></script>
 @endpush 
   
 

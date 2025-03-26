@@ -152,8 +152,8 @@
                                     <tr>
                                         <td><?php echo e($cour->titre); ?></td>
                                         <td><?php echo e($cour->description); ?></td>
-                                        <td><?php echo e($cour->date_debut); ?></td>
-                                        <td><?php echo e($cour->date_fin); ?></td>
+                                        <td><?php echo e($cour->start_date); ?></td>
+                                        <td><?php echo e($cour->end_date); ?></td>
                                         <td><?php echo e($cour->user ? $cour->user->name : 'Aucun utilisateur'); ?></td>
                                         <td><?php echo e($cour->formation ? $cour->formation->titre : 'Aucune formation'); ?></td>
                                         <td>

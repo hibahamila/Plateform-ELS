@@ -61,7 +61,7 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label class="form-label">Durée (HH:mm)</label>
-                                        <input class="form-control" type="text" name="duree" value="<?php echo e(old('duree', \Carbon\Carbon::parse($lesson->duree)->format('H:i'))); ?>" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" required />
+                                        <input class="form-control" type="text" name="duration" value="<?php echo e(old('duration', \Carbon\Carbon::parse($lesson->duration)->format('H:i'))); ?>" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" required />
                                     </div>
                                 </div>
                             </div>

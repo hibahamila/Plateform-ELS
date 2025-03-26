@@ -14,8 +14,8 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('css'); ?>
-    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/table.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/custom-style.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/table.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/custom-style.css')); ?>">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/prism.css')); ?>">
@@ -59,7 +59,7 @@
                         <table class=" dataTable display" id="lessons-table">
                             <thead>
                                 <tr>
-                                    <th>Titre</th>
+                                    <th>title</th>
                                     <th>Description</th>
                                     <th>Durée</th>
                                     <th>Chapitre</th>
@@ -72,16 +72,26 @@
                                 <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
                                 <?php $__currentLoopData = $lessons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lesson): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td><?php echo e($lesson->titre); ?></td>
-                                        <td><?php echo e($lesson->description); ?></td>
-                                        <td><?php echo e($lesson->duree); ?></td>
-                                        <td><?php echo e($lesson->chapitre->titre ?? 'Non attribué'); ?></td>
+                                        <td><?php echo e($lesson->title); ?></td>
+                                        <td><?php echo $lesson->description; ?></td> <!-- Modification ici -->
+
+                                        <td><?php echo e($lesson->duration); ?></td>
+                                        <td><?php echo e($lesson->chapitre->title ?? 'Non attribué'); ?></td>
                                         <td>
-                                            <?php if($lesson->file_path): ?>
-                                                <a href="<?php echo e(asset('storage/' . $lesson->file_path)); ?>" target="_blank">Voir le fichier</a>
-                                            <?php else: ?>
-                                                Aucun fichier
-                                            <?php endif; ?>
+                                            
+                                            <?php
+                                            // Décoder le champ file_path (qui est un tableau JSON)
+                                            $files = json_decode($lesson->file_path) ?? []; // Utiliser un tableau vide si file_path est null
+                                        ?>
+                        
+                                        <?php if(count($files) > 0): ?>
+                                            <?php $__currentLoopData = $files; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <!-- Afficher un lien pour chaque fichier -->
+                                                <a href="<?php echo e(asset('storage/' . $file)); ?>" target="_blank"><?php echo e(basename($file)); ?></a><br>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php else: ?>
+                                            Aucun fichier
+                                        <?php endif; ?>
                                         </td>
                                         <td>
                                             <?php if($lesson->link): ?>
@@ -112,7 +122,7 @@
                                                         <i class="icofont icofont-edit"></i> Modifier
                                                     </a>
 
-                                                    <a class="dropdown-item text-danger delete-action" href="javascript:void(0);" data-delete-url="<?php echo e(route('lessondestroy', $lesson->id)); ?>" data-type="lesson" data-name="<?php echo e($lesson->titre); ?>" data-csrf="<?php echo e(csrf_token()); ?>">
+                                                    <a class="dropdown-item text-danger delete-action" href="javascript:void(0);" data-delete-url="<?php echo e(route('lessondestroy', $lesson->id)); ?>" data-type="lesson" data-name="<?php echo e($lesson->title); ?>" data-csrf="<?php echo e(csrf_token()); ?>">
                                                         <i class="icofont icofont-ui-delete"></i> Supprimer
                                                     </a>
                                                 </div>
@@ -131,7 +141,7 @@
 
 <?php $__env->startPush('scripts'); ?>
     
-<script src="<?php echo e(asset('assets/js/dropdown/dropdown.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/MonJs/dropdown/dropdown.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/prism/prism.min.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/clipboard/clipboard.min.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/custom-card/custom-card.js')); ?>"></script>

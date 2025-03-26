@@ -13,8 +13,8 @@ class Certification extends Model
     protected $fillable = [
         'user_id',
         'formation_id',
-        'date_obtention',
-        'statut',
+        'obtained_date',
+        'status',
     ];
 
     // Relation avec l'étudiant

@@ -73,8 +73,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="duree" class="form-label">Durée (HH:mm)</label>
-                                        <input type="text" name="duree" class="form-control" value="<?php echo e(old('duree', \Carbon\Carbon::parse($chapitre->duree)->format('H:i'))); ?>" pattern="\d{2}:\d{2}" title="Format: HH:mm" required>
+                                        <label for="duration" class="form-label">Durée (HH:mm)</label>
+                                        <input type="text" name="duration" class="form-control" value="<?php echo e(old('duration', \Carbon\Carbon::parse($chapitre->duration)->format('H:i'))); ?>" pattern="\d{2}:\d{2}" title="Format: HH:mm" required>
                                     </div>
                                 </div>
                             </div>

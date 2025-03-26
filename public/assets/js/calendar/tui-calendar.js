@@ -18778,7 +18778,7 @@ module.exports = ScheduleViewModel;
 var theme = {
     'common.border': '1px solid #e5e5e5',
     'common.backgroundColor': 'white',
-    'common.holiday.color': '#ba895d',
+    'common.holiday.color': '#717171',
     'common.saturday.color': '#333',
     'common.dayname.color': '#333',
     'common.today.color': '#333',
@@ -19025,7 +19025,7 @@ module.exports = Theme;
  var themeConfig = {
     'common.border': '1px solid #e5e5e5',
     'common.backgroundColor': 'white',
-    'common.holiday.color': '#ba895d',
+    'common.holiday.color': '#717171',
     'common.saturday.color': '#333',
     'common.dayname.color': '#333',
     'common.today.color': '#333',
@@ -19145,7 +19145,7 @@ module.exports = Theme;
 var themeConfig = {
     'common.border': '1px solid #e5e5e5',
     'common.backgroundColor': 'white',
-    'common.holiday.color': '#ba895d',
+    'common.holiday.color': '#717171',
     'common.saturday.color': '#333',
     'common.dayname.color': '#333',
     'common.today.color': '#333',

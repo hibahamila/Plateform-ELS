@@ -27,17 +27,17 @@ class ReponseController extends Controller
 public function store(Request $request)
 {
     $request->validate([
-        'enonce' => 'required|string',
+        'statement' => 'required|string',
         'quiz_id' => 'required|exists:quizzes,id',
         'response_count' => 'required|integer|min:1|max:10',
         'reponses' => 'required|array',
-        'reponses.*.contenu' => 'required|string',
-        'reponses.*.est_correcte' => 'boolean',
+        'reponses.*.content' => 'required|string',
+        'reponses.*.is_correct' => 'boolean',
     ]);
 
     // Création de la question
     $question = Question::create([
-        'enonce' => $request->enonce,
+        'statement' => $request->statement,
         'quiz_id' => $request->quiz_id,
     ]);
 
@@ -45,8 +45,8 @@ public function store(Request $request)
     if (is_array($request->reponses)) {
         foreach ($request->reponses as $reponse) {
             Reponse::create([
-                'contenu' => $reponse['contenu'],
-                'est_correcte' => isset($reponse['est_correcte']) ? $reponse['est_correcte'] : 0,
+                'content' => $reponse['content'],
+                'is_correct' => isset($reponse['is_correct']) ? $reponse['is_correct'] : 0,
                 'question_id' => $question->id,
             ]);
         }
@@ -75,15 +75,15 @@ public function store(Request $request)
         // Validation des données
         $request->validate([
             'question_id' => 'required|exists:questions,id',
-            'contenu' => 'required|string|max:255',
-            'est_correcte' => 'required|boolean',
+            'content' => 'required|string|max:255',
+            'is_correct' => 'required|boolean',
         ]);
 
         // Mise à jour de la réponse
         $reponse->update([
             'question_id' => $request->question_id,
-            'contenu' => $request->contenu,
-            'est_correcte' => $request->est_correcte,
+            'content' => $request->content,
+            'is_correct' => $request->is_correct,
         ]);
 
         // Retourner à la liste des réponses avec un message de succès

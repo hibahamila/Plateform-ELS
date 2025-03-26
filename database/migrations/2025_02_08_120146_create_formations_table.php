@@ -15,14 +15,14 @@ class CreateFormationsTable extends Migration
     {
         Schema::create('formations', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
-            $table->string('description');
-            $table->time('duree'); 
+            $table->string('title');
+            $table->longText('description');
+            $table->time('duration'); 
             $table->string('type'); 
-            $table->decimal('prix', 8, 3);
+            $table->decimal('price', 8, 3);
             $table->string('image');
             $table->unsignedBigInteger('categorie_id');
-            $table->boolean('statut')->default(true);
+            $table->boolean('status')->default(true);
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });

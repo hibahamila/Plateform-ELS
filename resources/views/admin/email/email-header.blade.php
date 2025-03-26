@@ -71,7 +71,7 @@
                                         <h6 style="font-weight: 600;">Password Reset</h6>
                                         <p>you forgot your password for viho Admin. If this is true, click below to reset your password.</p>
                                         <p style="text-align: center;">
-                                            <a href="javascript:void(0)" style="padding: 10px; background-color: #24695c; color: #fff; display: inline-block; border-radius: 4px; font-weight: 600;">Reset Password</a>
+                                            <a href="javascript:void(0)" style="padding: 10px; background-color: #2B6ED4; color: #fff; display: inline-block; border-radius: 4px; font-weight: 600;">Reset Password</a>
                                         </p>
                                         <p>If you have remember your password you can safely ignore his email.</p>
                                         <p>Good luck! Hope it works.</p>
@@ -88,7 +88,7 @@
                                 <tr style="text-align: center;">
                                     <td>
                                         <p style="color: #999; margin-bottom: 0;">333 Woodland Rd. Baldwinsville, NY 13027</p>
-                                        <p style="color: #999; margin-bottom: 0;">Don't Like These Emails?<a href="javascript:void(0)" style="color: #24695c;">Unsubscribe</a></p>
+                                        <p style="color: #999; margin-bottom: 0;">Don't Like These Emails?<a href="javascript:void(0)" style="color: #2B6ED4;">Unsubscribe</a></p>
                                         <p style="color: #999; margin-bottom: 0;">Powered By viho Admin</p>
                                     </td>
                                 </tr>

@@ -15,7 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('enonce');
+            $table->string('statement');
             $table->integer('response_count')->default(1);
             $table->unsignedBigInteger('quiz_id'); 
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');

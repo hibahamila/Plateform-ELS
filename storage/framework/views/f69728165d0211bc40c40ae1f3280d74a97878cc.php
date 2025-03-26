@@ -89,15 +89,15 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="date_debut">Date de début</label>
-                                            <input id="date_debut" class="form-control" type="date" name="date_debut" value="<?php echo e(old('date_debut')); ?>" required>
+                                            <label class="form-label" for="start_date">Date de début</label>
+                                            <input id="start_date" class="form-control" type="date" name="start_date" value="<?php echo e(old('start_date')); ?>" required>
                                             <div class="invalid-feedback">Veuillez sélectionner une date de début valide.</div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="date_fin">Date de fin</label>
-                                            <input id="date_fin" class="form-control" type="date" name="date_fin" value="<?php echo e(old('date_fin')); ?>" required>
+                                            <label class="form-label" for="end_date">Date de fin</label>
+                                            <input id="end_date" class="form-control" type="date" name="end_date" value="<?php echo e(old('end_date')); ?>" required>
                                             <div class="invalid-feedback">Veuillez sélectionner une date de fin valide.</div>
                                         </div>
                                     </div>

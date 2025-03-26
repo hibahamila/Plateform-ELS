@@ -61,7 +61,7 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label class="form-label">Date Limite</label>
-                                        <input class="form-control" type="date" name="date_limite" value="<?php echo e(old('date_limite')); ?>" required />
+                                        <input class="form-control" type="date" name="deadline" value="<?php echo e(old('deadline')); ?>" required />
                                         <div class="invalid-feedback">Veuillez entrer une date limite valide.</div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label class="form-label">Date de Fin</label>
-                                        <input class="form-control" type="date" name="date_fin" value="<?php echo e(old('date_fin')); ?>" required />
+                                        <input class="form-control" type="date" name="end_date" value="<?php echo e(old('end_date')); ?>" required />
                                         <div class="invalid-feedback">Veuillez entrer une date de fin valide.</div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label class="form-label">Score Minimum</label>
-                                        <input class="form-control" type="number" name="score_minimum" placeholder="Score Minimum" value="<?php echo e(old('score_minimum')); ?>" required />
+                                        <input class="form-control" type="number" name="minimum_score" placeholder="Score Minimum" value="<?php echo e(old('minimum_score')); ?>" required />
                                         <div class="invalid-feedback">Veuillez entrer un score minimum valide.</div>
                                     </div>
                                 </div>

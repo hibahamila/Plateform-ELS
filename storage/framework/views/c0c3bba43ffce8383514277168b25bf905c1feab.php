@@ -46,8 +46,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="enonce" class="form-label">Enoncé</label>
-                                        <input type="text" name="enonce" class="form-control" value="<?php echo e(old('enonce', $question->enonce)); ?>" required>
+                                        <label for="statement" class="form-label">Enoncé</label>
+                                        <input type="text" name="statement" class="form-control" value="<?php echo e(old('statement', $question->statement)); ?>" required>
                                     </div>
                                 </div>
                             </div>

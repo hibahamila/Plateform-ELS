@@ -55,7 +55,7 @@
                                         <select class="form-select select2-question" name="question_id" required>
                                             <?php $__currentLoopData = $questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($question->id); ?>" <?php echo e(old('question_id', $reponse->question_id) == $question->id ? 'selected' : ''); ?>>
-                                                    <?php echo e($question->enonce); ?>
+                                                    <?php echo e($question->statement); ?>
 
                                                 </option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -67,8 +67,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label class="form-label">Contenu</label>
-                                        <input class="form-control" type="text" name="contenu" value="<?php echo e(old('contenu', $reponse->contenu)); ?>" required />
+                                        <label class="form-label">content</label>
+                                        <input class="form-control" type="text" name="content" value="<?php echo e(old('content', $reponse->content)); ?>" required />
                                     </div>
                                 </div>
                             </div>
@@ -77,9 +77,9 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label class="form-label">Est correcte ?</label>
-                                        <select class="form-select" name="est_correcte" required>
-                                            <option value="1" <?php echo e(old('est_correcte', $reponse->est_correcte) == 1 ? 'selected' : ''); ?>>Oui</option>
-                                            <option value="0" <?php echo e(old('est_correcte', $reponse->est_correcte) == 0 ? 'selected' : ''); ?>>Non</option>
+                                        <select class="form-select" name="is_correct" required>
+                                            <option value="1" <?php echo e(old('is_correct', $reponse->is_correct) == 1 ? 'selected' : ''); ?>>Oui</option>
+                                            <option value="0" <?php echo e(old('is_correct', $reponse->is_correct) == 0 ? 'selected' : ''); ?>>Non</option>
                                         </select>
                                     </div>
                                 </div>

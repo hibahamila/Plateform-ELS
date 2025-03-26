@@ -77,19 +77,19 @@
                                         <select class="form-select select2-question" name="question_id" required>
                                             <option value="" disabled selected>Choisir une question</option>
                                             @foreach($questions as $question)
-                                                <option value="{{ $question->id }}">{{ $question->enonce }}</option>
+                                                <option value="{{ $question->id }}">{{ $question->statement }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Champ Contenu -->
+                            <!-- Champ content -->
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="contenu" class="form-label">Contenu</label>
-                                        <input type="text" class="form-control" name="contenu" placeholder="Contenu" required>
+                                        <label for="content" class="form-label">content</label>
+                                        <input type="text" class="form-control" name="content" placeholder="content" required>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label class="form-label">Est correcte ?</label>
-                                        <select class="form-select" name="est_correcte" required>
+                                        <select class="form-select" name="is_correct" required>
                                             <option value="1">Oui</option>
                                             <option value="0">Non</option>
                                         </select>
@@ -127,8 +127,8 @@
     <!-- Inclusion de Select2 JS via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <!-- Inclusion de notre fichier JS externe pour l'initialisation de Select2 -->
-    <script src="{{ asset('assets/js/select2-init/single-select.js') }}"></script>
-    <script src="{{ asset('assets/js/form-validation/form-validation.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/select2-init/single-select.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/form-validation/form-validation.js') }}"></script>
 
 
     @endpush

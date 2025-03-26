@@ -26,7 +26,7 @@
                                     fill: #455a64;
                                 }
                                 .shp2 {
-                                    fill: #24695c;
+                                    fill: #2B6ED4;
                                 }
                                 .shp3 {
                                     opacity: 0.4;

@@ -48,13 +48,13 @@
     margin: 0; }
     .page-builder .ge-mainControls .ge-addRowGroup .ge-row-icon .column {
       height: 10px;
-      background: #24695c;
+      background: #2B6ED4;
       padding: 0;
       border-left: 3px solid #fff; }
   .page-builder .ge-mainControls .ge-layout-mode ul li a {
     cursor: pointer; }
     .page-builder .ge-mainControls .ge-layout-mode ul li a:active {
-      background-color: #ba895d;
+      background-color: #717171;
       color: #fff; }
   .page-builder .ge-mainControls .btn:focus {
     -webkit-box-shadow: none;
@@ -80,7 +80,7 @@
     padding: 5px; }
     .page-builder .ge-canvas.ge-editing .ge-tools-drawer > a:hover {
       cursor: pointer;
-      color: #24695c !important; }
+      color: #2B6ED4 !important; }
   .page-builder .ge-canvas.ge-editing .ge-tools-drawer .ge-details {
     padding: 5px;
     border-top: 1px solid #2c323f;

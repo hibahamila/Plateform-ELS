@@ -123,11 +123,11 @@
                                                 <p><?php echo e($formation->description); ?></p>
                                                 <div class="row details">
                                                     <div class="col-6"><span>Durée</span></div>
-                                                    <div class="col-6 font-primary"><?php echo e($formation->duree); ?></div>
+                                                    <div class="col-6 font-primary"><?php echo e($formation->duration); ?></div>
                                                     <div class="col-6"><span>Type</span></div>
                                                     <div class="col-6 font-primary"><?php echo e($formation->type); ?></div>
-                                                    <div class="col-6"><span>Prix</span></div>
-                                                    <div class="col-6 font-primary"><?php echo e(number_format($formation->prix, 3)); ?> Dt</div>
+                                                    <div class="col-6"><span>price</span></div>
+                                                    <div class="col-6 font-primary"><?php echo e(number_format($formation->price, 3)); ?> Dt</div>
                                                     <div class="col-6"><span>Catégorie</span></div>
                                                     <div class="col-6 font-primary"><?php echo e($formation->categorie->titre ?? 'N/A'); ?></div>
                                                 </div>

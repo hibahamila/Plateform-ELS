@@ -40,8 +40,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label">Titre</label>
-                                            <input class="form-control" type="text" name="titre" placeholder="Titre" value="<?php echo e(old('titre', $formation->titre)); ?>" required />
+                                            <label class="form-label">title</label>
+                                            <input class="form-control" type="text" name="title" placeholder="title" value="<?php echo e(old('title', $formation->title)); ?>" required />
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                     <div class="col-sm-4">
                                         <div class="mb-3">
                                             <label class="form-label">Durée (HH:mm)</label>
-                                            <input class="form-control" type="text" name="duree" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" value="<?php echo e(old('duree', \Carbon\Carbon::parse($formation->duree)->format('H:i'))); ?>" required />
+                                            <input class="form-control" type="text" name="duration" placeholder="Durée (HH:mm)" pattern="\d{2}:\d{2}" title="Format: HH:mm" value="<?php echo e(old('duration', \Carbon\Carbon::parse($formation->duration)->format('H:i'))); ?>" required />
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -70,8 +70,8 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Prix</label>
-                                            <input class="form-control" type="number" name="prix" placeholder="Prix" step="0.01" value="<?php echo e(old('prix', $formation->prix)); ?>" required />
+                                            <label class="form-label">price</label>
+                                            <input class="form-control" type="number" name="price" placeholder="price" step="0.01" value="<?php echo e(old('price', $formation->price)); ?>" required />
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                                 <option value="" disabled selected>Choisir une catégorie</option>
                                                 <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($categorie->id); ?>" <?php echo e(old('categorie_id', $formation->categorie_id) == $categorie->id ? 'selected' : ''); ?>>
-                                                        <?php echo e($categorie->titre); ?>
+                                                        <?php echo e($categorie->title); ?>
 
                                                     </option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

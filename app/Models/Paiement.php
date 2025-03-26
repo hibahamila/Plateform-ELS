@@ -10,9 +10,9 @@ class Paiement extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'montant',
-        'date_paiement',
-        'statut',
+        'amount',
+        'payment_date',
+        'status',
     ];
 
     // Relation avec l'étudiant
