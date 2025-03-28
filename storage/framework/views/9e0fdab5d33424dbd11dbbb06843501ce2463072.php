@@ -15,6 +15,19 @@
   <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vector-map.css')); ?>">
 <?php $__env->stopPush(); ?>
     <?php $__env->startSection('content'); ?>
+    <?php if(session('success')): ?>
+        <div class="alert alert-success">
+            <?php echo e(session('success')); ?>
+
+        </div>
+        <?php endif; ?>
+
+        <?php if(session('warning')): ?>
+            <div class="alert alert-warning">
+                <?php echo e(session('warning')); ?>
+
+            </div>
+        <?php endif; ?>
       <?php echo $__env->yieldContent('breadcrumb-list'); ?>
       <!-- Container-fluid starts-->
       <div class="container-fluid dashboard-default-sec">

@@ -127,7 +127,7 @@
       width: 100% !important; }
       .note-editor.note-frame.fullscreen .note-editable {
         background-color: #fff;
-        border-color: #e6edef; }
+        border-color: #ADD8E633; }
       .note-editor.note-frame.fullscreen .note-resizebar {
         display: none; }
     .note-editor.note-frame .note-status-output {
@@ -139,7 +139,7 @@
       line-height: 1.42857143;
       color: #000;
       border: 0;
-      border-top: 1px solid #e6edef; }
+      border-top: 1px solid #ADD8E633; }
       .note-editor.note-frame .note-status-output:empty {
         height: 0;
         border-top: 0 solid transparent; }

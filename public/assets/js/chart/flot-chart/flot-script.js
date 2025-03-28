@@ -271,7 +271,7 @@ $(function() {
 
                         borderWidth: 0
                     },
-                    colors: [vihoAdminConfig.primary, "#ba895" ,"#222222" ,"#717171" ,"#e2c636", "#d22d3d" ,"#e6edef"]
+                    colors: [vihoAdminConfig.primary, "#ba895" ,"#222222" ,"#717171" ,"#e2c636", "#d22d3d" ,"#ADD8E633"]
 
                 });
             }

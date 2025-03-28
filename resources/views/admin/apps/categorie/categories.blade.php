@@ -293,7 +293,7 @@
 </div>
 
 @push('scripts')
-    <script src="{{ asset('assets/js/dropdown/dropdown.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/dropdown/dropdown.js') }}"></script>
     <script src="{{ asset('assets/js/prism/prism.min.js') }}"></script>
     <script src="{{ asset('assets/js/clipboard/clipboard.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom-card/custom-card.js') }}"></script>

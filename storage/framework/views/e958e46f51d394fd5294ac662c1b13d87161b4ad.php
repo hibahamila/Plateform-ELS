@@ -185,7 +185,7 @@
 </div>
 
 <?php $__env->startPush('scripts'); ?>
-    <script src="<?php echo e(asset('assets/js/dropdown/dropdown.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/dropdown/dropdown.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/prism/prism.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/clipboard/clipboard.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/custom-card/custom-card.js')); ?>"></script>

@@ -323,14 +323,14 @@
  @endsection
  
  @push('scripts')
-     <script src="{{ asset('assets/js/dropzone/dropzone.js') }}"></script>
+     <script src="{{ asset('assets/js/MonJs/dropzone/dropzone.js') }}"></script>
      <script src="{{ asset('assets/js/dropzone/dropzone-script.js') }}"></script>
      <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
      <script src="{{ asset('assets/js/MonJs/select2-init/single-select.js') }}"></script>
      <script src="{{ asset('assets/js/MonJs/form-validation/form-validation.js') }}"></script>
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <script src="{{ asset('assets/js/tinymce/js/tinymce/tinymce.min.js') }}"></script>
-     <script src="{{ asset('assets/js/description/description.js') }}"></script>
+     <script src="{{ asset('assets/js/MonJs/description/description.js') }}"></script>
      <script src="https://cdn.tiny.cloud/1/ofuiqykj9zattk5odkx0o1t79jxdfcb5eeuemjgcdtb1s95t/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
      <script>
          document.addEventListener("DOMContentLoaded", function() {

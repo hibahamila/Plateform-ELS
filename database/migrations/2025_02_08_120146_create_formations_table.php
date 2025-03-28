@@ -23,6 +23,8 @@ class CreateFormationsTable extends Migration
             $table->string('image');
             $table->unsignedBigInteger('categorie_id');
             $table->boolean('status')->default(true);
+            $table->timestamp('publish_date')->nullable();
+
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });

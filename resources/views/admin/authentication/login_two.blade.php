@@ -14,7 +14,7 @@
 	            <div class="col-xl-5"><img class="bg-img-cover bg-center" src="{{ asset('assets/images/login/3.jpg') }}" alt="looginpage" /></div>
 	            <div class="col-xl-7 p-0">
 	                <div class="login-card">
-	                    <form class="theme-form login-form">
+	                    <form class="theme-form login-form" method="POST" action="{{ route('login_two')}}">
 	                        <h4>Login</h4>
 	                        <h6>Welcome back! Log in to your account.</h6>
 	                        <div class="form-group">
@@ -67,7 +67,7 @@
 	    </div>
 	</section>
 
-	
+
     @push('scripts')
     @endpush
 

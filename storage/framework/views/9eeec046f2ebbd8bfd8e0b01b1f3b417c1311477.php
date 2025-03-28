@@ -16,8 +16,8 @@
      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
      <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
      <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/select2.min.css')); ?>">
-     <link href="<?php echo e(asset('assets/css/custom-style.css')); ?>" rel="stylesheet">
-     <link href="<?php echo e(asset('assets/css/SweatAlert2.css')); ?>" rel="stylesheet">
+     <link href="<?php echo e(asset('assets/css/MonCss/custom-style.css')); ?>" rel="stylesheet">
+     <link href="<?php echo e(asset('assets/css/MonCss/SweatAlert2.css')); ?>" rel="stylesheet">
  <?php $__env->stopPush(); ?>
  
  <?php $__env->startSection('content'); ?>
@@ -140,14 +140,14 @@
  <?php $__env->stopSection(); ?>
  
  <?php $__env->startPush('scripts'); ?>
-     <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
+     <script src="<?php echo e(asset('assets/js/MonJs/dropzone/dropzone.js')); ?>"></script>
      <script src="<?php echo e(asset('assets/js/dropzone/dropzone-script.js')); ?>"></script>
      <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-     <script src="<?php echo e(asset('assets/js/select2-init/single-select.js')); ?>"></script>
-     <script src="<?php echo e(asset('assets/js/form-validation/form-validation.js')); ?>"></script>
+     <script src="<?php echo e(asset('assets/js/MonJs/select2-init/single-select.js')); ?>"></script>
+     <script src="<?php echo e(asset('assets/js/MonJs/form-validation/form-validation.js')); ?>"></script>
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <script src="<?php echo e(asset('assets/js/tinymce/js/tinymce/tinymce.min.js')); ?>"></script>
-     <script src="<?php echo e(asset('assets/js/description/description.js')); ?>"></script>
+     <script src="<?php echo e(asset('assets/js/MonJs/description/description.js')); ?>"></script>
      <script src="https://cdn.tiny.cloud/1/ofuiqykj9zattk5odkx0o1t79jxdfcb5eeuemjgcdtb1s95t/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
      <script>
          document.addEventListener("DOMContentLoaded", function() {

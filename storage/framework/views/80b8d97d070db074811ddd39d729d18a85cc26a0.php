@@ -5,7 +5,7 @@
           <?php echo e($breadcrumb_title ?? ''); ?>
 
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo e(route('index')); ?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo e(route('index')); ?>">Accueil</a></li>
               <?php echo e($slot ?? ''); ?>
 
           </ol>
@@ -32,4 +32,5 @@
         </div>
       </div>
     </div>
-</div><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/components/breadcrumb.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/components/breadcrumb.blade.php ENDPATH**/ ?>

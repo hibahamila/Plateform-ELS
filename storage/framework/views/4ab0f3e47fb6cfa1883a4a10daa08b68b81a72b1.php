@@ -1,5 +1,4 @@
-
-
+ 
 
 <?php $__env->startSection('title'); ?> Ajouter une Formation <?php $__env->stopSection(); ?>
 
@@ -7,6 +6,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/formationcreate.css')); ?>">
+    <style>
+        #publishDateContainer {
+            display: none;
+        }
+    </style>
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -53,7 +57,7 @@
                                             <div class="col-sm-10">
                                                 <div class="input-group">
                                                     <span class="input-group-text"><i class="fa fa-align-left"></i></span>
-                                                    <textarea class="form-control" id="description" rows="4" name="description" placeholder="Description" required><?php echo e(old('description')); ?></textarea>
+                                                    <textarea class="form-control" id="description"  name="description" placeholder="Description" required><?php echo e(old('description')); ?></textarea>
                                                 </div>
                                                 <div class="invalid-feedback">Veuillez entrer une description valide.</div>
                                             </div>
@@ -89,9 +93,18 @@
                                             <div class="col-sm-10">
                                                 <div class="input-group">
                                                     <span class="input-group-text">Dt</span>
-                                                    <input class="form-control" type="number" id="price" name="price" placeholder="Prix" step="0.01" value="<?php echo e(old('price')); ?>" required />
+                                                    <input class="form-control" 
+                                                           type="number" 
+                                                           id="price" 
+                                                           name="price" 
+                                                           placeholder="Ex: 50.000" 
+                                                           step="0.001" 
+                                                           min="0"
+                                                           value="<?php echo e(old('price')); ?>" 
+                                                           required />
                                                 </div>
-                                                <div class="invalid-feedback">Veuillez entrer un Prix valide.</div>
+                                                <small class="text-muted">Format: 000.000 (3 décimales obligatoires)</small>
+                                                <div class="invalid-feedback">Veuillez entrer un prix valide (ex: 50.000 ou 45.500)</div>
                                             </div>
                                         </div>
 
@@ -138,21 +151,44 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Bouton switch pour le statut -->
+
+                                
+
+                                        <!-- Publication Section -->
                                         <div class="mb-3 row">
-                                            <label class="col-sm-2 col-form-label">Statut <span class="text-danger">*</span></label>
-                                            <div class="col-sm-10">
-                                                <div class="form-check form-switch">
-                                                    <!-- Case à cocher pour le statut -->
-                                                    <input class="form-check-input" type="checkbox" id="statusToggle" name="status" 
-                                                        value="1" <?php echo e(old('status', true) ? 'checked' : ''); ?>>
-                                                    <label class="form-check-label" for="statusToggle">
-                                                        <span id="statusLabel"><?php echo e(old('status', true) ? 'Publié' : 'Non publié'); ?></span>
-                                                    </label>
+                                            <div class="col-12">  <!-- Utilisation de col-12 pour occuper toute la largeur -->
+                                                <div class="d-flex justify-content-center">  <!-- Centrage horizontal -->
+                                                    <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
+                                                        <div class="radio radio-primary mx-2">  <!-- marge horizontale -->
+                                                            <input id="publishNow" type="radio" name="publication_type" value="now" checked>
+                                                            <label class="mb-0" for="publishNow">Publier immédiatement</label>
+                                                        </div>
+                                                        <div class="radio radio-primary mx-2">  <!-- marge horizontale -->
+                                                            <input id="publishLater" type="radio" name="publication_type" value="later">
+                                                            <label class="mb-0" for="publishLater">Programmer la publication</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Publication Date Container -->
+                                                <div id="publishDateContainer" class="mt-3 text-center">  <!-- Centrage du texte -->
+                                                    <div class="d-flex justify-content-center">  <!-- Centrage du groupe -->
+                                                        <div class="input-group" style="max-width:500px;">  <!-- Limite de largeur -->
+                                                            <span class="input-group-text"><i class="fa fa-clock"></i></span>
+                                                            <input class="form-control" 
+                                                                type="datetime-local" 
+                                                                id="publish_date" 
+                                                                name="publish_date" 
+                                                                value="<?php echo e(old('publish_date')); ?>"
+                                                                min="<?php echo e(now()->format('Y-m-d\TH:i')); ?>">
+                                                        </div>
+                                                    </div>
+                                                    <small class="text-muted">Sélectionnez la date et l'heure de publication</small>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Boutons de soumission -->
+
+                                        <!-- Boutons -->
                                         <div class="row">
                                             <div class="col">
                                                 <div class="text-end mt-4">
@@ -180,20 +216,49 @@
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone-script.js')); ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="<?php echo e(asset('assets/js/select2-init/single-select.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/form-validation/form-validation.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/formations/formationcreate.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/select2-init/single-select.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/form-validation/form-validation.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/formationcreate.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/tinymce/js/tinymce/tinymce.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/description/description.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/description/description.js')); ?>"></script>
     <script src="https://cdn.tiny.cloud/1/ofuiqykj9zattk5odkx0o1t79jxdfcb5eeuemjgcdtb1s95t/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
-
-    <!-- Script pour la mise à jour dynamique du label du statut -->
     <script>
-        document.getElementById('statusToggle').addEventListener('change', function() {
-            const statusLabel = document.getElementById('statusLabel');
-            statusLabel.textContent = this.checked ? 'Publié' : 'Non publié';
+        // Formatage automatique du prix
+        document.getElementById('price').addEventListener('blur', function() {
+            let value = parseFloat(this.value);
+            if (!isNaN(value)) {
+                this.value = value.toFixed(3);
+            }
+        });
+
+        // Show/hide publication date based on radio button selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const publishNowRadio = document.getElementById('publishNow');
+            const publishLaterRadio = document.getElementById('publishLater');
+            const publishDateContainer = document.getElementById('publishDateContainer');
+            const publishDateInput = document.getElementById('publish_date');
+
+            function togglePublishDate() {
+                if (publishLaterRadio.checked) {
+                    publishDateContainer.style.display = 'block';
+                    publishDateInput.required = true;
+                } else {
+                    publishDateContainer.style.display = 'none';
+                    publishDateInput.required = false;
+                    publishDateInput.value = ''; // Clear the date when hidden
+                }
+            }
+
+            publishNowRadio.addEventListener('change', togglePublishDate);
+            publishLaterRadio.addEventListener('change', togglePublishDate);
+
+            // Initial state
+            togglePublishDate();
         });
     </script>
 <?php $__env->stopPush(); ?>
+
+
+
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/formation/formationcreate.blade.php ENDPATH**/ ?>

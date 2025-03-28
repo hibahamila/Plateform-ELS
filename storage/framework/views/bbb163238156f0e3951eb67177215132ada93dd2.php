@@ -1,4 +1,6 @@
- <div class="card">
+
+
+<div class="card">
     <div class="card-header">
         <h5>Utilisateurs</h5>
     </div>
@@ -57,5 +59,6 @@
         </div>
     </div>
 </div>
+
 
 <?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/user/index.blade.php ENDPATH**/ ?>

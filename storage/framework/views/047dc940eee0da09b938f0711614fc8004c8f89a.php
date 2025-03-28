@@ -113,7 +113,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo e(asset('assets/js/datatables/datatables.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/MonJs/datatables/datatables.js')); ?>"></script>
 
 <script>
     $(document).ready(function () {

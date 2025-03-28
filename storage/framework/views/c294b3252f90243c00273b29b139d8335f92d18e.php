@@ -127,7 +127,7 @@
     <script src="<?php echo e(asset('assets/js/clipboard/clipboard.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/custom-card/custom-card.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/height-equal.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/actions-icon/actions-icon.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/actions-icon/actions-icon.js')); ?>"></script>
 
     <script>
         window.onload = function() {

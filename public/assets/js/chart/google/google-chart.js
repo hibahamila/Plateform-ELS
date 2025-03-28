@@ -147,7 +147,7 @@ function drawBasic() {
           15: {offset: 0.5},
         },
           // colors: ["#ab8ce4", "#26c6da"]
-          colors: [vihoAdminConfig.primary, vihoAdminConfig.secondary, "#222222", "#717171", "#e2c636", "#d22d3d","#e6edef", vihoAdminConfig.primary, vihoAdminConfig.secondary, "#222222", "#717171", "#e2c636","#d22d3d", vihoAdminConfig.primary, vihoAdminConfig.secondary, "#222222", "#717171", "#e2c636", "#d22d3d", vihoAdminConfig.primary,vihoAdminConfig.secondary, "#222222"]
+          colors: [vihoAdminConfig.primary, vihoAdminConfig.secondary, "#222222", "#717171", "#e2c636", "#d22d3d","#ADD8E633", vihoAdminConfig.primary, vihoAdminConfig.secondary, "#222222", "#717171", "#e2c636","#d22d3d", vihoAdminConfig.primary, vihoAdminConfig.secondary, "#222222", "#717171", "#e2c636", "#d22d3d", vihoAdminConfig.primary,vihoAdminConfig.secondary, "#222222"]
         };
         var chart = new google.visualization.PieChart(document.getElementById('pie-chart4'));
         chart.draw(data, options);

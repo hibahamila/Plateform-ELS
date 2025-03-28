@@ -9,13 +9,13 @@
   display: none;
   z-index: 8;
   background: #2c323f;
-  border: 1px solid #e6edef; }
+  border: 1px solid #ADD8E633; }
   .button-builder .colorpicker input {
     background-color: transparent;
     border: 1px solid transparent;
     position: absolute;
     font-size: 10px;
-    color: #e6edef;
+    color: #ADD8E633;
     top: 4px;
     right: 11px;
     text-align: right;
@@ -285,7 +285,7 @@
   position: absolute;
   top: 12px;
   width: 73px;
-  border: 1px solid #e6edef; }
+  border: 1px solid #ADD8E633; }
 
 .button-builder .colorpicker-field {
   display: none; }
@@ -417,7 +417,7 @@
     text-align: center;
     list-style: none outside none;
     padding: 5px;
-    border: 1px dotted #e6edef;
+    border: 1px dotted #ADD8E633;
     color: #898989;
     width: 40px;
     -webkit-transition: all 0.2s ease-in-out 0s;
@@ -427,12 +427,12 @@
       display: none; }
     .button-builder ul.the-icons li:hover {
       background: #fff;
-      -webkit-box-shadow: 0 0 3px #e6edef;
-              box-shadow: 0 0 3px #e6edef; }
+      -webkit-box-shadow: 0 0 3px #ADD8E633;
+              box-shadow: 0 0 3px #ADD8E633; }
       .button-builder ul.the-icons li:hover.active {
         background: #fff;
-        -webkit-box-shadow: 0 0 3px #e6edef;
-                box-shadow: 0 0 3px #e6edef; }
+        -webkit-box-shadow: 0 0 3px #ADD8E633;
+                box-shadow: 0 0 3px #ADD8E633; }
 
 .button-builder-wrap .form-group {
   margin-bottom: 15px; }

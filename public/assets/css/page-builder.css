@@ -15,7 +15,7 @@
   background-color: transparent;
   border: none;
   font-size: 12px;
-  border-right: 1px solid #e6edef;
+  border-right: 1px solid #ADD8E633;
   color: #cccccc; }
 
 .page-builder .btn-grid {
@@ -107,7 +107,7 @@
 
 .page-builder .ge-canvas.ge-editing .column {
   background-color: #f5f7fb;
-  border: 1px solid #e6edef;
+  border: 1px solid #ADD8E633;
   padding: 15px;
   border-radius: 4px; }
   .page-builder .ge-canvas.ge-editing .column > .ge-tools-drawer a {
@@ -117,12 +117,12 @@
     color: #2c323f; }
 
 .page-builder .ge-canvas.ge-editing .ui-sortable-placeholder {
-  background: #e6edef;
+  background: #ADD8E633;
   visibility: visible !important;
   min-height: 50px; }
 
 .page-builder .ge-canvas.ge-editing .ge-content-type-tinymce.active {
-  outline: 1px dotted #e6edef; }
+  outline: 1px dotted #ADD8E633; }
 
 .page-builder .ge-canvas.ge-layout-phone {
   max-width: 450px;

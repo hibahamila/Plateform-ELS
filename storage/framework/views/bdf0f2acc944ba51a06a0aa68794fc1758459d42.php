@@ -9,7 +9,7 @@
 <?php $__env->startPush('css'); ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/prism.css')); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/table.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/table.css')); ?>">
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -80,7 +80,7 @@
     <script src="<?php echo e(asset('assets/js/clipboard/clipboard.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/custom-card/custom-card.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/height-equal.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/actions-icon/actions-icon.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/actions-icon/actions-icon.js')); ?>"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <!-- Inclure les scripts de DataTables -->
@@ -88,7 +88,7 @@
      <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
      
      <!-- Inclure le fichier JavaScript pour l'initialisation -->
-     <script src="<?php echo e(asset('assets/js/datatables/datatables.js')); ?>"></script>
+     <script src="<?php echo e(asset('assets/js/MonJs/datatables/datatables.js')); ?>"></script>
     
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>

@@ -7,7 +7,7 @@
   top: 0; }
 
 .cropper-center:before, .cropper-center:after {
-  background-color: #e6edef;
+  background-color: #ADD8E633;
   content: ' ';
   display: block;
   position: absolute; }
@@ -63,7 +63,7 @@
   width: 100%; }
 
 .cropper-dashed {
-  border: 0 dashed #e6edef;
+  border: 0 dashed #ADD8E633;
   display: block;
   opacity: .5;
   position: absolute; }

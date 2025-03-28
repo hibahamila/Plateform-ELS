@@ -119,7 +119,7 @@
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Inclure le fichier JavaScript pour l'initialisation -->
-<script src="{{ asset('assets/js/datatables/datatables.js') }}"></script>
+<script src="{{ asset('assets/js/MonJs/datatables/datatables.js') }}"></script>
 
 @endpush
 @endsection 

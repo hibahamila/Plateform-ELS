@@ -101,7 +101,7 @@
 							<span data-peity='{ "fill": ["#2B6ED4", "#efefef"],    "innerRadius": 10, "radius": 40 }'>1/7</span><span data-peity='{ "fill": ["#717171", "#efefef"], "innerRadius": 14, "radius": 36 }'>2/7</span>
 							<span data-peity='{ "fill": ["#222222", "#efefef"], "innerRadius": 16, "radius": 32 }'>3/7</span><span data-peity='{ "fill": ["#717171", "#efefef"],  "innerRadius": 18, "radius": 28 }'>4/7</span>
 							<span data-peity='{ "fill": ["#e2c636", "#efefef"],   "innerRadius": 20, "radius": 24 }'>5/7</span><span data-peity='{ "fill": ["#d22d3d", "#efefef"], "innerRadius": 18, "radius": 20 }'>6/7</span>
-							<span data-peity='{ "fill": ["#e6edef", "#efefef"], "innerRadius": 15, "radius": 16 }'>7/7</span>
+							<span data-peity='{ "fill": ["#ADD8E633", "#efefef"], "innerRadius": 15, "radius": 16 }'>7/7</span>
 						</p>
 					</div>
 				</div>

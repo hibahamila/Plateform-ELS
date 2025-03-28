@@ -15,6 +15,17 @@
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vector-map.css')}}">
 @endpush
     @section('content')
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if(session('warning'))
+            <div class="alert alert-warning">
+                {{ session('warning') }}
+            </div>
+        @endif
       @yield('breadcrumb-list')
       <!-- Container-fluid starts-->
       <div class="container-fluid dashboard-default-sec">

@@ -800,7 +800,7 @@
   .img-cropper .docs-toggles > .dropdown {
     margin-bottom: 0; }
   .error-wrapper .maintenance-icons li i {
-    color: #e6edef;
+    color: #ADD8E633;
     font-size: 40px; }
   .error-wrapper .maintenance-icons li:nth-child(2) i {
     font-size: 80px;
@@ -1009,7 +1009,7 @@
       max-width: 270px;
       height: 600px;
       background-color: #fff;
-      border: 1px solid #e6edef;
+      border: 1px solid #ADD8E633;
       padding: 20px; }
       .job-sidebar .job-left-aside.open {
         opacity: 1;
@@ -1041,7 +1041,7 @@
     background-color: #fff;
     width: 300px;
     border-radius: 0;
-    border: 1px solid #e6edef;
+    border: 1px solid #ADD8E633;
     top: 80px;
     height: 100vh;
     left: -300px;
@@ -1261,7 +1261,7 @@
       background-color: #fff;
       -webkit-transition: all linear 0.3s;
       transition: all linear 0.3s;
-      border-top: 1px solid #e6edef;
+      border-top: 1px solid #ADD8E633;
       -webkit-box-shadow: 0 2px 2px 2px rgba(113, 113, 113, 0.08);
               box-shadow: 0 2px 2px 2px rgba(113, 113, 113, 0.08);
       width: 100%;
@@ -1739,7 +1739,7 @@
       display: inline-block;
       padding: 10px;
       margin-right: 5px;
-      border: 1px solid #e6edef;
+      border: 1px solid #ADD8E633;
       margin-bottom: 10px; }
       .chat-box .people-list ul li:last-child {
         padding-bottom: 10px; }
@@ -1875,7 +1875,7 @@
     padding-right: 10px;
     padding-left: 10px; }
   .error-wrapper .maintenance-icons li i {
-    color: #e6edef;
+    color: #ADD8E633;
     font-size: 30px; }
   .error-wrapper .maintenance-icons li:nth-child(2) i {
     font-size: 60px;

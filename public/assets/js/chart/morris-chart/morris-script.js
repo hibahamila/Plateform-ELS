@@ -373,7 +373,7 @@ var morris_chart = {
                 xkey: "x",
                 ykeys: ["y", "z", "a"],
                 labels: ["A", "Y", "Z"],
-                barColors: [vihoAdminConfig.primary, vihoAdminConfig.secondary ,"#222222" ,"#717171" ,"#e2c636", "#d22d3d" ,"#e6edef"],
+                barColors: [vihoAdminConfig.primary, vihoAdminConfig.secondary ,"#222222" ,"#717171" ,"#e2c636", "#d22d3d" ,"#ADD8E633"],
                 stacked: !0
             });
         });

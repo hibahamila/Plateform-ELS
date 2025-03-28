@@ -3,16 +3,19 @@
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\EditController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ChapitreController;
 use App\Http\Controllers\CoursController;
-use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ReponseController;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,15 +29,56 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
+Route::get('sign-up', [RegisterController::class, 'showRegistrationForm'])->name('sign-up');
+Route::post('sign-up', [RegisterController::class, 'register'])->name('register');
+Route::get('validation', [RegisterController::class, 'showValidationForm'])->name('validation.form');
+Route::post('validation', [RegisterController::class, 'validateAccount'])->name('validation.code');
+Route::get('resend-code', [RegisterController::class, 'resendCode'])->name('resend.code');
+
+// Routes pour la réinitialisation du mot de passe
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('forgot.password');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetCode'])->name('forgot.password.send');
+
+// Route pour afficher le formulaire de vérification du code
+Route::get('/verify-code', [ForgotPasswordController::class, 'showVerifyForm'])->name('reset.password.form');
+// Route pour vérifier le code de réinitialisation
+Route::post('/verify-code', [ForgotPasswordController::class, 'verifyCode'])->name('reset.password.verify');
+
+// Route pour afficher le formulaire de réinitialisation du mot de passe
+Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset.form');
+
+// Route pour mettre à jour le mot de passe
+Route::post('/reset-password', [ForgotPasswordController::class, 'changePassword'])->name('password.reset.update');
+
 Route::group(['middleware' => 'auth'], function () {
+	// Route::get('/test-redis', function() {
+	// 	try {
+	// 		return response()->json([
+	// 			'status' => Redis::ping()
+	// 		]);
+	// 	} catch (\Exception $e) {
+	// 		return response()->json([
+	// 			'error' => $e->getMessage(),
+	// 			'solution' => 'Run: composer require predis/preset'
+	// 		], 500);
+	// 	}
+	// });
 
 	Route::prefix('admin')->group(function () {
 	});
-	Route::get('profile/edit', [EditProfileController::class, 'edit'])->name('profile.edit');
-
-// Mettre à jour le profil
-	Route::put('profile/{user}', [EditProfileController::class, 'update'])->name('profile.update');
-	
+	Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/parametre', [EditController::class, 'index'])->name('parametre');
+        Route::get('/edit', [EditController::class, 'edit'])->name('edit');
+        Route::put('/update', [EditController::class, 'update'])->name('update');
+        Route::get('/updateCompte', [EditController::class, 'updateCompte'])->name('updateCompte');
+        Route::get('/updateEmail', [EditController::class, 'updateEmail'])->name('updateEmail');
+        Route::post('/sendEmailVerificationCode', [EditController::class, 'sendEmailVerificationCode'])->name('sendEmailVerificationCode');
+        Route::get('/verifyEmail', [EditController::class, 'validateCode'])->name('validateCode');
+        Route::post('/verifyEmail', [EditController::class, 'verifyAndUpdateEmail'])->name('verifyEmail');
+        Route::get('/editPassword', [EditController::class, 'editPassword'])->name('editPassword');
+        Route::post('/updatePassword', [EditController::class, 'updatePassword'])->name('updatePassword');
+    });
 
 
 	Route::prefix('dashboard')->group(function () {
@@ -361,11 +405,11 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::view('chat-video', 'admin.apps.chat-video')->name('chat-video');
 	});
 	
-	// Route::prefix('users')->group( function(){
-	// 	Route::view('user-profile', 'admin.apps.user-profile')->name('user-profile');
-	// 	Route::view('edit-profile', 'admin.apps.edit-profile')->name('edit-profile');
-	// 	Route::view('user-cards', 'admin.apps.user-cards')->name('user-cards');
-	// });
+	Route::prefix('users')->group( function(){
+		Route::view('user-profile', 'admin.apps.user-profile')->name('user-profile');
+		Route::view('edit-profile', 'admin.apps.edit-profile')->name('edit-profile');
+		Route::view('user-cards', 'admin.apps.user-cards')->name('user-cards');
+	});
 	
 	Route::view('bookmark', 'admin.apps.bookmark')->name('bookmark');
 	Route::view('contacts', 'admin.apps.contacts')->name('contacts');
@@ -388,12 +432,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::view('login-bs-validation', 'admin.authentication.login-bs-validation')->name('login-bs-validation');
 	Route::view('login-bs-tt-validation', 'admin.authentication.login-bs-tt-validation')->name('login-bs-tt-validation');
 	Route::view('login-sa-validation', 'admin.authentication.login-sa-validation')->name('login-sa-validation');
-	Route::view('sign-up', 'admin.authentication.sign-up')->name('sign-up');
+	
 	Route::view('sign-up-one', 'admin.authentication.sign-up-one')->name('sign-up-one');
 	Route::view('sign-up-two', 'admin.authentication.sign-up-two')->name('sign-up-two');
 	Route::view('unlock', 'admin.authentication.unlock')->name('unlock');
-	Route::view('forget-password', 'admin.authentication.forget-password')->name('forget-password');
-	Route::view('creat-password', 'admin.authentication.creat-password')->name('creat-password');
+	
+	
 	Route::view('maintenance', 'admin.authentication.maintenance')->name('maintenance');
 	
 	Route::view('comingsoon', 'admin.comingsoon.comingsoon')->name('comingsoon');

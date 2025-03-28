@@ -80,7 +80,7 @@
     .todo .todo-list-wrapper .todo-list-footer .add-task-btn:hover {
       background: #2B6ED4; }
       .todo .todo-list-wrapper .todo-list-footer .add-task-btn:hover .icon {
-        color: #e6edef; }
+        color: #ADD8E633; }
     .todo .todo-list-wrapper .todo-list-footer .add-task-btn .icon {
       color: #2B6ED4;
       font-size: 20px; }
@@ -93,7 +93,7 @@
         -webkit-box-sizing: border-box;
                 box-sizing: border-box;
         width: 100%;
-        border: 1px solid #e6edef;
+        border: 1px solid #ADD8E633;
         height: 90px;
         padding: 10px 15px;
         margin-bottom: 24px;
@@ -134,7 +134,7 @@
         display: table;
         padding: 10px 0;
         width: 100%;
-        border-bottom: 1px solid #e6edef;
+        border-bottom: 1px solid #ADD8E633;
         -webkit-box-sizing: border-box;
                 box-sizing: border-box;
         position: relative;

@@ -1,11 +1,5 @@
 
 
-
-
-
-
-
-
  
 
 <?php $__env->startSection('title'); ?> Ajouter un Cours <?php $__env->stopSection(); ?>
@@ -18,8 +12,6 @@
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
-    
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -195,5 +187,35 @@
             });
         }
     </script>
-<?php $__env->stopPush(); ?>
+<?php $__env->stopPush(); ?> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/cours/courscreate.blade.php ENDPATH**/ ?>

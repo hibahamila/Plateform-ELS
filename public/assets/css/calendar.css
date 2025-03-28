@@ -1996,10 +1996,10 @@ input[type='checkbox'].tui-full-calendar-checkbox-round {
     top: 25px;
     padding: 15px;
     border-radius: 2px;
-    border: 1px solid #e6edef;
+    border: 1px solid #ADD8E633;
     background-color: #fff; }
     .calendar-basic .dropdown-menu .dropdown-divider {
-      border-top: 1px solid #e6edef; }
+      border-top: 1px solid #ADD8E633; }
     .calendar-basic .dropdown-menu > li > a {
       color: #242934;
       cursor: pointer;
@@ -2017,7 +2017,7 @@ input[type='checkbox'].tui-full-calendar-checkbox-round {
     height: 15px; }
   .calendar-basic #top {
     height: 49px;
-    border-bottom: 1px solid #e6edef;
+    border-bottom: 1px solid #ADD8E633;
     padding: 16px;
     font-size: 10px; }
   .calendar-basic #lnb {
@@ -2082,7 +2082,7 @@ input[type='checkbox'].tui-full-calendar-checkbox-round {
         -ms-flex-pack: justify;
             justify-content: space-between;
     padding-bottom: 20px;
-    border-bottom: 1px solid #e6edef; }
+    border-bottom: 1px solid #ADD8E633; }
     .calendar-basic #menu-navi .move-day {
       padding: 6px 15px; }
       .calendar-basic #menu-navi .move-day i {
@@ -2131,7 +2131,7 @@ input[type='checkbox'].tui-full-calendar-checkbox-round {
     line-height: 17px;
     padding: 0 5px;
     border-radius: 3px;
-    border: 1px solid #e6edef;
+    border: 1px solid #ADD8E633;
     font-size: 12px;
     text-align: center;
     color: #000; }
@@ -2140,7 +2140,7 @@ input[type='checkbox'].tui-full-calendar-checkbox-round {
     min-height: auto; }
   .calendar-basic .tui-full-calendar-popup .tui-full-calendar-popup-section-item {
     padding: 0;
-    border-color: #e6edef; }
+    border-color: #ADD8E633; }
     .calendar-basic .tui-full-calendar-popup .tui-full-calendar-popup-section-item .tui-full-calendar-icon {
       margin-left: 10px; }
   .calendar-basic .tui-full-calendar-popup .tui-full-calendar-button.tui-full-calendar-section-private {
@@ -2167,7 +2167,7 @@ input[type='checkbox'].tui-full-calendar-checkbox-round {
   .calendar-basic .tui-full-calendar-popup .tui-datepicker .tui-calendar-title {
     font-weight: 600; }
   .calendar-basic .tui-full-calendar-popup .tui-full-calendar-section-start-date .tui-datepicker {
-    border-color: #e6edef; }
+    border-color: #ADD8E633; }
   .calendar-basic .tui-datepicker.tui-rangepicker .tui-is-selectable.tui-is-selected {
     background-color: #2B6ED4; }
   .calendar-basic .tui-datepicker .tui-is-selectable:hover {
@@ -2176,9 +2176,9 @@ input[type='checkbox'].tui-full-calendar-checkbox-round {
   .calendar-basic .tui-calendar .tui-calendar-today {
     color: #2B6ED4; }
   .calendar-basic .tui-calendar .tui-timepicker-select {
-    border-color: #e6edef; }
+    border-color: #ADD8E633; }
   .calendar-basic .tui-calendar .tui-calendar-header {
-    border-color: #e6edef; }
+    border-color: #ADD8E633; }
 
 @media (max-width: 1470px) {
   .calendar-basic #menu-navi .move-day {

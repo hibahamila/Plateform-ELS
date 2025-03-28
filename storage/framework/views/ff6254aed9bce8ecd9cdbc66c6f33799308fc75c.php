@@ -16,10 +16,10 @@
 
 	<?php $__env->startComponent('components.breadcrumb'); ?>
 		<?php $__env->slot('breadcrumb_title'); ?>
-			<h3>Contacts</h3>
+			<h3>Utilisateurs et Accès</h3>
 		<?php $__env->endSlot(); ?>
-		<li class="breadcrumb-item">Apps</li>
-		<li class="breadcrumb-item active">Contacts</li>
+		<li class="breadcrumb-item">Applications</li>
+		<li class="breadcrumb-item active">Utilisateurs et Accès</li>
         <div id="alert-container" class="mt-3"></div>
 	<?php echo $__env->renderComponent(); ?>
 	<div class="container-fluid">

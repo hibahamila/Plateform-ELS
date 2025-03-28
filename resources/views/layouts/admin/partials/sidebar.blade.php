@@ -1,22 +1,17 @@
 <header class="main-nav">
-    <div class="sidebar-user text-center">
-        {{-- @if(isset($user))
-            <a class="setting-primary" href="{{ route('profile.edit', $user->id) }}">
-        @else
-            <a class="setting-primary" href="{{ route('profile.edit') }}">
-        @endif --}}
-        {{-- <a class="setting-primary" href="{{ route('profile.edit',$user->id) }}"> --}}
-            <a class="setting-primary" href="{{ url('profile/edit') }}">
-                <i data-feather="settings"></i>
-            </a>
-        <img class="img-90 rounded-circle" src="{{ asset('assets/images/dashboard/1.png') }}" alt="" />
+      <div class="sidebar-user text-center">
+        <a class="setting-primary" href="{{ route('profile.parametre') }}">
+            <i data-feather="settings"></i>
+        </a>
+        <div class="mb-4">
+            <div class="avatar-circle text-white mx-auto" style="background-color: #2B6ED4; width: 80px; height: 80px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 28px; font-weight: bold;">
+                <span>{{ substr(auth()->user()->name, 0, 1) }}{{ substr(auth()->user()->lastname, 0, 1) }}</span>
+            </div>
+        </div>
 
-
-
-        {{-- <a class="setting-primary" href="javascript:void(0)"><i data-feather="settings"></i></a><img class="img-90 rounded-circle" src="{{asset('assets/images/dashboard/1.png')}}" alt="" /> --}}
-        <div class="badge-bottom"><span class="badge badge-primary">New</span></div>
-        <a href="user-profile"> <h6 class="mt-3 f-14 f-w-600">{{auth()->user()->name}}</h6></a>
-    
+        <a href="{{ route('user-profile') }}">
+            <h6 class="mt-3 f-14 f-w-600">{{auth()->user()->name}} </h6>
+        </a>
     </div>
     <nav>
         <div class="main-navbar">
@@ -32,7 +27,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title {{ prefixActive('/dashboard') }}" href="javascript:void(0)"><i data-feather="home"></i><span>Dashboard</span></a>                  
+                        <a class="nav-link menu-title {{ prefixActive('/dashboard') }}" href="javascript:void(0)"><i data-feather="home"></i><span>Dashboard</span></a>
                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/dashboard') }};">
                             <li><a href="{{route('index')}}" class="{{routeActive('index')}}">Default</a></li>
                             <li><a href="{{route('dashboard-02')}}" class="{{routeActive('dashboard-02')}}">Ecommerce</a></li>
@@ -262,6 +257,13 @@
                             <li><a href="{{ route('projects') }}" class="{{routeActive('projects')}}">Project List</a></li>
                             <li><a href="{{ route('projectcreate') }}" class="{{routeActive('projectcreate')}}">Create new </a></li>
                         </ul>
+                         {{-- zedtouu  ta formation --}}
+                         <a class="nav-link menu-title {{ prefixActive('/formation') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Formations </span></a>
+                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/formation') }};">
+                             <li><a href="{{ route('formations') }}" class="{{routeActive('formations')}}">Formations List</a></li>
+                             <li><a href="{{ route('formationcreate') }}" class="{{routeActive('formationcreate')}}">Create new </a></li>
+                         </ul>
+
                          {{-- categorie --}}
 
                          <a class="nav-link menu-title {{ prefixActive('/categorie') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Categories </span></a>
@@ -270,88 +272,81 @@
                              <li><a href="{{ route('categoriecreate') }}" class="{{routeActive('categoriecreate')}}">Create new </a></li>
                          </ul>
 
-                        {{-- zedtouu  ta formation --}}
-                        <a class="nav-link menu-title {{ prefixActive('/formation') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Formations </span></a>
-                        <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/formation') }};">
-                            <li><a href="{{ route('formations') }}" class="{{routeActive('formations')}}">Formations List</a></li>
-                            <li><a href="{{ route('formationcreate') }}" class="{{routeActive('formationcreate')}}">Create new </a></li>
-                        </ul>
+                         {{-- cours --}}
+                         <a class="nav-link menu-title {{ prefixActive('/categorie') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Cours </span></a>
+                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/cours') }};">
+                             <li><a href="{{ route('cours') }}" class="{{routeActive('cours')}}">cours List</a></li>
+                             <li><a href="{{ route('courscreate') }}" class="{{routeActive('courscreate')}}">Create new </a></li>
+                         </ul>
+                         {{-- chapitre --}}
 
-                       
-
-                        {{-- cours --}}
-                        <a class="nav-link menu-title {{ prefixActive('/categorie') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Cours </span></a>
-                        <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/cours') }};">
-                            <li><a href="{{ route('cours') }}" class="{{routeActive('cours')}}">cours List</a></li>
-                            <li><a href="{{ route('courscreate') }}" class="{{routeActive('courscreate')}}">Create new </a></li>
-                        </ul>
-                        {{-- chapitre --}}
-
-                        <a class="nav-link menu-title {{ prefixActive('/chapitre') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Chapitres </span></a>
-                        <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/chapitre') }};">
-                            <li><a href="{{ route('chapitres') }}" class="{{routeActive('chapitres')}}">chapitres List</a></li>
-                            <li><a href="{{ route('chapitrecreate') }}" class="{{routeActive('chapitrecreate')}}">Create new </a></li>
-                        </ul>
-
-                         {{-- lesson --}}
-                         <a class="nav-link menu-title {{ prefixActive('/lesson') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Leçons </span></a>
-                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/lesson') }};">
-                             <li><a href="{{ route('lessons') }}" class="{{routeActive('lessons')}}">Leçons List</a></li>
-                             <li><a href="{{ route('lessoncreate') }}" class="{{routeActive('lessoncreate')}}">Create new </a></li>
+                         <a class="nav-link menu-title {{ prefixActive('/chapitre') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Chapitres </span></a>
+                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/chapitre') }};">
+                             <li><a href="{{ route('chapitres') }}" class="{{routeActive('chapitres')}}">chapitres List</a></li>
+                             <li><a href="{{ route('chapitrecreate') }}" class="{{routeActive('chapitrecreate')}}">Create new </a></li>
                          </ul>
 
-
-                          {{-- quiz --}}
-                          <a class="nav-link menu-title {{ prefixActive('/quiz') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Quizzes </span></a>
-                          <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/quiz') }};">
-                              <li><a href="{{ route('quizzes') }}" class="{{routeActive('quizzes')}}">Quizzes List</a></li>
-                              <li><a href="{{ route('quizcreate') }}" class="{{routeActive('quizcreate')}}">Create new </a></li>
+                          {{-- lesson --}}
+                          <a class="nav-link menu-title {{ prefixActive('/lesson') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Leçons </span></a>
+                          <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/lesson') }};">
+                              <li><a href="{{ route('lessons') }}" class="{{routeActive('lessons')}}">Leçons List</a></li>
+                              <li><a href="{{ route('lessoncreate') }}" class="{{routeActive('lessoncreate')}}">Create new </a></li>
                           </ul>
 
-                          {{-- question --}}
-                          <a class="nav-link menu-title {{ prefixActive('/question') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Questions </span></a>
-                          <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/question') }};">
-                              <li><a href="{{ route('questions') }}" class="{{routeActive('questions')}}">Questions List</a></li>
-                              <li><a href="{{ route('questioncreate') }}" class="{{routeActive('questioncreate')}}">Create new </a></li>
-                          </ul>
-                          
 
-                           {{-- reponse de question --}}
-                           <a class="nav-link menu-title {{ prefixActive('/reponse') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Reponses </span></a>
-                           <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/reponse') }};">
-                               <li><a href="{{ route('reponses') }}" class="{{routeActive('reponses')}}">Reponses List</a></li>
-                               <li><a href="{{ route('reponsecreate') }}" class="{{routeActive('reponsecreate')}}">Create new </a></li>
+                           {{-- quiz --}}
+                           <a class="nav-link menu-title {{ prefixActive('/quiz') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Quizzes </span></a>
+                           <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/quiz') }};">
+                               <li><a href="{{ route('quizzes') }}" class="{{routeActive('quizzes')}}">Quizzes List</a></li>
+                               <li><a href="{{ route('quizcreate') }}" class="{{routeActive('quizcreate')}}">Create new </a></li>
                            </ul>
-                            {{-- Feedbacks --}}
 
-                            {{-- <a class="nav-link menu-title {{ prefixActive('/feedback') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Reponse </span></a>
-                           <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/feedback') }};">
-                               <li><a href="{{ route('feedbacks') }}" class="{{routeActive('feedbacks')}}">feedbacks List</a></li>
-                               <li><a href="{{ route('feedbackcreate') }}" class="{{routeActive('feedbackcreate')}}">Create new </a></li>
-                           </ul> --}}
+                           {{-- question --}}
+                           <a class="nav-link menu-title {{ prefixActive('/question') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Questions </span></a>
+                           <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/question') }};">
+                               <li><a href="{{ route('questions') }}" class="{{routeActive('questions')}}">Questions List</a></li>
+                               <li><a href="{{ route('questioncreate') }}" class="{{routeActive('questioncreate')}}">Create new </a></li>
+                           </ul>
 
-                           <a class="nav-link menu-title {{ prefixActive('/feedbacks') }}" href="javascript:void(0)">
-    <i data-feather="box"></i><span>Feedbacks</span>
-</a>
-<ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/feedbacks') }};">
-    <li><a href="{{ route('feedbacks') }}" class="{{ routeActive('feedbacks') }}">Feedbacks List</a></li>
-    <li><a href="{{ route('feedbackcreate') }}" class="{{ routeActive('feedbackcreate') }}">Create New</a></li>
-</ul>
-                            {{-- <a class="nav-link menu-title {{ prefixActive('/feedbacks') }}" href="javascript:void(0)">
-                                <i data-feather="message-square"></i><span>Feedbacks</span>
+
+                            {{-- reponse de question --}}
+                            <a class="nav-link menu-title {{ prefixActive('/reponse') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Reponses </span></a>
+                            <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/reponse') }};">
+                                <li><a href="{{ route('reponses') }}" class="{{routeActive('reponses')}}">Reponses List</a></li>
+                                <li><a href="{{ route('reponsecreate') }}" class="{{routeActive('reponsecreate')}}">Create new </a></li>
+                            </ul>
+                             {{-- Feedbacks --}}
+
+                             {{-- <a class="nav-link menu-title {{ prefixActive('/feedback') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Reponse </span></a>
+                            <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/feedback') }};">
+                                <li><a href="{{ route('feedbacks') }}" class="{{routeActive('feedbacks')}}">feedbacks List</a></li>
+                                <li><a href="{{ route('feedbackcreate') }}" class="{{routeActive('feedbackcreate')}}">Create new </a></li>
+                            </ul> --}}
+
+                            <a class="nav-link menu-title {{ prefixActive('/feedbacks') }}" href="javascript:void(0)">
+                                <i data-feather="box"></i><span>Feedbacks</span>
                             </a>
                             <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/feedbacks') }};">
-                                <li>
-                                    <a href="{{ route('feedbacks.feedbacks') }}" class="{{ routeActive('feedbacks') }}">
-                                        Feedback List
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('feedbackcreate') }}" class="{{ routeActive('feedbackcreate') }}">
-                                        Create New
-                                    </a>
-                                </li>
-                            </ul> --}}
+                                <li><a href="{{ route('feedbacks') }}" class="{{ routeActive('feedbacks') }}">Feedbacks List</a></li>
+                                <li><a href="{{ route('feedbackcreate') }}" class="{{ routeActive('feedbackcreate') }}">Create New</a></li>
+                            </ul>
+                             {{-- <a class="nav-link menu-title {{ prefixActive('/feedbacks') }}" href="javascript:void(0)">
+                                 <i data-feather="message-square"></i><span>Feedbacks</span>
+                             </a>
+                             <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/feedbacks') }};">
+                                 <li>
+                                     <a href="{{ route('feedbacks.feedbacks') }}" class="{{ routeActive('feedbacks') }}">
+                                         Feedback List
+                                     </a>
+                                 </li>
+                                 <li>
+                                     <a href="{{ route('feedbackcreate') }}" class="{{ routeActive('feedbackcreate') }}">
+                                         Create New
+                                     </a>
+                                 </li>
+                             </ul> --}}
+
+
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href="{{ route('file-manager') }}"><i data-feather="git-pull-request"></i><span>File manager</span></a>
@@ -392,16 +387,16 @@
                     <li class="dropdown">
                         <a class="nav-link menu-title {{ prefixActive('/users') }}" href="javascript:void(0)"><i data-feather="users"></i><span>Users</span></a>
                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/users') }};">
-                            {{-- <li><a href="{{ route('user-profile') }}" class="{{routeActive('user-profile')}}">Users Profile</a></li>
-                            <li><a href="{{ route('edit-profile') }}" class="{{routeActive('edit-profile')}}">Users Edit</a></li>
-                            <li><a href="{{ route('user-cards') }}" class="{{routeActive('user-cards')}}">Users Cards</a></li> --}}
+                            <li><a href="{{ route('user-profile') }}" class="{{routeActive('user-profile')}}">Users Profile</a></li>
+                            {{-- <li><a href="{{ route('edit-profile') }}" class="{{routeActive('edit-profile')}}">Users Edit</a></li> --}}
+                            <li><a href="{{ route('user-cards') }}" class="{{routeActive('user-cards')}}">Users Cards</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('bookmark')}}" href="{{ route('bookmark') }}"><i data-feather="heart"></i><span>Bookmarks</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('contacts')}}" href="{{ route('contacts') }}"><i data-feather="list"></i><span>Utilisateurs et Accés</span></a>
+                        <a class="nav-link menu-title link-nav {{routeActive('contacts')}}" href="{{ route('contacts') }}"><i data-feather="list"></i><span>Utilisateurs et Accès</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('task')}}" href="{{ route('task') }}"><i data-feather="check-square"></i><span>Tasks</span></a>
@@ -469,8 +464,8 @@
                                                     <li><a href="{{ route('sign-up-one') }}" class="{{routeActive('sign-up-one')}}" target="_blank">Register with Bg Image </a></li>
                                                     <li><a href="{{ route('sign-up-two') }}" class="{{routeActive('sign-up-two')}}" target="_blank">Register with Bg video </a></li>
                                                     <li><a href="{{ route('unlock') }}" class="{{routeActive('unlock')}}">Unlock User</a></li>
-                                                    <li><a href="{{ route('forget-password') }}" class="{{routeActive('forget-password')}}">Forget Password</a></li>
-                                                    <li><a href="{{ route('creat-password') }}" class="{{routeActive('creat-password')}}">Creat Password</a></li>
+                                                    {{-- <li><a href="{{ route('forget-password') }}" class="{{routeActive('forget-password')}}">Forget Password</a></li> --}}
+                                                    {{-- <li><a href="{{ route('creat-password') }}" class="{{routeActive('creat-password')}}">Creat Password</a></li> --}}
                                                     <li><a href="{{ route('maintenance') }}" class="{{routeActive('maintenance')}}">Maintenance</a></li>
                                                 </ul>
                                             </div>
