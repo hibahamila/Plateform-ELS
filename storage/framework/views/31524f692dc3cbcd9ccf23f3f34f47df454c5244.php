@@ -252,7 +252,7 @@
 <script src="<?php echo e(asset('assets/js/MonJs/select2-init/single-select.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/MonJs/form-validation/form-validation.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/MonJs/lecons/link-validation.js')); ?>"></script>
-<script src="https://cdn.tiny.cloud/1/ofuiqykj9zattk5odkx0o1t79jxdfcb5eeuemjgcdtb1s95t/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/cwjxs6s7k08kvxb3t6udodzrwpomhxtehiozsu4fem2igekf/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="<?php echo e(asset('assets/js/MonJs/description/description.js')); ?>"></script>
 
 <script>

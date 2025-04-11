@@ -13,8 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\PublishFormationsCommand::class,
     ];
+    
 
     /**
      * Define the application's command schedule.
@@ -23,15 +24,15 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-{
-    $schedule->command('formations:publish')->everyMinute()
-
-    ->description('Publication automatique des formations programmées');
+    {
+        $schedule->command('formations:publish') // Juste le nom de la commande, sans "php artisan"
+            ->everyMinute()
+            ->description('Publication automatique des formations programmées')
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/formation_publish.log'));
+    }
     
     
-
-    
-}
 
 
     /**

@@ -31,13 +31,13 @@ class FeedbackController extends Controller
     {
         $request->validate([
             'formation_id' => 'required|exists:formations,id',
-            'rating_cout' => 'nullable|numeric|min:0.5|max:5', 
+            'rating_count' => 'nullable|numeric|min:0.5|max:5', 
         ]);
     
         Feedback::create([
             'user_id'      => auth()->id(), // Utilisation de l'utilisateur authentifié
             'formation_id' => $request->formation_id,
-            'rating_cout'  => $request->rating_cout,
+            'rating_count'  => $request->rating_count,
         ]);
     
         return redirect()->route('feedbacks')->with('success', 'Feedback ajouté avec succès.');
@@ -64,12 +64,12 @@ class FeedbackController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'rating_cout' => 'nullable|numeric|min:0.5|max:5', 
+            'rating_count' => 'nullable|numeric|min:0.5|max:5', 
         ]);
 
         $feedback = Feedback::findOrFail($id);
         $feedback->update([
-            'rating_cout'  => $request->rating_cout,
+            'rating_count'  => $request->rating_count,
         ]);
 
         return redirect()->route('feedbacks')->with('success', 'Feedback mis à jour.');

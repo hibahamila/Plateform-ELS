@@ -23,23 +23,16 @@
 
 
 
+
+
+
 <?php $__env->startSection('title'); ?> Modifier une Formation <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/formationedit.css')); ?>">
-    <style>
-        #publishDateContainer {
-            display: none;
-        }
-        .text-success {
-            color: #28a745;
-        }
-        .text-muted {
-            color: #6c757d;
-        }
-    </style>
+    
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -79,13 +72,15 @@
                                             </div>
                                         </div>
 
-                                        <!-- Description -->
+                                        <!-- Description -->            
                                         <div class="mb-3 row">
                                             <label class="col-sm-2 col-form-label">Description <span class="text-danger">*</span></label>
                                             <div class="col-sm-10">
-                                                <div class="input-group">
-                                                    <span class="input-group-text"><i class="fa fa-align-left"></i></span>
-                                                    <textarea class="form-control" id="description" name="description" placeholder="Description" required><?php echo e(old('description', $formation->description)); ?></textarea>
+                                                <div class="input-group" style="flex-wrap: nowrap;">
+                                                    <div class="input-group-text d-flex align-items-stretch" style="height: auto;">
+                                                        <i class="fa fa-align-left align-self-center"></i>
+                                                    </div>
+                                                    <textarea class="form-control" id="description" name="description" placeholder="Description" required><?php echo e(old('description',$formation->description)); ?></textarea>
                                                 </div>
                                                 <div class="invalid-feedback">Veuillez entrer une description valide.</div>
                                             </div>
@@ -109,14 +104,17 @@
                                             <div class="col-sm-10">
                                                 <div class="input-group">
                                                     <span class="input-group-text"><i class="fa fa-list"></i></span>
-                                                    <input class="form-control" type="text" id="type" name="type" placeholder="Type" value="<?php echo e(old('type', $formation->type)); ?>" required />
+                                                    <select class="form-select" id="type" name="type" required>
+                                                        <option value="payante" <?php echo e(old('type', $formation->type) == 'payante' ? 'selected' : ''); ?>>Payante</option>
+                                                        <option value="gratuite" <?php echo e(old('type', $formation->type) == 'gratuite' ? 'selected' : ''); ?>>Gratuite</option>
+                                                    </select>
                                                 </div>
-                                                <div class="invalid-feedback">Veuillez entrer un type valide.</div>
+                                                <div class="invalid-feedback">Veuillez sélectionner un type.</div>
                                             </div>
                                         </div>
 
                                         <!-- Prix -->
-                                        <div class="mb-3 row">
+                                        <div class="mb-3 row" id="priceContainer" style="<?php echo e(old('type', $formation->type) == 'payante' ? 'display: flex;' : 'display: none;'); ?>">
                                             <label class="col-sm-2 col-form-label">Prix <span class="text-danger">*</span></label>
                                             <div class="col-sm-10">
                                                 <div class="input-group">
@@ -128,11 +126,41 @@
                                                            placeholder="Ex: 50.000" 
                                                            step="0.001" 
                                                            min="0"
-                                                           value="<?php echo e(old('price', $formation->price)); ?>" 
-                                                           required />
+                                                           value="<?php echo e(old('price', $formation->price)); ?>" />
                                                 </div>
                                                 <small class="text-muted">Format: 000.000 (3 décimales obligatoires)</small>
                                                 <div class="invalid-feedback">Veuillez entrer un prix valide (ex: 50.000 ou 45.500)</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Remise -->
+                                        <div class="mb-3 row" id="discountContainer" style="<?php echo e(old('type', $formation->type) == 'payante' ? 'display: flex;' : 'display: none;'); ?>">
+                                            <label class="col-sm-2 col-form-label">Remise (%)</label>
+                                            <div class="col-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                                    <input class="form-control" 
+                                                           type="number" 
+                                                           id="discount" 
+                                                           name="discount" 
+                                                           placeholder="Ex: 10" 
+                                                           min="0" 
+                                                           max="100"
+                                                           value="<?php echo e(old('discount', $formation->discount ?? 0)); ?>" />
+                                                </div>
+                                                <small class="text-muted">Entrez un pourcentage de remise (0-100)</small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Prix final -->
+                                        <div class="mb-3 row" id="finalPriceContainer" style="<?php echo e(old('type', $formation->type) == 'payante' ? 'display: flex;' : 'display: none;'); ?>">
+                                            <label class="col-sm-2 col-form-label">Prix final</label>
+                                            <div class="col-sm-10">
+                                                <div class="price-display">
+                                                    <span class="original-price" id="originalPriceDisplay">0.000 DT</span>
+                                                    <span class="final-price" id="finalPriceDisplay">0.000 DT</span>
+                                                </div>
+                                                <input type="hidden" id="final_price" name="final_price" value="<?php echo e(old('final_price', $formation->final_price ?? $formation->price)); ?>">
                                             </div>
                                         </div>
 
@@ -155,59 +183,95 @@
                                             </div>
                                         </div>
 
-                                        <!-- Image -->
+                                        <!-- Professeur -->
                                         <div class="mb-3 row">
-                                            <label class="col-sm-2 col-form-label">Image <span class="text-danger">*</span></label>
+                                            <label class="col-sm-2 col-form-label">Professeur <span class="text-danger">*</span></label>
                                             <div class="col-sm-10">
-                                                <?php if($formation->image): ?>
-                                                    <div id="currentImageContainer" class="image-container">
-                                                        <img src="<?php echo e(asset('storage/' . $formation->image)); ?>?v=<?php echo e(time()); ?>" alt="image" class="centered-image" id="currentImage" />
-                                                        <div class="image-actions">
-                                                            <button type="button" class="btn" id="deleteImage">
-                                                                <i class="fa fa-trash trash-icon" title="Supprimer l'image"></i>
-                                                            </button>
-                                                        </div>
+                                                <div class="row">
+                                                    <div class="col-auto">
+                                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
                                                     </div>
-                                                <?php endif; ?>
-                                                <div id="newImagePreview" class="image-preview-container" style="display: none;">
-                                                    <img id="previewImage" src="#" alt="Prévisualisation de la nouvelle image" class="image-preview" />
+                                                    <div class="col">
+                                                        <select id="user_id" class="form-select select2-professeur" name="user_id" required>
+                                                            <option value="" disabled>Choisir un professeur</option>
+                                                            <?php $__currentLoopData = $professeurs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $professeur): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <option value="<?php echo e($professeur->id); ?>" 
+                                                                    <?php echo e($formation->user_id == $professeur->id ? 'selected' : ''); ?>>
+                                                                    <?php echo e($professeur->name); ?> <?php echo e($professeur->lastname ?? ''); ?>
+
+                                                                </option>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div class="input-group">
-                                                    <span class="input-group-text" id="imageIcon" style="<?php echo e($formation->image ? 'display: none;' : ''); ?>">
-                                                        <i class="fa fa-image"></i>
-                                                    </span>
-                                                    <input class="form-control" type="file" id="imageUpload" name="image" accept="image/*" style="<?php echo e($formation->image ? 'display: none;' : ''); ?>">
-                                                </div>
-                                                <button id="restoreImage" type="button" class="btn" style="display: none;">
-                                                    <i class="fa fa-undo"></i> Revenir à l'image actuelle
-                                                </button>
-                                                <input type="hidden" name="delete_image" id="deleteImageInput" value="0">
-                                                <small class="text-muted">Formats acceptés: JPG, PNG, GIF. Taille max: 2Mo</small>
+                                                <div class="invalid-feedback">Veuillez sélectionner un professeur valide.</div>
                                             </div>
                                         </div>
 
+                                        <!-- Image -->
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-2 col-form-label">Image <span class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <?php if($formation->image): ?>
+                                                <div id="currentImageContainer" class="image-container">
+                                                    <img src="<?php echo e(asset('storage/' . $formation->image)); ?>?v=<?php echo e(time()); ?>" alt="image" class="centered-image" id="currentImage" />
+                                                    <div class="image-actions">
+                                                        <button type="button" class="btn" id="deleteImage">
+                                                            <i class="fa fa-trash trash-icon" title="Supprimer l'image"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                            <div id="newImagePreview" class="image-preview-container" style="display: none;">
+                                                <img id="previewImage" src="#" alt="Prévisualisation de la nouvelle image" class="image-preview" />
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="imageIcon" style="<?php echo e($formation->image ? 'display: none;' : ''); ?>">
+                                                    <i class="fa fa-image"></i>
+                                                </span>
+                                                <input class="form-control" type="file" id="imageUpload" name="image" accept="image/*" style="<?php echo e($formation->image ? 'display: none;' : ''); ?>">
+                                            </div>
+                                            <small class="text-muted d-block text-center my-2">Formats acceptés: JPG, PNG, GIF. Taille max: 2Mo</small>
+                                            <button id="restoreImage" type="button" class="btn" style="display: none;">
+                                                <i class="fa fa-undo"></i> Revenir à l'image actuelle
+                                            </button>
+                                            <input type="hidden" name="delete_image" id="deleteImageInput" value="0">
+                                        </div>
+                                    </div>
+                                    
                                         <!-- Publication Section -->
                                         <div class="mb-3 row">
                                             <div class="col-12">
-                                                <div class="d-flex justify-content-center">
+                                                <?php if($formation->status): ?>
+                                                    <div class="publication-status text-success text-center">
+                                                        <i class="fa fa-check-circle"></i> Formation publiée
+                                                        <?php if($formation->publish_date): ?>
+                                                            le <?php echo e(\Carbon\Carbon::parse($formation->publish_date)->format('d/m/Y H:i')); ?>
+
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php elseif($formation->publish_date): ?>
+                                                    <div class="publication-status text-muted text-center">
+                                                        <i class="fa fa-clock"></i> Publication programmée pour le <?php echo e(\Carbon\Carbon::parse($formation->publish_date)->format('d/m/Y H:i')); ?>
+
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <div class="d-flex justify-content-center mt-3">
                                                     <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                                         <div class="radio radio-primary mx-2">
                                                             <input id="publishNow" type="radio" name="publication_type" value="now" 
-                                                                <?php echo e(($formation->status || !$formation->publish_date) ? 'checked' : ''); ?>
-
-                                                                <?php echo e(($formation->status) ? 'disabled' : ''); ?>>
+                                                                <?php echo e((old('publication_type', $formation->status ? 'now' : ($formation->publish_date ? 'later' : 'now'))) == 'now' ? 'checked' : ''); ?>>
                                                             <label class="mb-0" for="publishNow">
-                                                                <?php echo e(($formation->status) ? 'Déjà publiée' : 'Publier immédiatement'); ?>
+                                                                <?php echo e($formation->status ? 'Maintenir publiée' : 'Publier immédiatement'); ?>
 
                                                             </label>
                                                         </div>
                                                         <div class="radio radio-primary mx-2">
                                                             <input id="publishLater" type="radio" name="publication_type" value="later" 
-                                                                <?php echo e((!$formation->status && $formation->publish_date) ? 'checked' : ''); ?>
-
-                                                                <?php echo e(($formation->status) ? 'disabled' : ''); ?>>
+                                                                <?php echo e((old('publication_type', $formation->status ? 'now' : ($formation->publish_date ? 'later' : 'now'))) == 'later' ? 'checked' : ''); ?>>
                                                             <label class="mb-0" for="publishLater">
-                                                                <?php echo e(($formation->status) ? 'Non publiée' : 'Programmer la publication'); ?>
+                                                                <?php echo e($formation->status ? 'Dépublier' : 'Programmer la publication'); ?>
 
                                                             </label>
                                                         </div>
@@ -216,7 +280,7 @@
 
                                                 <!-- Publication Date Container -->
                                                 <div id="publishDateContainer" class="mt-3 text-center" 
-                                                    style="<?php echo e((!$formation->status && $formation->publish_date) ? 'display: block;' : 'display: none;'); ?>">
+                                                    style="<?php echo e((old('publication_type', $formation->status ? 'now' : ($formation->publish_date ? 'later' : 'now'))) == 'later' ? 'display: block;' : 'display: none;'); ?>">
                                                     <div class="d-flex justify-content-center">
                                                         <div class="input-group" style="max-width:500px;">
                                                             <span class="input-group-text"><i class="fa fa-clock"></i></span>
@@ -224,18 +288,11 @@
                                                                 type="datetime-local" 
                                                                 id="publish_date" 
                                                                 name="publish_date" 
-                                                                value="<?php echo e(old('publish_date', $formation->publish_date ? \Carbon\Carbon::parse($formation->publish_date)->format('Y-m-d\TH:i') : '')); ?>"
-                                                                min="<?php echo e(now()->format('Y-m-d\TH:i')); ?>"
-                                                                <?php echo e(($formation->status) ? 'disabled' : ''); ?>>
+                                                                value="<?php echo e(old('publish_date', $formation->publish_date ? \Carbon\Carbon::parse($formation->publish_date)->format('Y-m-d\TH:i') : \Carbon\Carbon::now()->format('Y-m-d\TH:i'))); ?>"
+                                                                min="<?php echo e(\Carbon\Carbon::now()->format('Y-m-d\TH:i')); ?>">
                                                         </div>
                                                     </div>
-                                                    <?php if($formation->status && $formation->publish_date): ?>
-                                                        <small class="text-success">Publiée le <?php echo e(\Carbon\Carbon::parse($formation->publish_date)->format('d/m/Y H:i')); ?></small>
-                                                    <?php elseif($formation->publish_date): ?>
-                                                        <small class="text-muted">Programmée pour le <?php echo e(\Carbon\Carbon::parse($formation->publish_date)->format('d/m/Y H:i')); ?></small>
-                                                    <?php else: ?>
-                                                        <small class="text-muted">Sélectionnez la date et l'heure de publication</small>
-                                                    <?php endif; ?>
+                                                    <small class="text-muted">Sélectionnez la date et l'heure de publication</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -271,93 +328,12 @@
     <script src="<?php echo e(asset('assets/js/MonJs/select2-init/single-select.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/form-validation/form-validation.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/formations/formation-edit.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/formation-edit-price.js')); ?>"></script>
+
     <script src="<?php echo e(asset('assets/js/tinymce/js/tinymce/tinymce.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/description/description.js')); ?>"></script>
-    <script src="https://cdn.tiny.cloud/1/ofuiqykj9zattk5odkx0o1t79jxdfcb5eeuemjgcdtb1s95t/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/cwjxs6s7k08kvxb3t6udodzrwpomhxtehiozsu4fem2igekf/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
-    <script>
-        // Formatage automatique du prix
-        document.getElementById('price').addEventListener('blur', function() {
-            let value = parseFloat(this.value);
-            if (!isNaN(value)) {
-                this.value = value.toFixed(3);
-            }
-        });
-
-        // Gestion de la date de publication
-        document.addEventListener('DOMContentLoaded', function() {
-            const publishNowRadio = document.getElementById('publishNow');
-            const publishLaterRadio = document.getElementById('publishLater');
-            const publishDateContainer = document.getElementById('publishDateContainer');
-            const publishDateInput = document.getElementById('publish_date');
-            
-            // Vérifie si la formation est déjà publiée
-            const isPublished = <?php echo e($formation->status ? 'true' : 'false'); ?>;
-
-            function togglePublishDate() {
-                if (!isPublished) {
-                    if (publishLaterRadio.checked) {
-                        publishDateContainer.style.display = 'block';
-                        publishDateInput.required = true;
-                        publishDateInput.disabled = false;
-                    } else {
-                        publishDateContainer.style.display = 'none';
-                        publishDateInput.required = false;
-                        publishDateInput.value = '';
-                    }
-                }
-            }
-
-            if (!isPublished) {
-                publishNowRadio.addEventListener('change', togglePublishDate);
-                publishLaterRadio.addEventListener('change', togglePublishDate);
-                togglePublishDate(); // Initial state
-            }
-
-            // Gestion de l'image
-            const deleteImageBtn = document.getElementById('deleteImage');
-            const restoreImageBtn = document.getElementById('restoreImage');
-            const imageUpload = document.getElementById('imageUpload');
-            const currentImageContainer = document.getElementById('currentImageContainer');
-            const newImagePreview = document.getElementById('newImagePreview');
-            const deleteImageInput = document.getElementById('deleteImageInput');
-            const imageIcon = document.getElementById('imageIcon');
-
-            if (deleteImageBtn) {
-                deleteImageBtn.addEventListener('click', function() {
-                    currentImageContainer.style.display = 'none';
-                    imageUpload.style.display = 'block';
-                    imageIcon.style.display = 'flex';
-                    deleteImageInput.value = '1';
-                    restoreImageBtn.style.display = 'block';
-                });
-            }
-
-            if (restoreImageBtn) {
-                restoreImageBtn.addEventListener('click', function() {
-                    currentImageContainer.style.display = 'block';
-                    imageUpload.style.display = 'none';
-                    imageIcon.style.display = 'none';
-                    deleteImageInput.value = '0';
-                    restoreImageBtn.style.display = 'none';
-                    newImagePreview.style.display = 'none';
-                    imageUpload.value = '';
-                });
-            }
-
-            if (imageUpload) {
-                imageUpload.addEventListener('change', function(e) {
-                    if (e.target.files && e.target.files[0]) {
-                        const reader = new FileReader();
-                        reader.onload = function(event) {
-                            newImagePreview.style.display = 'block';
-                            document.getElementById('previewImage').src = event.target.result;
-                        };
-                        reader.readAsDataURL(e.target.files[0]);
-                    }
-                });
-            }
-        });
-    </script>
+    
 <?php $__env->stopPush(); ?>
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/formation/formationedit.blade.php ENDPATH**/ ?>

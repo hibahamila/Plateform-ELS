@@ -10,6 +10,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ChapitreController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FilePreviewController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QuestionController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ReponseController;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -250,6 +252,17 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::view('projectcreate', 'admin.apps.project.projectcreate')->name('projectcreate');
 	});
 	
+	
+	Route::prefix('categorie')->group(function () {
+		Route::get('categories', [CategorieController::class, 'index'])->name('categories'); // Liste 
+		Route::get('categoriecreate', [CategorieController::class, 'create'])->name('categoriecreate'); // Formulaire de création
+		Route::post('store', [CategorieController::class, 'store'])->name('categoriestore'); // Enregistrement d'une nouvelle catégorie
+		Route::get('/{id}', [CategorieController::class, 'show'])->name('categorieshow'); // Détails d'une catégorie
+		Route::get('/{id}/edit', [CategorieController::class, 'edit'])->name('categorieedit'); // Formulaire de modification
+		Route::put('/{id}', [CategorieController::class, 'update'])->name('categorieupdate'); // Mise à jour d'une catégorie
+		Route::delete('/{id}', [CategorieController::class, 'destroy'])->name('categoriedestroy'); 
+	});
+
 	//zedtou lel formation
 	Route::prefix('formation')->group( function(){
 		Route::get('formations', [FormationController::class, 'index'])->name('formations');
@@ -260,17 +273,13 @@ Route::group(['middleware' => 'auth'], function () {
     	Route::delete('/{id}', [FormationController::class, 'destroy'])->name('formationdestroy');
 		Route::get('/{id}', [FormationController::class, 'show'])->name('formationshow');
 
+
 	});
 
-	Route::prefix('categorie')->group(function () {
-		Route::get('categories', [CategorieController::class, 'index'])->name('categories'); // Liste 
-		Route::get('categoriecreate', [CategorieController::class, 'create'])->name('categoriecreate'); // Formulaire de création
-		Route::post('store', [CategorieController::class, 'store'])->name('categoriestore'); // Enregistrement d'une nouvelle catégorie
-		Route::get('/{id}', [CategorieController::class, 'show'])->name('categorieshow'); // Détails d'une catégorie
-		Route::get('/{id}/edit', [CategorieController::class, 'edit'])->name('categorieedit'); // Formulaire de modification
-		Route::put('/{id}', [CategorieController::class, 'update'])->name('categorieupdate'); // Mise à jour d'une catégorie
-		Route::delete('/{id}', [CategorieController::class, 'destroy'])->name('categoriedestroy'); 
-	});
+	// Route::get('/formation/ajax', [FormationController::class, 'getFormationsAjax'])->name('formations.ajax');
+
+
+
 
 	Route::prefix('cours')->group(function () {
         Route::get('cours', [CoursController::class, 'index'])->name('cours');        
@@ -312,9 +321,20 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/get-file', [LessonController::class, 'getFile'])->name('get.file');
 	Route::post('/upload-temp', [LessonController::class, 'uploadTemp'])->name('upload.temp');
 	Route::post('/delete-temp', [LessonController::class, 'deleteTemp'])->name('delete.temp');
-	// Route::post('/delete-file', [LessonController::class, 'deleteFile'])->name('delete.file');
-	// Route::post('/deletefile', [LessonController::class, 'deleteFile'])->name('deletefile');
-	Route::delete('/admin/lesson/delete-file/{lessonId}', [LessonController::class, 'deleteFile']);
+	Route::post('/delete-file', [LessonController::class, 'deleteFile'])->name('delete.file');
+	Route::post('/deletefile', [LessonController::class, 'deleteFile'])->name('deletefile');
+	Route::delete('/admin/lesson/delete-file/{lessonId}', [LessonController::class, 'file.delete']);
+
+
+
+	// Routes pour la gestion des fichiers
+// Route::post('/upload/temp', [App\Http\Controllers\FilePreviewController::class, 'uploadTemp'])->name('upload.temp');
+// Route::post('/delete/temp', [App\Http\Controllers\FilePreviewController::class, 'deleteTemp'])->name('delete.temp');
+// Route::get('/file/preview', [App\Http\Controllers\FilePreviewController::class, 'preview'])->name('file.preview');
+
+
+
+
 
 
 	//zedtou tw 

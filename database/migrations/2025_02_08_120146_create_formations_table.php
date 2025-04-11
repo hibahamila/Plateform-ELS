@@ -17,13 +17,21 @@ class CreateFormationsTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description');
-            $table->time('duration'); 
+            $table->string('duration'); 
+            $table->dateTime('start_date') ;
+            $table->dateTime('end_date'); 
             $table->string('type'); 
             $table->decimal('price', 8, 3);
             $table->string('image');
             $table->unsignedBigInteger('categorie_id');
+
             $table->boolean('status')->default(true);
             $table->timestamp('publish_date')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->decimal('discount', 5, 2)->default(0); // Nouveau champ pour le pourcentage de remise
+            $table->decimal('final_price', 10, 3)->default(0); // Nouveau champ pour le prix apr
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
 
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();

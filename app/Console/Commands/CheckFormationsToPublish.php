@@ -16,14 +16,8 @@ class CheckFormationsToPublish extends Command
         $nowUTC = Carbon::now('UTC');
         $nowTunis = $nowUTC->copy()->setTimezone('Africa/Tunis');
 
-        // // Récupérer toutes les formations avec leur statut
-        // $formations = Formation::withTrashed() // Inclut les formations supprimées si vous utilisez le soft delete
-        //     ->orderBy('publish_date', 'asc')
-        //     ->get();
         $formations = Formation::orderBy('publish_date', 'asc')->get();
 
-
-        // Analyser chaque formation
         $formations->transform(function ($formation) use ($nowUTC) {
             $pubDateUTC = $formation->publish_date ? Carbon::parse($formation->publish_date, 'UTC') : null;
             
@@ -34,7 +28,7 @@ class CheckFormationsToPublish extends Command
                 } elseif ($pubDateUTC->lte($nowUTC)) {
                     $status = 'PROGRAMMÉE PUIS PUBLIÉE';
                 } else {
-                    $status = 'PUBLIÉE AVANT LA DATE'; // Cas où status=1 mais date future
+                    $status = 'PUBLIÉE AVANT LA DATE';
                 }
             } else {
                 if (!$formation->publish_date) {
@@ -49,7 +43,6 @@ class CheckFormationsToPublish extends Command
             return [
                 'id' => $formation->id,
                 'title' => $formation->title,
-                'publish_date_utc' => $formation->publish_date ? $pubDateUTC->format('Y-m-d H:i:s') : 'N/A',
                 'publish_date_local' => $formation->publish_date ? $pubDateUTC->copy()->setTimezone('Africa/Tunis')->format('Y-m-d H:i:s') : 'N/A',
                 'status' => $status,
                 'current_status' => $formation->status,
@@ -70,9 +63,8 @@ class CheckFormationsToPublish extends Command
 
         // Affichage du tableau détaillé
         $this->table(
-            ['ID', 'Titre', 'Date UTC', 'Date Tunis', 'Statut', 'Créée le', 'Délai'],
+            ['ID', 'Titre', 'Date Tunis', 'Statut', 'Créée le', 'Délai'],
             $formations->map(function ($f) {
-                // Couleurs selon le statut
                 $colors = [
                     'PUBLIÉE IMMÉDIATEMENT' => 'blue',
                     'PROGRAMMÉE PUIS PUBLIÉE' => 'green',
@@ -85,7 +77,6 @@ class CheckFormationsToPublish extends Command
                 return [
                     $f['id'],
                     $f['title'],
-                    $f['publish_date_utc'],
                     $f['publish_date_local'],
                     "<fg={$colors[$f['status']]}>{$f['status']}</>",
                     $f['created_at'],
@@ -103,11 +94,5 @@ class CheckFormationsToPublish extends Command
         $this->line("<fg=cyan>➤ {$stats['programmees']} programmées (non publiées)</>");
         $this->line("<fg=red>➤ {$stats['en_retard']} en retard</>");
         $this->line("<fg=gray>➤ {$stats['sans_date']} non publiées (sans date)</>");
-
-        // Debug timezone
-        $this->newLine(2);
-        $this->line("<fg=yellow>DEBUG TIMEZONE</>");
-        $this->line("Maintenant (UTC): <fg=cyan>{$nowUTC->format('Y-m-d H:i:s')}</>");
-        $this->line("Maintenant (Tunis): <fg=cyan>{$nowTunis->format('Y-m-d H:i:s')}</>");
     }
 }

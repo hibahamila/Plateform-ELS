@@ -60,12 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const currentImageContainer = document.getElementById('currentImageContainer');
     const newImagePreview = document.getElementById('newImagePreview');

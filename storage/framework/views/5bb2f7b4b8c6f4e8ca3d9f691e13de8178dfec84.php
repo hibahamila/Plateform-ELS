@@ -2,8 +2,6 @@
 
 
 
-
-
 <?php $__env->startSection('title'); ?> Ajouter un Feedback <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('css'); ?>

@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', function () {
     console.log("Document ready");
 
@@ -34,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         text: '#333333',       // Noir pour les fichiers texte
         default: '#666666'     // Gris
     };
+    
 
     // Fonction pour lire le contenu d'un fichier texte
     function readTextFile(file, callback) {
@@ -810,3 +809,26 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("Form not found");
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

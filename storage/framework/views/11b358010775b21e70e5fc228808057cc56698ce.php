@@ -41,11 +41,7 @@
                         <div id="error-message" class="alert alert-danger d-none mb-3"></div>
 
                         <!-- Message d'information si aucun quiz n'existe -->
-                        <?php if($quizzes->isEmpty()): ?>
-                            <div class="alert alert-info">
-                                Aucun quiz n'existe. Veuillez <a href="<?php echo e(route('quizcreate')); ?>">créer un quiz</a> avant d'ajouter une question.
-                            </div>
-                        <?php endif; ?>
+                        
 
                         <div class="form theme-form">
                             <form id="question-form" action="<?php echo e(route('questionstore')); ?>" method="POST" class="needs-validation" novalidate>
@@ -139,6 +135,8 @@
                                             <button class="btn btn-primary" type="submit" id="submit-btn">
                                                 <i class="fa fa-save"></i> Ajouter
                                             </button>
+                                            
+                                          
                                             <button class="btn btn-danger" type="button" onclick="window.location.href='<?php echo e(route('questions')); ?>'">
                                                 <i class="fa fa-times"></i> Annuler
                                             </button>

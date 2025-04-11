@@ -40,11 +40,11 @@
                         <div id="error-message" class="alert alert-danger d-none mb-3"></div>
 
                         <!-- Message d'information si aucun quiz n'existe -->
-                        @if ($quizzes->isEmpty())
+                        {{-- @if ($quizzes->isEmpty())
                             <div class="alert alert-info">
                                 Aucun quiz n'existe. Veuillez <a href="{{ route('quizcreate') }}">créer un quiz</a> avant d'ajouter une question.
                             </div>
-                        @endif
+                        @endif --}}
 
                         <div class="form theme-form">
                             <form id="question-form" action="{{ route('questionstore') }}" method="POST" class="needs-validation" novalidate>
@@ -154,6 +154,10 @@
                                             <button class="btn btn-primary" type="submit" id="submit-btn">
                                                 <i class="fa fa-save"></i> Ajouter
                                             </button>
+                                            {{-- <a href="{{ route('questioncreate', ['quiz_id' => $quiz->id]) }}" class="btn btn-primary">
+                                                <i class="fa fa-plus"></i> Ajouter une question
+                                            </a> --}}
+                                          
                                             <button class="btn btn-danger" type="button" onclick="window.location.href='{{ route('questions') }}'">
                                                 <i class="fa fa-times"></i> Annuler
                                             </button>

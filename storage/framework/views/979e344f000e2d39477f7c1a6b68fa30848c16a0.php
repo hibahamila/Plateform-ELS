@@ -5,9 +5,9 @@
 
 <?php $__env->startPush('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
-    <link href="<?php echo e(asset('assets/css/custom-style.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/css/MonCss/custom-style.css')); ?>" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="<?php echo e(asset('assets/css/SweatAlert2.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/css/MonCss/SweatAlert2.css')); ?>" rel="stylesheet">
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -56,12 +56,15 @@
                                 </div>
 
                                 <!-- Description -->
+                              
                                 <div class="mb-3 row">
                                     <label class="col-sm-2 col-form-label">Description <span class="text-danger">*</span></label>
                                     <div class="col-sm-10">
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="fa fa-align-left"></i></span>
-                                            <textarea class="form-control" id="description" rows="4" name="description" placeholder="Description" required><?php echo e(old('description', $cours->description)); ?></textarea>
+                                        <div class="input-group" style="flex-wrap: nowrap;">
+                                            <div class="input-group-text d-flex align-items-stretch" style="height: auto;">
+                                                <i class="fa fa-align-left align-self-center"></i>
+                                            </div>
+                                            <textarea class="form-control" id="description" name="description" placeholder="Description" required><?php echo e(old('description',$cours->description)); ?></textarea>
                                         </div>
                                         <div class="invalid-feedback">Veuillez entrer une description valide.</div>
                                     </div>
@@ -166,11 +169,11 @@
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone-script.js')); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <script src="<?php echo e(asset('assets/js/select2-init/single-select.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/form-validation/form-validation.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/select2-init/single-select.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/form-validation/form-validation.js')); ?>"></script>
     <script src="https://cdn.tiny.cloud/1/ofuiqykj9zattk5odkx0o1t79jxdfcb5eeuemjgcdtb1s95t/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="<?php echo e(asset('assets/js/description/description.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/description/description.js')); ?>"></script>
    
 <?php $__env->stopPush(); ?>
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/cours/coursedit.blade.php ENDPATH**/ ?>

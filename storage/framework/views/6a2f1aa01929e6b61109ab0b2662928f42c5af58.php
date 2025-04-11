@@ -136,10 +136,12 @@
 
 <?php $__env->startPush('scripts'); ?>
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/questions/question-edit.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/select2-init/single-select.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/questions/question-edit.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/select2-init/single-select.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/dropzone/dropzone-script.js')); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <script src="<?php echo e(asset('assets/js/form-validation/form-validation.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/form-validation/form-validation.js')); ?>"></script>
+         <script src="https://cdn.tiny.cloud/1/cwjxs6s7k08kvxb3t6udodzrwpomhxtehiozsu4fem2igekf/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
 <?php $__env->stopPush(); ?>
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/question/questionedit.blade.php ENDPATH**/ ?>

@@ -37,6 +37,9 @@
 document.addEventListener("DOMContentLoaded", function() {
   tinymce.init({
      selector: '#description',
+     height: 400,
+     width: '100%',
+
     // selector: 'textarea',
     plugins: [
       // Core editing features

@@ -200,7 +200,6 @@
                                      <th>Description</th>
                                      <th>Date début</th>
                                      <th>Date fin</th>
-                                     <th>Professeur</th>
                                      <th>Formation</th>
                                      <th>Actions</th>
                                  </tr>
@@ -213,7 +212,6 @@
                                          <td>{!! $cour->description !!}</td>
                                          <td>{{ $cour->start_date }}</td>
                                          <td>{{ $cour->end_date }}</td>
-                                         <td>{{ $cour->user ? $cour->user->name : 'Aucun utilisateur' }}</td>
                                          <td>
                                              @if ($cour->formation)
                                                  <a href="{{ route('formationshow', $cour->formation->id) }}" class="text-primary">

@@ -23,26 +23,8 @@ class QuestionController extends Controller
 
 
 
-// public function create(Request $request)
-// {
-//     // Récupérer tous les quiz
-//     $quizzes = Quiz::all();
-
-//     // Récupérer l'ID du quiz depuis l'URL ou la session
-//     $quizId = $request->query('quiz_id') ?? session('quiz_id');
-
-//     // Récupérer le quiz associé
-//     $quiz = Quiz::find($quizId);
-//     // Passer les données à la vue
-//     return view('admin.apps.question.questioncreate', [
-//         'quizzes' => $quizzes,
-//         'quizId' => $quizId,
-//         'quiz' => $quiz, // Passer le quiz associé à la vue
-//     ]);
-// }
 
 
-//zedtou tw :
 public function create(Request $request)
 {
     // Récupérer tous les quiz
@@ -51,10 +33,10 @@ public function create(Request $request)
     // Récupérer l'ID du quiz depuis l'URL ou la session
     $quizId = $request->query('quiz_id') ?? session('quiz_id');
 
-    // Si aucun quiz n'existe dans la base de données
-    if ($quizzes->isEmpty()) {
-        return redirect()->route('quizcreate')->with('info', 'Aucun quiz existant. Veuillez d\'abord créer un quiz.');
-    }
+    // // Si aucun quiz n'existe dans la base de données
+    // if ($quizzes->isEmpty()) {
+    //     return redirect()->route('quizcreate')->with('info', 'Aucun quiz existant. Veuillez d\'abord créer un quiz.');
+    // }
 
     // Si un quizId est présent
     if ($quizId) {
@@ -131,50 +113,6 @@ public function create(Request $request)
 
     return redirect()->route('questions')->with('success', 'Question et réponses ajoutées avec succès !');
 }
-
-
-
-// //new 
-// public function store(Request $request)
-// {
-//     // Validation des champs
-//     $request->validate([
-//         'statement' => 'required|string',
-//         'quiz_id' => 'required|exists:quizzes,id',
-//         'response_count' => 'required|integer|min:1|max:10',
-//         'reponses' => 'required|array|size:' . $request->response_count,
-//         'reponses.*.content' => 'required|string',
-//         'reponses.*.is_correct' => 'required|in:0,1',
-//     ]);
-
-//     // Vérifier qu'au moins une réponse est correcte
-//     $hasCorrectAnswer = collect($request->reponses)->contains('is_correct', 1);
-//     if (!$hasCorrectAnswer) {
-//         return redirect()->back()
-//             ->withInput() // Conserver les données saisies
-//             ->withErrors(['reponses' => 'Au moins une réponse doit être correcte.']);
-//     }
-
-//     // Création de la question
-//     $question = Question::create([
-//         'statement' => $request->statement,
-//         'quiz_id' => $request->quiz_id,
-//         'response_count' => $request->response_count,
-//     ]);
-
-//     // Création des réponses
-//     foreach ($request->reponses as $reponse) {
-//         Reponse::create([
-//             'question_id' => $question->id,
-//             'content' => $reponse['content'],
-//             'is_correct' => $reponse['is_correct'],
-//         ]);
-//     }
-
-//     return redirect()->route('questions')->with('success', 'Question et réponses ajoutées avec succès !');
-// }
-
-
     public function show($id)
     {
         // Récupérer la question avec son quiz associé et le nombre de réponses
@@ -194,28 +132,6 @@ public function create(Request $request)
 
         return view('admin.apps.question.questionedit', compact('question', 'quizzes', 'reponses'));
     }
-
-    // public function update(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'statement' => 'required|string|max:255',
-    //         'quiz_id' => 'required|exists:quizzes,id',
-    //     ]);
-
-    //     DB::beginTransaction();
-    //     try {
-    //         // Mise à jour de la question
-    //         $question = Question::findOrFail($id);
-    //         $question->update($request->all());
-    //         DB::commit();
-    //         return redirect()->route('admin.apps.question.questions')->with('success', 'Question mise à jour avec succès.');
-    //     } catch (\Exception $e) {
-    //         DB::rollback();
-    //         return redirect()->route('admin.apps.question.questions')->with('error', 'Une erreur est survenue lors de la mise à jour.');
-    //     }
-    // }
-
-
     public function update(Request $request, $id)
 {
     // Validation des champs

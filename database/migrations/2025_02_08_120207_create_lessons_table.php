@@ -17,8 +17,8 @@ class CreateLessonsTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description');
-            $table->time('duration'); 
-            $table->string('file_path');
+            $table->string('duration'); 
+            // $table->string('file_path');
             $table->string('link'); 
             $table->unsignedBigInteger('chapitre_id');
             $table->foreign('chapitre_id')->references('id')->on('chapitres')->onDelete('cascade');

@@ -1,5 +1,4 @@
 
-
 @extends('layouts.admin.master')
 
 @section('title') Ajouter une Leçon @endsection
@@ -10,10 +9,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 <!-- Mammoth.js pour les fichiers Word -->
 <script src="https://unpkg.com/mammoth@1.4.8/mammoth.browser.min.js"></script>
-
 <!-- SheetJS pour les fichiers Excel -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 
@@ -127,8 +125,6 @@
                                     </div>
                                 </div>
 
-
-
                                 <!-- Conteneur pour la prévisualisation des fichiers -->
                                 <div id="filePreviewContainer" style="display:none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 9999; padding: 20px; overflow: auto;">
                                     <div class="card" style="max-width: 90%; margin: 20px auto; max-height: 90vh; overflow: hidden;">
@@ -179,14 +175,18 @@
 @push('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('assets/js/dropzone/dropzone.js') }}"></script>
-<script src="{{ asset('assets/js/MonJs/dropzone-config.js') }}"></script>
-
+{{-- <script src="{{ asset('assets/js/MonJs/dropzone-config.js') }}"></script> --}}
+<script src="{{ asset('assets/js/MonJs/lecons/dropzone.js') }}"></script>
+<script src="{{ asset('assets/js/MonJs/lecons/file-preview.js') }}"></script>
+<script src="{{ asset('assets/js/MonJs/lecons/pdf-preview.js') }}"></script>
+<script src="{{ asset('assets/js/MonJs/lecons/image-preview.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script src="{{ asset('assets/js/MonJs/select2-init/single-select.js') }}"></script>
 <script src="{{ asset('assets/js/MonJs/form-validation/form-validation.js') }}"></script>
 <script src="{{ asset('assets/js/MonJs/description/description.js') }}"></script>
 <script src="{{ asset('assets/js/MonJs/lecons/link-validation.js') }}"></script>
-<script src="https://cdn.tiny.cloud/1/ofuiqykj9zattk5odkx0o1t79jxdfcb5eeuemjgcdtb1s95t/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+{{-- <script src="https://cdn.tiny.cloud/1/cwjxs6s7k08kvxb3t6udodzrwpomhxtehiozsu4fem2igekf/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> --}}
+<script src="https://cdn.tiny.cloud/1/cwjxs6s7k08kvxb3t6udodzrwpomhxtehiozsu4fem2igekf/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
@@ -195,12 +195,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/pptx2html/dist/pptx2html.min.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 @endpush 
-
-
-
-
-
-

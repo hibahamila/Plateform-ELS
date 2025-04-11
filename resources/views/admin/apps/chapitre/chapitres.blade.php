@@ -104,7 +104,7 @@
 <script src="{{ asset('assets/js/clipboard/clipboard.min.js') }}"></script>
 <script src="{{ asset('assets/js/custom-card/custom-card.js') }}"></script>
 <script src="{{ asset('assets/js/height-equal.js') }}"></script>
-<script src="{{ asset('assets/js/actions-icon/actions-icon.js') }}"></script>
+<script src="{{ asset('assets/js/MonJs//actions-icon/actions-icon.js') }}"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

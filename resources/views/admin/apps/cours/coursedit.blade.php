@@ -55,12 +55,15 @@
                                 </div>
 
                                 <!-- Description -->
+                              
                                 <div class="mb-3 row">
                                     <label class="col-sm-2 col-form-label">Description <span class="text-danger">*</span></label>
                                     <div class="col-sm-10">
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="fa fa-align-left"></i></span>
-                                            <textarea class="form-control" id="description" rows="4" name="description" placeholder="Description" required>{{ old('description', $cours->description) }}</textarea>
+                                        <div class="input-group" style="flex-wrap: nowrap;">
+                                            <div class="input-group-text d-flex align-items-stretch" style="height: auto;">
+                                                <i class="fa fa-align-left align-self-center"></i>
+                                            </div>
+                                            <textarea class="form-control" id="description" name="description" placeholder="Description" required>{{ old('description',$cours->description) }}</textarea>
                                         </div>
                                         <div class="invalid-feedback">Veuillez entrer une description valide.</div>
                                     </div>
@@ -165,7 +168,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="{{ asset('assets/js/MonJs/select2-init/single-select.js') }}"></script>
     <script src="{{ asset('assets/js/MonJs/form-validation/form-validation.js') }}"></script>
-    <script src="https://cdn.tiny.cloud/1/ofuiqykj9zattk5odkx0o1t79jxdfcb5eeuemjgcdtb1s95t/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/cwjxs6s7k08kvxb3t6udodzrwpomhxtehiozsu4fem2igekf/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('assets/js/MonJs/description/description.js') }}"></script>
    

@@ -9,20 +9,17 @@ use Illuminate\Http\Request;
 
 class CategorieController extends Controller
 {
-    // Afficher la liste des catégories
     public function index()
     {
         $categories = Categorie::all();
         return view('admin.apps.categorie.categories', compact('categories'));
     }
 
-    // Afficher le formulaire de création
     public function create()
     {
         return view('admin.apps.categorie.categoriecreate');
     }
 
-    // Enregistrer une nouvelle catégorie
     public function store(Request $request)
     {
         $request->validate([
@@ -34,14 +31,12 @@ class CategorieController extends Controller
         return redirect()->route('categories')->with('success', 'Catégorie ajoutée avec succès.');
     }
 
-    // Afficher une catégorie spécifique
     public function show($id)
     {
         $categorie = Categorie::findOrFail($id);
         return view('admin.apps.categorie.categorieshow', compact('categorie'));
     }
 
-    // Afficher le formulaire d'édition
     public function edit($id)
     {
         $categorie = Categorie::findOrFail($id);

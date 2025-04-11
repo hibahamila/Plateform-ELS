@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+{{-- @extends('layouts.admin.master')
 
 @section('content')
     <div class="container">
@@ -11,4 +11,4 @@
         <p><strong>Catégorie:</strong> {{ $formation->categorie->title }}</p>
         <a href="{{ route('formations') }}" class="btn btn-secondary">Retour à la lise </a>
     </div>
-@endsection
+@endsection --}}

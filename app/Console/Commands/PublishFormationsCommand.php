@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 class PublishFormationsCommand extends Command
 {
     protected $signature = 'formations:publish';
+
     protected $description = 'Publie les formations programmées (heure Tunis)';
 
     public function handle()

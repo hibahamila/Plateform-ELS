@@ -78,7 +78,6 @@
                                      <th>Description</th>
                                      <th>Date début</th>
                                      <th>Date fin</th>
-                                     <th>Professeur</th>
                                      <th>Formation</th>
                                      <th>Actions</th>
                                  </tr>
@@ -91,7 +90,6 @@
                                          <td><?php echo $cour->description; ?></td>
                                          <td><?php echo e($cour->start_date); ?></td>
                                          <td><?php echo e($cour->end_date); ?></td>
-                                         <td><?php echo e($cour->user ? $cour->user->name : 'Aucun utilisateur'); ?></td>
                                          <td>
                                              <?php if($cour->formation): ?>
                                                  <a href="<?php echo e(route('formationshow', $cour->formation->id)); ?>" class="text-primary">

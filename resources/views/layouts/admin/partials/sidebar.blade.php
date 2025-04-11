@@ -257,12 +257,7 @@
                             <li><a href="{{ route('projects') }}" class="{{routeActive('projects')}}">Project List</a></li>
                             <li><a href="{{ route('projectcreate') }}" class="{{routeActive('projectcreate')}}">Create new </a></li>
                         </ul>
-                         {{-- zedtouu  ta formation --}}
-                         <a class="nav-link menu-title {{ prefixActive('/formation') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Formations </span></a>
-                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/formation') }};">
-                             <li><a href="{{ route('formations') }}" class="{{routeActive('formations')}}">Formations List</a></li>
-                             <li><a href="{{ route('formationcreate') }}" class="{{routeActive('formationcreate')}}">Create new </a></li>
-                         </ul>
+                        
 
                          {{-- categorie --}}
 
@@ -271,6 +266,13 @@
                              <li><a href="{{ route('categories') }}" class="{{routeActive('categories')}}">Categories List</a></li>
                              <li><a href="{{ route('categoriecreate') }}" class="{{routeActive('categoriecreate')}}">Create new </a></li>
                          </ul>
+
+                          {{-- zedtouu  ta formation --}}
+                          <a class="nav-link menu-title {{ prefixActive('/formation') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Formations </span></a>
+                          <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/formation') }};">
+                              <li><a href="{{ route('formations') }}" class="{{routeActive('formations')}}">Formations List</a></li>
+                              <li><a href="{{ route('formationcreate') }}" class="{{routeActive('formationcreate')}}">Create new </a></li>
+                          </ul>
 
                          {{-- cours --}}
                          <a class="nav-link menu-title {{ prefixActive('/categorie') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Cours </span></a>

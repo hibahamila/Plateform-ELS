@@ -17,8 +17,7 @@ class CreateChapitresTable extends Migration
             $table->id();
             $table->longText('description');
             $table->string('title');
-
-            $table->time('duration'); 
+            $table->string('duration'); 
             $table->unsignedBigInteger('cours_id');
             $table->foreign('cours_id')->references('id')->on('cours')->onDelete('cascade');
             $table->timestamps();
