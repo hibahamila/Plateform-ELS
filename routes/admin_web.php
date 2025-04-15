@@ -13,11 +13,13 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FilePreviewController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\PanierController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ReponseController;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -272,13 +274,21 @@ Route::group(['middleware' => 'auth'], function () {
     	Route::put('/{id}', [FormationController::class, 'update'])->name('formationupdate');
     	Route::delete('/{id}', [FormationController::class, 'destroy'])->name('formationdestroy');
 		Route::get('/{id}', [FormationController::class, 'show'])->name('formationshow');
-
+		
 
 	});
+	Route::get('/panier', [App\Http\Controllers\PanierController::class, 'index'])->name('panier.index');
 
-	// Route::get('/formation/ajax', [FormationController::class, 'getFormationsAjax'])->name('formations.ajax');
+	Route::get('/panier/items', [PanierController::class, 'getItems'])->name('panier.items');
+	// Route::post('/panier/supprimer', 'PanierController@supprimer')->name('panier.supprimer');
 
+	Route::post('/panier/supprimer', [PanierController::class, 'supprimer'])->name('panier.supprimer');
+	Route::post('/panier/ajouter', [PanierController::class, 'ajouter']);
+	Route::get('/panier/check/{formationId}', [PanierController::class,'checkInCart'])->name('panier.check');
+	// Route::get('/panier/items-count', [PanierController::class, 'getItemsCount'])->name('panier.items-count');
+	Route::get('/panier/items-count', [PanierController::class, 'getItemsCount']);
 
+	Route::post('/panier/check', [PanierController::class, 'check']);
 
 
 	Route::prefix('cours')->group(function () {

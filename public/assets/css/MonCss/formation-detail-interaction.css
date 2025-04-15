@@ -109,6 +109,8 @@
     width: 100%;
     transition: background-color 0.2s;
     margin: 0;
+    outline: none; /* Ajoutez cette ligne */
+
 }
 
 #formation-detail-panel .btn-add-to-cart:hover {

@@ -1,31 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php $__env->startSection('title'); ?> Modifier une Formation <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('css'); ?>
@@ -86,18 +60,31 @@
                                             </div>
                                         </div>
 
-                                        <!-- Durée -->
+                                        <!-- Dates de début et fin -->
                                         <div class="mb-3 row">
-                                            <label class="col-sm-2 col-form-label">Durée (HH:mm) <span class="text-danger">*</span></label>
+                                            <label class="col-sm-2 col-form-label">Période <span class="text-danger">*</span></label>
                                             <div class="col-sm-10">
-                                                <div class="input-group">
-                                                    <span class="input-group-text"><i class="icon-timer"></i></span>
-                                                    <input class="form-control" type="text" id="duration" name="duration" placeholder="Ex: 02:30" pattern="\d{2}:\d{2}" title="Format: HH:mm" value="<?php echo e(old('duration', \Carbon\Carbon::parse($formation->duration)->format('H:i'))); ?>" required />
+                                                <div class="date-input-group">
+                                                    <div class="date-input-container">
+                                                        <div class="input-group">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                            <input class="form-control" type="date" id="start_date" name="start_date" 
+                                                                   value="<?php echo e(old('start_date', \Carbon\Carbon::parse($formation->start_date)->format('Y-m-d'))); ?>" required />
+                                                        </div>
+                                                        <small class="text-muted">Date de début</small>
+                                                    </div>
+                                                    <div class="date-input-container">
+                                                        <div class="input-group">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                            <input class="form-control" type="date" id="end_date" name="end_date" 
+                                                                   value="<?php echo e(old('end_date', \Carbon\Carbon::parse($formation->end_date)->format('Y-m-d'))); ?>" required />
+                                                        </div>
+                                                        <small class="text-muted">Date de fin</small>
+                                                    </div>
                                                 </div>
-                                                <div class="invalid-feedback">Veuillez entrer la durée au format HH:mm.</div>
+                                                <div class="invalid-feedback">Veuillez entrer des dates valides (la date de fin doit être après la date de début).</div>
                                             </div>
                                         </div>
-
                                         <!-- Type -->
                                         <div class="mb-3 row">
                                             <label class="col-sm-2 col-form-label">Type <span class="text-danger">*</span></label>
@@ -157,8 +144,8 @@
                                             <label class="col-sm-2 col-form-label">Prix final</label>
                                             <div class="col-sm-10">
                                                 <div class="price-display">
-                                                    <span class="original-price" id="originalPriceDisplay">0.000 DT</span>
-                                                    <span class="final-price" id="finalPriceDisplay">0.000 DT</span>
+                                                    <span class="original-price" id="originalPriceDisplay"><?php echo e(number_format($formation->price, 3)); ?> DT</span>
+                                                    <span class="final-price" id="finalPriceDisplay"><?php echo e(number_format($formation->final_price, 3)); ?> DT</span>
                                                 </div>
                                                 <input type="hidden" id="final_price" name="final_price" value="<?php echo e(old('final_price', $formation->final_price ?? $formation->price)); ?>">
                                             </div>
@@ -209,36 +196,36 @@
                                         </div>
 
                                         <!-- Image -->
-                                    <div class="mb-3 row">
-                                        <label class="col-sm-2 col-form-label">Image <span class="text-danger">*</span></label>
-                                        <div class="col-sm-10">
-                                            <?php if($formation->image): ?>
-                                                <div id="currentImageContainer" class="image-container">
-                                                    <img src="<?php echo e(asset('storage/' . $formation->image)); ?>?v=<?php echo e(time()); ?>" alt="image" class="centered-image" id="currentImage" />
-                                                    <div class="image-actions">
-                                                        <button type="button" class="btn" id="deleteImage">
-                                                            <i class="fa fa-trash trash-icon" title="Supprimer l'image"></i>
-                                                        </button>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-2 col-form-label">Image <span class="text-danger">*</span></label>
+                                            <div class="col-sm-10">
+                                                <?php if($formation->image): ?>
+                                                    <div id="currentImageContainer" class="image-container">
+                                                        <img src="<?php echo e(asset('storage/' . $formation->image)); ?>?v=<?php echo e(time()); ?>" alt="image" class="centered-image" id="currentImage" />
+                                                        <div class="image-actions">
+                                                            <button type="button" class="btn" id="deleteImage">
+                                                                <i class="fa fa-trash trash-icon" title="Supprimer l'image"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
+                                                <?php endif; ?>
+                                                <div id="newImagePreview" class="image-preview-container" style="display: none;">
+                                                    <img id="previewImage" src="#" alt="Prévisualisation de la nouvelle image" class="image-preview" />
                                                 </div>
-                                            <?php endif; ?>
-                                            <div id="newImagePreview" class="image-preview-container" style="display: none;">
-                                                <img id="previewImage" src="#" alt="Prévisualisation de la nouvelle image" class="image-preview" />
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="imageIcon" style="<?php echo e($formation->image ? 'display: none;' : ''); ?>">
+                                                        <i class="fa fa-image"></i>
+                                                    </span>
+                                                    <input class="form-control" type="file" id="imageUpload" name="image" accept="image/*" style="<?php echo e($formation->image ? 'display: none;' : ''); ?>">
+                                                </div>
+                                                <small class="text-muted d-block text-center my-2">Formats acceptés: JPG, PNG, GIF. Taille max: 2Mo</small>
+                                                <button id="restoreImage" type="button" class="btn" style="display: none;">
+                                                    <i class="fa fa-undo"></i> Revenir à l'image actuelle
+                                                </button>
+                                                <input type="hidden" name="delete_image" id="deleteImageInput" value="0">
                                             </div>
-                                            <div class="input-group">
-                                                <span class="input-group-text" id="imageIcon" style="<?php echo e($formation->image ? 'display: none;' : ''); ?>">
-                                                    <i class="fa fa-image"></i>
-                                                </span>
-                                                <input class="form-control" type="file" id="imageUpload" name="image" accept="image/*" style="<?php echo e($formation->image ? 'display: none;' : ''); ?>">
-                                            </div>
-                                            <small class="text-muted d-block text-center my-2">Formats acceptés: JPG, PNG, GIF. Taille max: 2Mo</small>
-                                            <button id="restoreImage" type="button" class="btn" style="display: none;">
-                                                <i class="fa fa-undo"></i> Revenir à l'image actuelle
-                                            </button>
-                                            <input type="hidden" name="delete_image" id="deleteImageInput" value="0">
                                         </div>
-                                    </div>
-                                    
+                                        
                                         <!-- Publication Section -->
                                         <div class="mb-3 row">
                                             <div class="col-12">
@@ -329,11 +316,9 @@
     <script src="<?php echo e(asset('assets/js/MonJs/form-validation/form-validation.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/formations/formation-edit.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/formations/formation-edit-price.js')); ?>"></script>
-
     <script src="<?php echo e(asset('assets/js/tinymce/js/tinymce/tinymce.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/description/description.js')); ?>"></script>
     <script src="https://cdn.tiny.cloud/1/cwjxs6s7k08kvxb3t6udodzrwpomhxtehiozsu4fem2igekf/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
-    
 <?php $__env->stopPush(); ?>
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/formation/formationedit.blade.php ENDPATH**/ ?>

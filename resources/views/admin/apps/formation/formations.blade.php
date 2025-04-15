@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/MonCss/formations-gallery.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/MonCss/formations-details.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/MonCss/formation-detail-interaction.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/MonCss/formations-details.css') }}">
 
 @endpush
 
@@ -65,6 +66,9 @@
                         @endif
 
                         <div class="tab-content" id="top-tabContent">
+                            <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
                             <!-- Toutes les formations -->
                             <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                                 <div class="carousel-container">
@@ -93,18 +97,16 @@
                                                     </div>
                                                     <div class="formation-details">
                                                         <div class="formation-duration">
-                                                            <i class="fas fa-clock"></i> Durée: 
-                                                            <span class="formation-duration-value">{{ $formation->duration }}</span>
+                                                            {{-- <i class="fas fa-clock"></i> Durée:  --}}
+                                                            <span class="formation-duration-value" style="display: none;">{{ $formation->duration }}</span>
                                                         </div>
                                                         <div class="formation-courses-count">
-                                                            <i class="fas fa-book"></i> 
-                                                            <span class="formation-courses-count-value">{{ $formation->cours->count() }}</span> cours
+                                                            {{-- <i class="fas fa-book"></i>  --}}
+                                                            <span class="formation-courses-count-value" style="display: none;">{{ $formation->cours->count() }}</span> cours
                                                         </div>
                                                     </div>
 
-                                                    <span class="formation-duration-value" style="display: none;">{{ $formation->duration }}</span>
-                                                    <span class="formation-courses-count-value" style="display: none;">{{ $formation->cours->count() }}</span>
-                                                    
+                                
                                                    
                                                     <div class="formation-description" style="display: none;">{!! $formation->description !!}</div>
                                                             <div class="formation-rating-price">
@@ -319,6 +321,8 @@
                                                 @endif
                                             @endforeach
                                         </div>
+
+
                                     </div>
                                 </div>
                         </div>
@@ -332,7 +336,6 @@
 @push('scripts')
     <script src="{{ asset('assets/js/prism/prism.min.js') }}"></script>
     <script src="{{ asset('assets/js/height-equal.js') }}"></script>
-    {{-- <script src="{{ asset('assets/js/MonJs/actions-icon/actions-icon.js') }}"></script> --}}
     <script src="{{ asset('assets/js/dropdown/dropdown.js') }}"></script>
     <script src="{{ asset('assets/js/clipboard/clipboard.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom-card/custom-card.js') }}"></script>
@@ -344,5 +347,23 @@
     <script src="{{ asset('assets/js/MonJs/formations/formation-gallery.js') }}"></script>
     <script src="{{ asset('assets/js/MonJs/formations/formation-filter.js') }}"></script>
     <script src="{{ asset('assets/js/MonJs/formations/formation-detail-interaction.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/formations/cart-modal.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/formations/add-to-cart.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/formations/confirmation-panel.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/formations/formation-card.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/formations/detail-panel.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/formations/cart-manager.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/formations/cart-modal-panier.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/formations/cart-core.js') }}"></script>
+
+    <script src="{{ asset('assets/js/MonJs/formations/cart-ui.js') }}"></script>
+
+
+
+
+
+
+
+
 
 @endpush

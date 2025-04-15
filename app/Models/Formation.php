@@ -5,9 +5,13 @@ namespace App\Models;
 use App\Models\Categorie;
 use App\Models\Cours;
 use App\Models\Feedback;
+use App\Models\Lesson;
+use App\Models\Panier;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -117,5 +121,20 @@ class Formation extends Model
             $formation->duration = $formation->calculateTotalDuration();
             Log::info("Formation {$formation->id}: Calcul de durée avant sauvegarde: {$formation->duration}");
         });
+    }
+
+
+
+    //zedtouu tww
+    // Accesseur pour vérifier si la formation est dans le panier
+    public function getInCartAttribute()
+    {
+        if (!Auth::check()) {
+            return false;
+        }
+        
+        return Panier::where('user_id', Auth::id())
+                   ->where('formation_id', $this->id)
+                   ->exists();
     }
 }

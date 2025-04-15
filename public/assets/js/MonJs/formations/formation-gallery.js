@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-  
     const formationsCache = {};
     const carouselInitialized = {
         '.formations-carousel': false,
         '.formations-carousel-published': false,
         '.formations-carousel-unpublished': false
     };
-
     function handleFlashMessages() {
         ['success-message', 'delete-message', 'create-message'].forEach(id => {
             const message = document.getElementById(id);
@@ -21,12 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initCarousel(carouselSelector) {
         const $carousel = $(carouselSelector);
-        
         // Vérifier si le carousel est déjà initialisé
         if ($carousel.hasClass('slick-initialized')) {
             $carousel.slick('unslick');
         }
-    
         // Initialiser le carousel avec Slick
         $carousel.slick({
             dots: false,
@@ -91,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentSlide = $carousel.slick('slickCurrentSlide');
         const slideCount = $carousel.find('.slick-slide:not(.slick-cloned)').length;
         const slidesToShow = $carousel.slick('slickGetOption', 'slidesToShow');
-        
         // Flèche précédente
         const $prevArrow = $carousel.find('.slick-prev');
         if (currentSlide === 0) {
@@ -99,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             $prevArrow.removeClass('slick-disabled').attr('aria-disabled', 'false');
         }
-        
         // Flèche suivante
         const $nextArrow = $carousel.find('.slick-next');
         if (currentSlide >= slideCount - slidesToShow) {
@@ -125,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         carousel.innerHTML = '';
-        
         // Ajouter les nouveaux éléments
         items.forEach(item => {
             carousel.appendChild(item);
@@ -223,123 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
             loader.style.display = 'none';
         });
     }
-   
-
-// Fonction modifiée pour la création des cartes de formation
-// function createFormationCard(formation) {
-//     const card = document.createElement('div');
-//     card.className = 'formation-card-container';
-    
-//     // Utiliser le titre complet
-//     const fullTitle = formation.title;
-    
-//     // Déterminer les classes spéciales pour la carte
-//     const hasRating = formation.average_rating !== null && formation.total_feedbacks > 0;
-//     const isFree = formation.price == 0;
-    
-//     // Classes pour la carte en fonction des conditions
-//     const cardClasses = [
-//         'formation-card',
-//         !hasRating ? 'no-rating' : '',
-//         isFree ? 'has-free-badge' : '',
-//         !hasRating && isFree ? 'compact-card' : ''
-//     ].filter(Boolean).join(' ');
-    
-//     let html = `
-//         <div class="${cardClasses}">
-//             ${formation.status && formation.is_bestseller ? '<span class="badge-bestseller">Meilleure vente</span>' : ''}
-            
-//             ${formation.image 
-//                 ? `<img src="${window.location.origin}/storage/${formation.image}" alt="${fullTitle}">`
-//                 : '<div class="placeholder-image">Image de formation</div>'
-//             }
-            
-//             <div class="title-container">
-//                 <h4 class="formation-title ${fullTitle.length < 50 ? 'title-short' : ''}" title="${fullTitle}">${fullTitle}</h4>
-//             </div>
-//             <div class="formation-instructor  ${!hasRating ? 'no-rating' : ''}">
-//                 ${formation.user 
-//                     ? `${formation.user.name} ${formation.user.lastname || ''}`
-//                     : 'Professeur non défini'
-//                 }
-//             </div>
-        
-//             <div class="formation-description" style="display:none;">
-//                 ${formation.description || 'Aucune description disponible'}
-//             </div>
-            
-//             <div class="formation-rating-price ${!hasRating ? 'no-rating' : ''}">
-//                 <div class="formation-rating">
-//     `;
-
-//     if (hasRating) {
-//         const rating = formation.average_rating;
-//         const fullStars = Math.floor(rating);
-//         const decimalPart = rating - fullStars;
-//         const hasHalfStar = decimalPart >= 0.25;
-//         const hasRating = formation.average_rating !== null && formation.total_feedbacks > 0;
-// const isFree = formation.price == 0;
-// const hasPaidPrice = formation.price > 0;
-
-// // Classes pour la carte en fonction des conditions
-// const cardClasses = [
-//     'formation-card',
-//     !hasRating ? 'no-rating' : '',
-//     isFree ? 'has-free-badge' : '',
-//     !hasRating && isFree ? 'compact-card' : '',
-//     !hasRating && !isFree && hasPaidPrice ? 'price-bottom' : ''
-// ].filter(Boolean).join(' ');
-        
-//         let starsHtml = '';
-//         for (let i = 1; i <= 5; i++) {
-//             if (i <= fullStars) {
-//                 starsHtml += '<i class="fas fa-star"></i>';
-//             } else if (i === fullStars + 1 && hasHalfStar) {
-//                 starsHtml += '<i class="fas fa-star-half-alt"></i>';
-//             } else {
-//                 starsHtml += '<i class="far fa-star"></i>';
-//             }
-//         }
-//         html += `
-//                   <span class="rating-value">${parseFloat(rating).toFixed(1)}</span>
-//                     <span class="rating-stars">${starsHtml}</span>
-//                      <span class="rating-count">(${formation.total_feedbacks})</span>
-//                  `;
-//     }
-    
-//     html += `
-//                 </div>
-//                 <div class="price-container ${!hasRating ? 'no-rating' : ''}">
-//                     ${formation.price == 0 
-//                         ? ``
-//                         : formation.discount > 0 
-//                             ? `<div style="display: flex; align-items: center;">
-//                                 <span class="original-price">${parseFloat(formation.price).toFixed(3)} DT</span>
-//                                 <span class="discount-badge">-${formation.discount}%</span>
-//                                </div>
-//                                <span class="final-price">${parseFloat(formation.final_price).toFixed(3)} DT</span>`
-//                             : `<span class="final-price">${parseFloat(formation.price).toFixed(3)} DT</span>`
-//                     }
-//                 </div>
-//             </div>
-            
-//             <div class="action-icons">
-//                  <i class="icofont icofont-ui-edit edit-icon action-icon" data-edit-url="${window.location.origin}/formation/${formation.id}/edit"></i>
-//                 <i class="icofont icofont-ui-delete delete-icon action-icon" data-delete-url="${window.location.origin}/formation/${formation.id}"></i>
-//             </div>
-
-//             <div class="card-badges">
-//                 ${formation.price == 0 ? '<span class="badge-free">Gratuite</span>' : ''}
-//             </div>
-//         </div>
-//     `;
-    
-//     card.innerHTML = html;
-
-//     return card;
-// }
-
-
+ 
 function createFormationCard(formation) {
     const duration = formation.duration || '00:00';
     const coursesCount = formation.cours ? formation.cours.length : 0;
@@ -348,16 +225,12 @@ function createFormationCard(formation) {
     console.log("Courses Count:", coursesCount);
     const card = document.createElement('div');
     card.className = 'formation-card-container';
-    
-    
     // Utiliser le titre complet
     const fullTitle = formation.title;
-    
     // Déterminer les classes spéciales pour la carte
     const hasRating = formation.average_rating !== null && formation.total_feedbacks > 0;
     const isFree = formation.price == 0;
     const hasPaidPrice = formation.price > 0;
-    
     // Classes pour la carte en fonction des conditions
     const cardClasses = [
         'formation-card',
@@ -368,7 +241,7 @@ function createFormationCard(formation) {
     ].filter(Boolean).join(' ');
     
     let html = `
-        <div class="${cardClasses}"              data-duration="${duration}" 
+        <div class="${cardClasses}" data-duration="${duration}" 
              data-courses-count="${coursesCount}">
             ${formation.status && formation.is_bestseller ? '<span class="badge-bestseller">Meilleure vente</span>' : ''}
             
@@ -386,18 +259,14 @@ function createFormationCard(formation) {
                     : 'Professeur non défini'
                 }
             </div>
-        
+            
             <div class="formation-description" style="display:none;">
                 ${formation.description || 'Aucune description disponible'}
             </div>
             
-            <!-- Ajout des informations de durée et nombre de cours -->
-            
-            
             <div class="formation-rating-price ${!hasRating ? 'no-rating' : ''}">
                 <div class="formation-rating">
     `;
-
     if (hasRating) {
         const rating = formation.average_rating;
         const fullStars = Math.floor(rating);
@@ -437,15 +306,24 @@ function createFormationCard(formation) {
                 </div>
             </div>
             
-            <div class="action-icons">
-                 <i class="icofont icofont-ui-edit edit-icon action-icon" data-edit-url="${window.location.origin}/formation/${formation.id}/edit"></i>
-                <i class="icofont icofont-ui-delete delete-icon action-icon" data-delete-url="${window.location.origin}/formation/${formation.id}"></i>
-            </div>
-
+            <!-- Déplacer le badge gratuit ici pour qu'il soit toujours à la même position -->
             <div class="card-badges">
                 ${formation.price == 0 ? '<span class="badge-free">Gratuite</span>' : ''}
             </div>
-        </div>
+            
+            <div class="action-menu">
+                <div class="action-dots">
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+                <div class="action-dropdown">
+                    <div class="action-item edit-action" data-edit-url="${window.location.origin}/formation/${formation.id}/edit">
+                        Modifier        
+                    </div>
+                    <div class="action-item delete-action" data-delete-url="${window.location.origin}/formation/${formation.id}">
+                        Supprimer
+                    </div>
+                </div>
+            </div>
     `;
     
     card.innerHTML = html;
@@ -453,8 +331,95 @@ function createFormationCard(formation) {
     return card;
 }
 
-// Pour appliquer ces changements, assurez-vous que cette fonction remplace celle existante dans votre code
+function attachActionIconHandlers() {
+    // Gestionnaire pour afficher/masquer le menu déroulant
+    document.querySelectorAll('.action-dots').forEach(dots => {
+        dots.addEventListener('click', function(e) {
+            e.stopPropagation(); // Empêcher la propagation de l'événement
+            
+            // Fermer tous les autres menus ouverts
+            document.querySelectorAll('.action-dropdown.show').forEach(dropdown => {
+                if (!dropdown.parentNode.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+            
+            // Basculer l'affichage du menu actuel
+            const dropdown = this.nextElementSibling;
+            dropdown.classList.toggle('show');
+        });
+    });
+    
+    // Gestionnaire pour les actions d'édition
+    document.querySelectorAll('.edit-action').forEach(action => {
+        action.addEventListener('click', function(e) {
+            e.stopPropagation();
+            window.location.href = this.dataset.editUrl;
+        });
+    });
+    
+    // Gestionnaire pour les actions de suppression
+    document.querySelectorAll('.delete-action').forEach(action => {
+        action.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const deleteUrl = this.dataset.deleteUrl;
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+            
+            // Message de confirmation
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')) {
+                // Utiliser le formulaire pour soumettre la requête DELETE
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = deleteUrl;
+                form.style.display = 'none';
+                
+                // Simuler la méthode DELETE pour Laravel
+                const methodField = document.createElement('input');
+                methodField.type = 'hidden';
+                methodField.name = '_method';
+                methodField.value = 'DELETE';
+                
+                // Ajouter le token CSRF
+                const tokenField = document.createElement('input');
+                tokenField.type = 'hidden';
+                tokenField.name = '_token';
+                tokenField.value = csrfToken;
+                
+                // Ajouter les champs au formulaire et soumettre
+                form.appendChild(methodField);
+                form.appendChild(tokenField);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    });
+    
+    // Fermez le menu si on clique ailleurs sur la page
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.action-menu')) {
+            document.querySelectorAll('.action-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('show');
+            });
+        }
+    });
+}
 
+// Ajoutez cette fonction à votre code d'initialisation (avant ou dans init())
+function initActionMenus() {
+    // Fermer tous les menus déroulants lorsqu'on clique en dehors
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.action-menu')) {
+            document.querySelectorAll('.action-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('show');
+            });
+        }
+    });
+    
+    // Réattacher les gestionnaires après chaque mise à jour du DOM
+    attachActionIconHandlers();
+}
+
+// Pour appliquer ces changements, assurez-vous que cette fonction remplace celle existante dans votre code
     function updateFormationsCarousels(formations) {
         const allFormations = [];
         const publishedFormations = [];
@@ -470,11 +435,9 @@ function createFormationCard(formation) {
                 unpublishedFormations.push(formationCard);
             }
         });
-        
         updateSingleCarousel('.formations-carousel', allFormations);
         updateSingleCarousel('.formations-carousel-published', publishedFormations);
         updateSingleCarousel('.formations-carousel-unpublished', unpublishedFormations);
-        
         attachActionIconHandlers();
         activateTab('#top-home-tab', '#top-home');
     }
@@ -495,7 +458,6 @@ function createFormationCard(formation) {
         document.querySelectorAll('.tab-pane').forEach(pane => {
             pane.classList.remove('show', 'active');
         });
-        
         const contentPane = document.querySelector(contentSelector);
         if (contentPane) {
             contentPane.classList.add('show', 'active');
@@ -628,81 +590,37 @@ function createFormationCard(formation) {
             });
         }
     }
-    function attachActionIconHandlers() {
-        // Gestionnaire pour les icônes d'édition
-        document.querySelectorAll('.edit-icon').forEach(icon => {
-            icon.addEventListener('click', function() {
-                window.location.href = this.dataset.editUrl;
-            });
-        });
-        
-        // Gestionnaire pour les icônes de suppression
-        document.querySelectorAll('.delete-icon').forEach(icon => {
-            icon.addEventListener('click', function() {
-                const deleteUrl = this.dataset.deleteUrl;
-                const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-                
-                // Message de confirmation
-                if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')) {
-                    // Utiliser le formulaire pour soumettre la requête DELETE
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = deleteUrl;
-                    form.style.display = 'none';
-                    
-                    // Simuler la méthode DELETE pour Laravel
-                    const methodField = document.createElement('input');
-                    methodField.type = 'hidden';
-                    methodField.name = '_method';
-                    methodField.value = 'DELETE';
-                    
-                    // Ajouter le token CSRF
-                    const tokenField = document.createElement('input');
-                    tokenField.type = 'hidden';
-                    tokenField.name = '_token';
-                    tokenField.value = csrfToken;
-                    
-                    // Ajouter les champs au formulaire et soumettre
-                    form.appendChild(methodField);
-                    form.appendChild(tokenField);
-                    document.body.appendChild(form);
-                    form.submit();
-                }
-            });
-        });
-    }
-    function init() {
-        // Gérer les messages flash
-        handleFlashMessages();
-        
-        // Configurer les indicateurs de chargement
-        setupLoadingIndicators();
-        
-        // Initialiser le slider de catégories
-        initCategoriesSlider();
-        
-        // Configurer les gestionnaires d'onglets
-        setupTabHandlers();
-        
-        // Attacher les gestionnaires d'événements aux liens de catégorie
-        document.querySelectorAll('.category-link').forEach(link => {
-            link.addEventListener('click', handleCategoryClick);
-        });
-        
-        // Initialiser le premier carrousel visible
-        initCarousel('.formations-carousel');
-        
-        // Attacher les gestionnaires d'événements pour les icônes d'action
-        attachActionIconHandlers();
-        
-        // Mettre à jour les carrousels lors du redimensionnement
-        window.addEventListener('resize', updateAllCarousels);
-        
-        // Initialiser la première catégorie après un court délai
-        setTimeout(initializeFirstCategory, 100);
-    }
+   
+function init() {
+    // Gérer les messages flash
+    handleFlashMessages();
     
+    // Configurer les indicateurs de chargement
+    setupLoadingIndicators();
     
+    // Initialiser le slider de catégories
+    initCategoriesSlider();
+    
+    // Configurer les gestionnaires d'onglets
+    setupTabHandlers();
+    
+    // Attacher les gestionnaires d'événements aux liens de catégorie
+    document.querySelectorAll('.category-link').forEach(link => {
+        link.addEventListener('click', handleCategoryClick);
+    });
+    
+    // Initialiser le premier carrousel visible
+    initCarousel('.formations-carousel');
+    
+    // Initialiser les menus d'action
+    initActionMenus();
+    
+    // Mettre à jour les carrousels lors du redimensionnement
+    window.addEventListener('resize', updateAllCarousels);
+    
+    // Initialiser la première catégorie après un court délai
+    setTimeout(initializeFirstCategory, 100);
+}
     // Lancer l'initialisation
     init();
 });

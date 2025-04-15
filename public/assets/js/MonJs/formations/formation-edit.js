@@ -1,135 +1,60 @@
-
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Gestion du statut (publié/non publié)
-    const statusToggle = document.getElementById('statusToggle');
-    const statusLabel = document.getElementById('statusLabel');
-
-    if (statusToggle) {
-        statusToggle.addEventListener('change', function() {
-            statusLabel.textContent = this.checked ? 'Publié' : 'Non publié';
-        });
-    }
-
     // Gestion de l'image
-    const deleteImageButton = document.getElementById('deleteImage');
-    const imageUploadInput = document.getElementById('imageUpload');
-    const deleteImageInput = document.getElementById('deleteImageInput');
-    const currentImageContainer = document.getElementById('currentImageContainer');
-    const newImagePreview = document.getElementById('newImagePreview');
-    const previewImage = document.getElementById('previewImage');
-    const restoreButton = document.getElementById('restoreImage');
-
-    // Supprimer l'image
-    if (deleteImageButton) {
-        deleteImageButton.addEventListener('click', function() {
-            deleteImageInput.value = 1; // Marquer pour suppression
-            currentImageContainer.style.display = 'none'; // Cacher l'image actuelle
-            imageUploadInput.style.display = 'block'; // Afficher l'input de fichier
-            restoreButton.style.display = 'block'; // Afficher le bouton de restauration
-            // Si une nouvelle image a déjà été prévisualisée, on la cache aussi
-            newImagePreview.style.display = 'none';
-        });
-    }
-
-    // Restaurer l'image originale
-    if (restoreButton) {
-        restoreButton.addEventListener('click', function() {
-            deleteImageInput.value = 0; // Annuler la suppression
-            currentImageContainer.style.display = 'flex'; // Réafficher l'image actuelle
-            imageUploadInput.style.display = 'none'; // Cacher l'input de fichier
-            newImagePreview.style.display = 'none'; // Cacher la prévisualisation
-            restoreButton.style.display = 'none'; // Cacher le bouton de restauration
-            imageUploadInput.value = ''; // Vider l'input de fichier
-        });
-    }
-
-    // Prévisualisation de la nouvelle image
-    if (imageUploadInput) {
-        imageUploadInput.addEventListener('change', function() {
-            if (this.files && this.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImage.src = e.target.result;
-                    newImagePreview.style.display = 'flex'; // Afficher la prévisualisation
-                    restoreButton.style.display = 'block'; // Afficher le bouton de restauration
-                };
-                reader.readAsDataURL(this.files[0]);
-            }
-        });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const currentImageContainer = document.getElementById('currentImageContainer');
-    const newImagePreview = document.getElementById('newImagePreview');
+    const deleteImageBtn = document.getElementById('deleteImage');
+    const restoreImageBtn = document.getElementById('restoreImage');
     const imageUpload = document.getElementById('imageUpload');
-    const imageIcon = document.getElementById('imageIcon');
-    const deleteImageButton = document.getElementById('deleteImage');
-    const restoreImageButton = document.getElementById('restoreImage');
+    const currentImageContainer = document.getElementById('currentImageContainer');
+    const newImagePreview = document.getElementById('newImagePreview');
     const deleteImageInput = document.getElementById('deleteImageInput');
+    const imageIcon = document.getElementById('imageIcon');
 
-    if (deleteImageButton) {
-        deleteImageButton.addEventListener('click', function() {
-            // Masquer l'image actuelle
-            if (currentImageContainer) {
-                currentImageContainer.style.display = 'none';
-            }
-
-            // Afficher le champ de téléchargement d'image et l'icône
+    if (deleteImageBtn) {
+        deleteImageBtn.addEventListener('click', function() {
+            currentImageContainer.style.display = 'none';
             imageUpload.style.display = 'block';
-            imageIcon.style.display = 'inline-flex';
-
-            // Afficher le bouton de restauration
-            restoreImageButton.style.display = 'block';
-
-            // Mettre à jour l'input hidden pour indiquer que l'image doit être supprimée
+            imageIcon.style.display = 'flex';
             deleteImageInput.value = '1';
+            restoreImageBtn.style.display = 'block';
         });
     }
 
-    if (restoreImageButton) {
-        restoreImageButton.addEventListener('click', function() {
-            // Réafficher l'image actuelle
-            if (currentImageContainer) {
-                currentImageContainer.style.display = 'flex'; // Utiliser flex pour centrer
-                currentImageContainer.style.justifyContent = 'center'; // Centrer horizontalement
-                currentImageContainer.style.alignItems = 'center'; // Centrer verticalement
-            }
-
-            // Masquer le champ de téléchargement d'image et l'icône
+    if (restoreImageBtn) {
+        restoreImageBtn.addEventListener('click', function() {
+            currentImageContainer.style.display = 'block';
             imageUpload.style.display = 'none';
             imageIcon.style.display = 'none';
-
-            // Masquer le bouton de restauration
-            restoreImageButton.style.display = 'none';
-
-            // Réinitialiser l'input hidden
             deleteImageInput.value = '0';
+            restoreImageBtn.style.display = 'none';
+            newImagePreview.style.display = 'none';
+            imageUpload.value = '';
         });
     }
 
-    // Gestion de la prévisualisation de la nouvelle image
     if (imageUpload) {
-        imageUpload.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
+        imageUpload.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    const previewImage = document.getElementById('previewImage');
-                    previewImage.src = e.target.result;
+                reader.onload = function(event) {
                     newImagePreview.style.display = 'block';
+                    document.getElementById('previewImage').src = event.target.result;
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(e.target.files[0]);
             }
         });
     }
+
+    // Validation des dates
+    function validateDates() {
+        const startDate = new Date(document.getElementById('start_date').value);
+        const endDate = new Date(document.getElementById('end_date').value);
+        
+        if (startDate && endDate && startDate > endDate) {
+            document.getElementById('end_date').setCustomValidity('La date de fin doit être après la date de début');
+        } else {
+            document.getElementById('end_date').setCustomValidity('');
+        }
+    }
+
+    document.getElementById('start_date').addEventListener('change', validateDates);
+    document.getElementById('end_date').addEventListener('change', validateDates);
 });
-
-
-
-
-
-
-
-

@@ -15,8 +15,9 @@ class CreatePaniersTable extends Migration
     {
         Schema::create('paniers', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Clé étrangère vers étudiants
+            $table->foreignId('formation_id')->constrained('formations')->onDelete('cascade'); 
+            $table->timestamps();
 
         });
     }

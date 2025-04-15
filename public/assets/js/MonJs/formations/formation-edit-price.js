@@ -1,5 +1,3 @@
-// formation-edit-script.js
-
 // Gestion du type de formation (payante/gratuite)
 const typeSelect = document.getElementById('type');
 const priceContainer = document.getElementById('priceContainer');
@@ -83,58 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
     publishLaterRadio.addEventListener('change', togglePublishDate);
     togglePublishDate(); // Initial state
 
-    // Gestion de l'image
-    const deleteImageBtn = document.getElementById('deleteImage');
-    const restoreImageBtn = document.getElementById('restoreImage');
-    const imageUpload = document.getElementById('imageUpload');
-    const currentImageContainer = document.getElementById('currentImageContainer');
-    const newImagePreview = document.getElementById('newImagePreview');
-    const deleteImageInput = document.getElementById('deleteImageInput');
-    const imageIcon = document.getElementById('imageIcon');
-
-    if (deleteImageBtn) {
-        deleteImageBtn.addEventListener('click', function() {
-            currentImageContainer.style.display = 'none';
-            imageUpload.style.display = 'block';
-            imageIcon.style.display = 'flex';
-            deleteImageInput.value = '1';
-            restoreImageBtn.style.display = 'block';
-        });
-    }
-
-    if (restoreImageBtn) {
-        restoreImageBtn.addEventListener('click', function() {
-            currentImageContainer.style.display = 'block';
-            imageUpload.style.display = 'none';
-            imageIcon.style.display = 'none';
-            deleteImageInput.value = '0';
-            restoreImageBtn.style.display = 'none';
-            newImagePreview.style.display = 'none';
-            imageUpload.value = '';
-        });
-    }
-
-    if (imageUpload) {
-        imageUpload.addEventListener('change', function(e) {
-            if (e.target.files && e.target.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    newImagePreview.style.display = 'block';
-                    document.getElementById('previewImage').src = event.target.result;
-                };
-                reader.readAsDataURL(e.target.files[0]);
-            }
-        });
-    }
-
     // Calcul initial du prix final
     calculateFinalPrice();
 });
-
-
-
-
-
-
-
-

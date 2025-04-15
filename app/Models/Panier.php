@@ -6,16 +6,12 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-
 class Panier extends Model
 {
     use HasFactory;
     protected $fillable = [
         'user_id',
-        // 'date_de_creation',
-        // 'amount_total',
-        // 'quantite_totale',
+        'formation_id',
     ];
 
     // Relation avec l'étudiant
@@ -23,4 +19,11 @@ class Panier extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    
+    public function formation()
+    {
+        return $this->belongsTo(Formation::class);
+    }
+    
 }

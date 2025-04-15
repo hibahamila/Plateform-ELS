@@ -23,48 +23,47 @@ class FormationController extends Controller
     }
 
     public function index(Request $request)
-    {
-        $categories = Categorie::withCount('formations')->get();
-        
-        $query = Formation::with(['user', 'category', 'feedbacks', 'cours']);
-        
-        if ($request->has('categorie_id')) {
-            $query->where('categorie_id', $request->categorie_id);
-        }
-        
-        $formations = $query->get();
-        
-        $formations->each(function ($formation) {
-            $formation->final_price = $formation->discount > 0 
-                ? $formation->price * (1 - $formation->discount / 100)
-                : $formation->price;
-            
-            $formation->total_feedbacks = $formation->feedbacks->count();
-            $formation->average_rating = $formation->total_feedbacks > 0
-                ? round($formation->feedbacks->sum('rating_count') / $formation->total_feedbacks, 1)
-                : null;
-
-            $formation->total_cours = $formation->cours->count();
-
-        });
-
-
-        
-        $totalFeedbacks = $formations->sum('total_feedbacks');
-        $title = $request->has('categorie_id') 
-            ? Categorie::find($request->categorie_id)->title 
-            : 'Toutes les formations';
-        
-        // Si c'est une requête AJAX, retourner JSON
-        if ($request->ajax()) {
-            return response()->json([
-                'formations' => $formations,
-                'title' => $title,
-                'totalFeedbacks' => $totalFeedbacks
-            ]);
-        }
-        return view('admin.apps.formation.formations', compact('formations', 'categories', 'title', 'totalFeedbacks'));
+{
+    $categories = Categorie::withCount('formations')->get();
+    
+    $query = Formation::with(['user', 'category', 'feedbacks', 'cours']);
+    
+    if ($request->has('categorie_id')) {
+        $query->where('categorie_id', $request->categorie_id);
     }
+    
+    $formations = $query->get();
+    
+    $formations->each(function ($formation) {
+        $formation->final_price = $formation->discount > 0
+            ? $formation->price * (1 - $formation->discount / 100)
+            : $formation->price;
+        
+        $formation->total_feedbacks = $formation->feedbacks->count();
+        $formation->average_rating = $formation->total_feedbacks > 0
+            ? round($formation->feedbacks->sum('rating_count') / $formation->total_feedbacks, 1)
+            : null;
+        $formation->total_cours = $formation->cours->count();
+    });
+    
+    $totalFeedbacks = $formations->sum('total_feedbacks');
+    $title = $request->has('categorie_id')
+        ? Categorie::find($request->categorie_id)->title
+        : 'Toutes les formations';
+    
+    // Vérifiez si la requête vient spécifiquement d'un appel AJAX intentionnel
+    // et non d'un simple clic sur le bouton retour du panier
+    if ($request->ajax() && $request->header('X-Requested-With') === 'XMLHttpRequest' && !$request->has('from_cart')) {
+        return response()->json([
+            'formations' => $formations,
+            'title' => $title,
+            'totalFeedbacks' => $totalFeedbacks
+        ]);
+    }
+    
+    // Dans tous les autres cas, y compris le retour du panier, afficher la vue normale
+    return view('admin.apps.formation.formations', compact('formations', 'categories', 'title', 'totalFeedbacks'));
+}
 
     public function show($id)
     {

@@ -10,7 +10,7 @@
                    class="category-link" 
                    data-category-id="<?php echo e($category->id); ?>">
                     <span class="category-title"><?php echo e($category->title); ?></span>
-                    <span class="participant-count">+ <?php echo e($category->formations_count ?? 0); ?> de participants</span>
+                    <span class="participant-count">+ <?php echo e($category->formations_count ?? 0); ?> formations</span>
                 </a>
             </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -24,5 +24,21 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/categories-filter.css')); ?>">
 <script src="<?php echo e(asset('assets/js/MonJs/categorie/categorie-filter.js')); ?>"></script>
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+
+
+
 
 <?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/categorie/categories-filter.blade.php ENDPATH**/ ?>

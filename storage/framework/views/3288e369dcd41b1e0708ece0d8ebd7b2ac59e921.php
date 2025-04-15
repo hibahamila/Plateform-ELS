@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/formations-gallery.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/formations-details.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/formation-detail-interaction.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/MonCss/formations-details.css')); ?>">
 
 <?php $__env->stopPush(); ?>
 
@@ -69,6 +70,9 @@
                         <?php endif; ?>
 
                         <div class="tab-content" id="top-tabContent">
+                            <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+
+
                             <!-- Toutes les formations -->
                             <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                                 <div class="carousel-container">
@@ -98,18 +102,16 @@
                                                     </div>
                                                     <div class="formation-details">
                                                         <div class="formation-duration">
-                                                            <i class="fas fa-clock"></i> Durée: 
-                                                            <span class="formation-duration-value"><?php echo e($formation->duration); ?></span>
+                                                            
+                                                            <span class="formation-duration-value" style="display: none;"><?php echo e($formation->duration); ?></span>
                                                         </div>
                                                         <div class="formation-courses-count">
-                                                            <i class="fas fa-book"></i> 
-                                                            <span class="formation-courses-count-value"><?php echo e($formation->cours->count()); ?></span> cours
+                                                            
+                                                            <span class="formation-courses-count-value" style="display: none;"><?php echo e($formation->cours->count()); ?></span> cours
                                                         </div>
                                                     </div>
 
-                                                    <span class="formation-duration-value" style="display: none;"><?php echo e($formation->duration); ?></span>
-                                                    <span class="formation-courses-count-value" style="display: none;"><?php echo e($formation->cours->count()); ?></span>
-                                                    
+                                
                                                    
                                                     <div class="formation-description" style="display: none;"><?php echo $formation->description; ?></div>
                                                             <div class="formation-rating-price">
@@ -326,6 +328,8 @@
                                                 <?php endif; ?>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
+
+
                                     </div>
                                 </div>
                         </div>
@@ -339,7 +343,6 @@
 <?php $__env->startPush('scripts'); ?>
     <script src="<?php echo e(asset('assets/js/prism/prism.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/height-equal.js')); ?>"></script>
-    
     <script src="<?php echo e(asset('assets/js/dropdown/dropdown.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/clipboard/clipboard.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/custom-card/custom-card.js')); ?>"></script>
@@ -351,6 +354,24 @@
     <script src="<?php echo e(asset('assets/js/MonJs/formations/formation-gallery.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/formations/formation-filter.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/formations/formation-detail-interaction.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/cart-modal.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/add-to-cart.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/confirmation-panel.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/formation-card.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/detail-panel.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/cart-manager.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/cart-modal-panier.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/cart-core.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/cart-ui.js')); ?>"></script>
+
+
+
+
+
+
+
+
 
 <?php $__env->stopPush(); ?>
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/formation/formations.blade.php ENDPATH**/ ?>

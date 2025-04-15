@@ -75,3 +75,48 @@
 .final-price {
     color: #FF4B59;
 }
+
+
+        #publishDateContainer {
+            display: none;
+        }
+        #priceContainer {
+            display: none;
+            align-items: center;
+        }
+        #discountContainer {
+            display: none;
+        }
+        #finalPriceContainer {
+            display: none;
+        }
+        .text-success {
+            color: #28a745;
+        }
+        .text-muted {
+            color: #6c757d;
+        }
+        .publication-status {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .price-display {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #6c757d;
+            margin-right: 10px;
+        }
+        .final-price {
+            color: #0a0f0b;
+            font-weight: bold;
+        }
+        .date-input-group {
+            display: flex;
+            gap: 20px;
+        }
+        .date-input-container {
+            flex: 1;
+        }

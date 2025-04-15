@@ -185,3 +185,94 @@
 .category-item.active:hover {
     background-color: #4d4e63; /* Une teinte intermédiaire pour le hover */
 }
+
+
+
+.categories-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+/* Dropdown toggle button */
+.dropdown-toggle {
+    background-color: #f0f0f4;
+    color: #444;
+    padding: 12px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 150px;
+}
+
+.dropdown-toggle .fa-chevron-down {
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 8px;
+    margin-top: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Show the dropdown menu on hover */
+.categories-dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+    display: block;
+}
+
+.categories-dropdown:hover .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/*zedtou tw lel dropdown/*
+
+/* Links inside the dropdown */
+.dropdown-content .category-item {
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-content .category-link {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.dropdown-content .category-link:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content .category-item.active .category-link {
+    background-color: #6c6a8a;
+    color: white;
+}
+
+/* Dark background for category "cat" and other styling as shown in Image 1 */
+.dropdown-content .category-item:first-child .category-link {
+    background-color: #6c6a8a;
+    color: white;
+}
+
+.dropdown-content .category-item:nth-child(2) .category-link,
+.dropdown-content .category-item:nth-child(3) .category-link {
+    background-color: #f0f0f4;
+    color: #333;
+}
