@@ -1,6 +1,7 @@
 
 @extends('layouts.admin.master')
 
+@section('content')
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,8 +16,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
-    <div class="container">
+    <div class="container" style="background-color: white !important;">
         <div class="panier-header">
             <h1>Panier d'achat</h1>
             <div class="panier-count">{{ count($panierItems) }} formation(s)</div>
@@ -147,6 +149,8 @@
 
 </body>
 </html>
+@endsection
+
 <script src="{{ asset('assets/js/MonJs/formations/panier.js') }}"></script>
 
 @php
@@ -172,98 +176,3 @@ function formatDuration($duration) {
     }
 }
 @endphp
-
-{{-- 
-<script>
-    $(document).ready(function() {
-    // Fonction pour mettre à jour l'affichage du résumé du panier
-    function updateCartSummary(response) {
-        console.log('Mise à jour du résumé:', response);
-        
-        if (response.cartCount === 0) {
-            return; // La gestion du panier vide est déjà faite dans la fonction principale
-        }
-        
-        // Mise à jour du prix total (ajouter l'unité monétaire ici)
-        $('.total-price').text(response.totalPrice + ' DT');
-        
-        // S'il y a une remise, mettre à jour l'affichage correspondant
-        if (response.hasDiscount && parseFloat(response.discountedItemsOriginalPrice) > 0) {
-            // Vérifier si les éléments existent déjà
-            if ($('.original-price').length) {
-                $('.original-price').text(response.discountedItemsOriginalPrice + ' DT');
-                $('.discount-percentage').text(response.discountPercentage + '% off');
-            } else {
-                // Ajouter les éléments de remise après le prix total
-                $('.total-price').after(`
-                    <div class="original-price">${response.discountedItemsOriginalPrice} DT</div>
-                    <div class="discount-percentage">${response.discountPercentage}% off</div>
-                `);
-            }
-        } else {
-            // Supprimer les éléments de remise s'ils existent
-            $('.original-price, .discount-percentage').remove();
-        }
-    }
-
-    // Fonction pour supprimer une formation du panier
-    $(document).on('click', '.remove-link', function(e) {
-        e.preventDefault();
-        
-        const formationId = $(this).data('formation-id');
-        const $formationItem = $(this).closest('.formation-item');
-        
-        // Ajouter un log pour vérifier que l'événement est bien déclenché
-        console.log('Tentative de suppression de la formation ID:', formationId);
-        
-        $.ajax({
-            url: '/panier/supprimer',
-            type: 'POST',
-            data: {
-                formation_id: formationId,
-                _token: $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                console.log('Réponse du serveur:', response);
-                
-                if (response.success) {
-                    // Supprimer l'élément du DOM
-                    $formationItem.fadeOut(300, function() {
-                        $(this).remove();
-                        
-                        // Mettre à jour le nombre d'éléments dans le panier
-                        $('.panier-count').text(response.cartCount + ' formation(s)');
-                        
-                        // Mettre à jour le résumé du panier
-                        updateCartSummary(response);
-                        
-                        // Si le panier est vide, afficher le message correspondant
-                        if (response.cartCount === 0) {
-                            $('.panier-content').replaceWith(`
-                                <div class="empty-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <p>Votre panier est vide</p>
-                                    <a href="/admin/apps/formation/formations">Découvrir des formations</a>
-                                </div>
-                            `);
-                        }
-                    });
-                } else {
-                    alert(response.message || 'Erreur lors de la suppression de la formation');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Erreur AJAX:', status, error);
-                console.error('Réponse:', xhr.responseText);
-                alert('Erreur lors de la communication avec le serveur');
-            }
-        });
-    });
-    
-    // Fonction pour sauvegarder pour plus tard
-    $(document).on('click', '.save-for-later', function(e) {
-        e.preventDefault();
-        alert('Fonctionnalité à implémenter: Sauvegarder pour plus tard');
-    });
-});
-</script> --}}

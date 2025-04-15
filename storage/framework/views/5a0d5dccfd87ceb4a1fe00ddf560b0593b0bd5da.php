@@ -1,6 +1,7 @@
 
 
 
+<?php $__env->startSection('content'); ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,8 +16,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
-    <div class="container">
+    <div class="container" style="background-color: white !important;">
+
+
         <div class="panier-header">
             <h1>Panier d'achat</h1>
             <div class="panier-count"><?php echo e(count($panierItems)); ?> formation(s)</div>
@@ -149,6 +153,8 @@
 
 </body>
 </html>
+<?php $__env->stopSection(); ?>
+
 <script src="<?php echo e(asset('assets/js/MonJs/formations/panier.js')); ?>"></script>
 
 <?php
@@ -174,7 +180,5 @@ function formatDuration($duration) {
     }
 }
 ?>
-
-
 
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/formation/panier.blade.php ENDPATH**/ ?>

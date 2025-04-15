@@ -27,8 +27,10 @@ class CategorieController extends Controller
         ]);
 
         Categorie::create($request->all());
+        return redirect()->route('formations');
 
-        return redirect()->route('categories')->with('success', 'Catégorie ajoutée avec succès.');
+
+        // return redirect()->route('categories')->with('success', 'Catégorie ajoutée avec succès.');
     }
 
     public function show($id)

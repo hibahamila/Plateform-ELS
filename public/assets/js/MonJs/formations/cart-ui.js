@@ -480,6 +480,9 @@ function showConfirmationToast(message) {
     const toastMessage = document.querySelector('.toast-message');
     if (toast && toastMessage) {
         toastMessage.textContent = message;
+        toast.style.backgroundColor = '#2B6ED4';
+        toast.style.bottom = '600px';  // ou toute autre valeur
+
         toast.style.display = 'block';
         toast.style.animation = 'none';
         toast.offsetHeight; // Forcer un reflow

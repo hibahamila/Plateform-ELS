@@ -18,6 +18,9 @@
         margin: 0;
         padding: 0;
     }
+    body, .container {
+        background-color: white !important;
+      }
 
     .container {
         max-width: 1200px;
