@@ -33,6 +33,7 @@ public function index()
     
     // Récupérer les formations du panier avec leurs détails
     $userId = Auth::id();
+    
     $panierItems = Panier::with('formation')
                         ->where('user_id', $userId)
                         ->get();

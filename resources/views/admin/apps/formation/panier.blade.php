@@ -89,20 +89,12 @@
                     </div>
                     
                     <div class="formation-actions">
-                        {{-- <a href="#" class="remove-link" data-formation-id="{{ $item->formation->id }}">Supprimer</a>
-                            
-                        <a href="" class="reserve-link" data-formation-id="{{ $item->formation->id }}">Réserver</a> --}}
+                       
                         <div class="action-links">
                             <a href="#" class="remove-link" data-formation-id="{{ $item->formation->id }}">Supprimer</a>
                             <a href="" class="reserve-link" data-formation-id="{{ $item->formation->id }}">Réserver</a>
                         </div>
-                        {{-- <div class="cart-item" data-formation-id="{{ $item->formation->id }}">
-                            <!-- Contenu de l'item -->
-                            <div class="action-links">
-                                <a href="#" class="remove-link" data-formation-id="{{ $item->formation->id }}">Supprimer</a>
-                                <a href="" class="reserve-link" data-formation-id="{{ $item->formation->id }}">Réserver</a>
-                            </div>
-                        </div> --}}
+                       
 
                        
                         <div class="formation-price">
@@ -180,6 +172,7 @@ function formatDuration($duration) {
     }
 }
 @endphp
+
 {{-- 
 <script>
     $(document).ready(function() {

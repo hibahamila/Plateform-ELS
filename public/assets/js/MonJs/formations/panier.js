@@ -1,20 +1,20 @@
+
 window.cartFormations = [];
 // Variable globale pour le compteur de panier
 window.globalCartCount = 0;
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialisation
-    initCartCore();
-    // Vérifier l'état du badge immédiatement
-    initCartBadge();
+    // Récupérer et afficher la valeur avant toute initialisation
+    const storedCount = parseInt(localStorage.getItem('cartCount') || '0');
+    const badge = document.querySelector('.cart-badge');
     
-    // Vérifier l'état du badge après un court délai pour s'assurer qu'il est bien rendu
-    setTimeout(function() {
-        const storedCount = parseInt(localStorage.getItem('cartCount') || '0');
-        if (storedCount > 0) {
-            forceUpdateCartBadge(storedCount);
-        }
-    }, 500);
+    if (badge && storedCount > 0) {
+        badge.textContent = storedCount.toString();
+        badge.style.display = 'block';
+    }
+    
+    // Continuer avec les autres initialisations
+    initCartCore();
+    initCartBadge();
 });
 
 function initCartCore() {
@@ -382,9 +382,7 @@ function updateCartButtons() {
     });
 }
 
-// ----- IMPLÉMENTATION AMÉLIORÉE POUR LE BADGE DU PANIER -----
 
-// Initialiser le badge du panier
 function initCartBadge() {
     // Charger la feuille de style CSS externe
     loadCartStyles();
@@ -395,11 +393,18 @@ function initCartBadge() {
     
     // S'assurer que le badge est mis à jour correctement
     if (storedCount > 0) {
-        forceUpdateCartBadge(storedCount);
+        // Mise à jour immédiate
+        const badge = document.querySelector('.cart-badge');
+        if (badge) {
+            badge.textContent = storedCount.toString();
+            badge.style.display = 'block';
+        } else {
+            createNewBadge(storedCount);
+        }
     }
     
-    // Puis vérifier avec le serveur pour s'assurer que c'est exact
-    fetchCartItemsCount();
+    // Puis vérifier avec le serveur après pour s'assurer que c'est exact
+    setTimeout(fetchCartItemsCount, 100);
     
     // Ajouter un écouteur d'événements pour la visibilité de la page
     document.addEventListener('visibilitychange', function() {
@@ -412,7 +417,6 @@ function initCartBadge() {
     // Vérifier régulièrement que le badge est présent et correct
     setInterval(refreshCartBadge, 2000);
 }
-
 // Fonction pour charger la feuille de style CSS externe
 function loadCartStyles() {
     // Vérifier si les styles sont déjà chargés
@@ -421,55 +425,75 @@ function loadCartStyles() {
     const link = document.createElement('link');
     link.id = 'cart-badge-styles';
     link.rel = 'stylesheet';
-    link.href = '/css/MonCss/cart-badge-panier.css'; // Chemin vers le fichier CSS séparé
+    link.href = '/assets/css/MonCss/cart-badge-panier.css'; // Chemin vers le fichier CSS séparé
 
     document.head.appendChild(link);
 }
 
-// Nouvelle fonction pour forcer la mise à jour du badge
+
+
 function forceUpdateCartBadge(count) {
     // Convertir count en nombre entier pour être sûr
     count = parseInt(count) || 0;
     
-    // Ne pas afficher de badge si le compteur est 0
-    if (count <= 0) {
-        const existingBadge = document.querySelector('.cart-badge');
-        if (existingBadge) {
-            existingBadge.remove();
-        }
+    // Mettre à jour le localStorage immédiatement
+    localStorage.setItem('cartCount', count.toString());
+    
+    // Mettre à jour la variable globale
+    window.globalCartCount = count;
+    
+    // Trouver le badge
+    const badge = document.querySelector('.cart-badge');
+    if (!badge) {
+        console.log("Badge non trouvé, création d'un nouveau badge");
+        createNewBadge(count);
         return;
     }
     
-    // Trouver le conteneur du panier
+    // Mettre à jour l'affichage
+    if (count <= 0) {
+        badge.style.display = 'none';
+    } else {
+        badge.textContent = count.toString();
+        badge.style.display = 'block';
+    }
+    
+    console.log(`Badge mis à jour: ${count} éléments dans le panier`);
+}
+
+function createNewBadge(count) {
+    if (count <= 0) return;
+    
     const cartContainer = document.querySelector('.cart-container');
     if (!cartContainer) {
         console.error("Conteneur de panier introuvable");
         return;
     }
     
-    // Supprimer l'ancien badge s'il existe
-    const existingBadge = document.querySelector('.cart-badge');
-    if (existingBadge) {
-        existingBadge.remove();
+    const svgContainer = cartContainer.querySelector('div');
+    if (!svgContainer) {
+        console.error("Container SVG introuvable");
+        return;
     }
     
     // Créer un nouveau badge
     const newBadge = document.createElement('span');
-    newBadge.className = 'cart-badge';
-    newBadge.id = 'cart-badge';
+    newBadge.className = 'cart-badge custom-violet-badge';
     newBadge.textContent = count.toString();
     
-    // Ajouter le badge au conteneur
-    cartContainer.appendChild(newBadge);
+    // Styles
+    newBadge.style.backgroundColor = '#2B6ED4';
+    newBadge.style.color = 'white';
+    newBadge.style.borderRadius = '50%';
+    newBadge.style.padding = '2px 6px';
+    newBadge.style.fontSize = '10px';
+    newBadge.style.position = 'absolute';
+    newBadge.style.top = '-8px';
+    newBadge.style.right = '-10px';
+    newBadge.style.fontWeight = 'bold';
+    newBadge.style.display = 'block';
     
-    // Forcer un reflow pour que le badge soit immédiatement visible
-    void newBadge.offsetHeight;
-    
-    // Mettre à jour la variable globale
-    window.globalCartCount = count;
-    
-    // Debug pour vérifier la visibilité
-    console.log(`Badge mis à jour: ${count} éléments dans le panier`);
+    svgContainer.appendChild(newBadge);
 }
 
 // Nouvelle fonction pour rafraîchir le badge

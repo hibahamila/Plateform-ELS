@@ -91,12 +91,12 @@
                     </div>
                     
                     <div class="formation-actions">
-                        
+                       
                         <div class="action-links">
                             <a href="#" class="remove-link" data-formation-id="<?php echo e($item->formation->id); ?>">Supprimer</a>
                             <a href="" class="reserve-link" data-formation-id="<?php echo e($item->formation->id); ?>">Réserver</a>
                         </div>
-                        
+                       
 
                        
                         <div class="formation-price">
@@ -174,6 +174,7 @@ function formatDuration($duration) {
     }
 }
 ?>
+
 
 
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hibah\PFE\plateformeEls\resources\views/admin/apps/formation/panier.blade.php ENDPATH**/ ?>

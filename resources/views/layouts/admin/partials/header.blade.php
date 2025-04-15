@@ -14,27 +14,43 @@
         <li>
             <div class="mode"><i class="fa fa-moon-o"></i></div>
         </li>
-        <li>
-        {{-- <a href="{{ route('panier.index') }}" class="cart-link">
-          <div class="cart-container">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon">
-                  <circle cx="9" cy="21" r="1"></circle>
-                  <circle cx="20" cy="21" r="1"></circle>
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-            
-          </div>
-      </a> --}}
-      <a href="{{ route('panier.index') }}" class="cart-link">
-        <div class="cart-container">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            <!-- Le badge sera inséré ici par JavaScript ou montré/caché selon le besoin -->
-        </div>
+  
+  <li>
+     {{-- <a href="{{ route('panier.index') }}">
+      <div style="position: relative;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <!-- Le badge est toujours affiché avec style="display: none;" par défaut -->
+        <span class="cart-badge" style="position: absolute; top: -8px; right: -10px; background-color: #2B6ED4; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; font-weight: bold; display: none;"></span>
+      </div>
+    </a>  --}}
+
+    {{-- <a href="{{ route('panier.index') }}">
+      <div class="cart-container" style="position: relative;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <!-- Ajoutez la classe custom-blue-badge -->
+        <span class="cart-badge custom-blue-badge" style="position: absolute; top: -8px; right: -10px; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; font-weight: bold; display: none;"></span>
+      </div>
+    </a> --}}
+    <a href="{{ route('panier.index') }}">
+      <div class="cart-container" style="position: relative;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <!-- Ajoutez une classe personnalisée au badge -->
+        <span class="cart-badge custom-blue-badge" style="position: absolute; top: -8px; right: -10px; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; font-weight: bold; display: none;"></span>
+      </div>
     </a>
+  </li>
         </li>
         
         <li class="onhover-dropdown p-0">
@@ -54,60 +70,30 @@
   </div>
 </div>
 
-
+<!-- Placez ce script dans la section head de votre document -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Récupérer la valeur stockée dès que possible
+    const storedCount = parseInt(localStorage.getItem('cartCount') || '0');
+    const badge = document.querySelector('.cart-badge');
+    
+    if (badge) {
+      if (storedCount > 0) {
+        badge.textContent = storedCount;
+        badge.style.display = 'block';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+  });
+</script>
 @push('styles')
-{{-- <style>
-  .cart-icon-wrapper {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-  }
-  .cart-count {
-  position: absolute;
-  top: -10px; /* Monter davantage le badge */
-  left: 50%; /* Centrer horizontalement */
-  transform: translateX(-50%); /* Assurer un centrage parfait */
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 50%;
-  background-color: #7366ff;
-  color: white;
+<style>
+  /* Ce sélecteur est plus spécifique que celui qui définit la couleur rouge */
+  .custom-blue-badge {
+  background-color: #3b82f6; /* ou toute autre nuance de bleu de votre choix */
+  /* Les autres propriétés sont déjà définies dans votre style inline */
 }
-</style> --}}
-
-{{-- <style>
-  .cart-container {
-    position: relative;
-    display: inline-block;
-}
-
-.cart-badge {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: #ff0000; /* Rouge */
-    color: white;
-    border-radius: 50%; /* Rond */
-    min-width: 18px;
-    height: 18px;
-    padding: 0 5px;
-    font-size: 12px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.cart-badge:empty {
-    display: none;
-}
-
-.cart-badge-visible {
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
-</style> --}}
+</style>
 @endpush
 

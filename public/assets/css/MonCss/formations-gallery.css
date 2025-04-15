@@ -1,4 +1,4 @@
-Style général du conteneur du carrousel
+/* Style général du conteneur du carrousel */
 .carousel-container {
     position: relative;
     padding: 20px 0; /* Padding réduit sur les côtés */

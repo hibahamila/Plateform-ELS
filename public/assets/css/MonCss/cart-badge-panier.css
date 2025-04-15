@@ -1,38 +1,17 @@
-/* Position relative pour le conteneur du panier */
-.cart-container {
-    position: relative !important;
-    display: inline-flex !important;
-}
-
-/* Style du badge */
 .cart-badge {
-    position: absolute !important;
-    top: -8px !important;
-    right: -8px !important;
-    background-color: #8e44ad !important; /* Couleur violette comme dans l'image 2 */
-    color: white !important;
-    border-radius: 50% !important;
-    min-width: 20px !important;
-    height: 20px !important;
-    font-size: 12px !important;
-    font-weight: bold !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important;
-    z-index: 10 !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
-    border: 2px solid white !important;
+    /* Remplacer le style existant avec celui-ci pour enlever le rouge */
+    background-color: #2B6ED4; /* Couleur violette comme suggéré par la classe custom-violet-badge */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 10px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-weight: bold;
 }
 
-/* Assurez-vous que l'icône du panier est visible */
-.cart-icon {
-    z-index: 1 !important;
-}
-
-/* Style spécifique pour le lien du panier */
-.cart-link {
-    position: relative !important;
-    display: inline-block !important;
-    text-decoration: none !important;
+/* Assurez-vous que cette classe a priorité */
+.cart-badge.custom-violet-badge {
+    background-color: #2B6ED4 !important; /* Utiliser !important pour garantir la priorité */
 }
