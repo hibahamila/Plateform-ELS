@@ -19,8 +19,6 @@
 
 <body>
     <div class="container" style="background-color: white !important;">
-
-
         <div class="panier-header">
             <h1>Panier d'achat</h1>
             <div class="panier-count"><?php echo e(count($panierItems)); ?> formation(s)</div>

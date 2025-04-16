@@ -55,22 +55,117 @@ function createModalIfNeeded() {
         <link rel="stylesheet" href="/assets/css/MonCss/cart-modal.css">
         `;
         document.body.insertAdjacentHTML('beforeend', modalHTML);
-    }
-    
-    // Toast de confirmation
+
+         // Toast de confirmation compact
     if (!document.getElementById('confirmation-toast')) {
         const toastHTML = `
             <div id="confirmation-toast">
                 <div class="toast-content">
                     <i class="fas fa-check-circle"></i>
                     <span class="toast-message"></span>
+                    <span class="close-toast">&times;</span>
                 </div>
+                <!-- La timeline sera ajoutée dynamiquement -->
             </div>
         `;
         document.body.insertAdjacentHTML('beforeend', toastHTML);
+        
+        // Ajouter un listener pour fermer le toast
+        document.querySelector('.close-toast').addEventListener('click', function() {
+            document.getElementById('confirmation-toast').style.display = 'none';
+        });
+    }
+    
+    // Styles CSS pour le toast compact
+    if (!document.getElementById('toast-styles')) {
+        const styleTag = document.createElement('style');
+        styleTag.id = 'toast-styles';
+        styleTag.textContent = `
+            #confirmation-toast {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: #ffffff; /* Fond blanc pour le toast */
+                color: #333; /* Texte sombre pour meilleure lisibilité */
+                padding: 10px 15px;
+                border-radius: 3px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                z-index: 9999;
+                max-width: 300px;
+                width: auto;
+                display: none;
+                overflow: hidden;
+                font-size: 14px;
+            }
+            
+            .toast-content {
+                display: flex;
+                align-items: center;
+                position: relative;
+                padding-right: 20px; /* Espace pour le bouton de fermeture */
+            }
+            
+            .toast-content i {
+                margin-right: 8px;
+                font-size: 16px;
+            }
+            
+            .close-toast {
+                position: absolute;
+                top: -5px;
+                right: -10px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            
+            .toast-timeline {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 3px;
+                width: 0%;
+                background-color: #ffffff; /* Timeline blanche correcte */
+
+                transition: width 3s linear;
+            }
+        `;
+        document.head.appendChild(styleTag);
     }
 }
+}
+function showToast(message, duration = 5000) {
+    const toast = document.getElementById('confirmation-toast');
+    const toastMessage = toast.querySelector('.toast-message');
+    
+    // Définir le message
+    toastMessage.textContent = message;
+    
+    // Supprimer l'ancienne timeline si elle existe
+    const oldTimeline = toast.querySelector('.toast-timeline');
+    if (oldTimeline) {
+        oldTimeline.remove();
+    }
+    
+    // Créer et ajouter une nouvelle timeline
+    const timeline = document.createElement('div');
+    timeline.className = 'toast-timeline';
+    timeline.style.backgroundColor = '#ffffff'; // Force la couleur blanche directement dans l'élément
+    toast.appendChild(timeline);
+    
+    // Afficher le toast
+    toast.style.display = 'block';
 
+    
+    // Animer la timeline
+    setTimeout(() => {
+        timeline.style.width = '100%';
+    }, 10);
+    
+    // Masquer le toast après la durée spécifiée
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, duration);
+} 
 function setupModalEventListeners() {
     const modal = document.getElementById('add-to-cart-modal');
     const closeModalBtn = document.querySelector('.close-modal');
@@ -475,21 +570,102 @@ function generateStars(rating) {
 }
 
 // Afficher un toast de confirmation
+// function showConfirmationToast(message) {
+//     const toast = document.getElementById('confirmation-toast');
+//     const toastMessage = document.querySelector('.toast-message');
+//     if (toast && toastMessage) {
+//         toastMessage.textContent = message;
+//         toast.style.backgroundColor = '#2B6ED4';
+//         toast.style.bottom = '600px';  // ou toute autre valeur
+
+//         toast.style.display = 'block';
+//         toast.style.animation = 'none';
+//         toast.offsetHeight; // Forcer un reflow
+//         toast.style.animation = 'toastIn 0.3s, toastOut 0.3s 2.7s';
+        
+//         setTimeout(function() {
+//             toast.style.display = 'none';
+//         }, 3000);
+//     }
+// }
+
+// Afficher un toast de confirmation
 function showConfirmationToast(message) {
     const toast = document.getElementById('confirmation-toast');
     const toastMessage = document.querySelector('.toast-message');
     if (toast && toastMessage) {
         toastMessage.textContent = message;
-        toast.style.backgroundColor = '#2B6ED4';
-        toast.style.bottom = '600px';  // ou toute autre valeur
-
+        
+        // Appliquer un style compact comme dans l'image 2 mais avec couleur bleue
+        toast.style.backgroundColor = '#2B6ED4'; // Couleur bleue au lieu de vert
+        toast.style.color = '#ffffff';
+        toast.style.borderRadius = '3px';
+        toast.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+        toast.style.padding = '10px 15px'; // Padding réduit pour un toast compact
+        toast.style.position = 'fixed';
+        toast.style.top = '20px';
+        toast.style.right = '20px';
+        toast.style.zIndex = '9999';
+        toast.style.maxWidth = '300px'; // Limiter la largeur
+        toast.style.width = 'auto'; // Laisser la largeur s'adapter au contenu
+        toast.style.overflow = 'hidden'; // Pour la timeline
+        
+        // Ajuster la taille de la police pour qu'elle soit plus petite
+        toastMessage.style.fontSize = '14px';
+        
+        // S'assurer que le contenu du toast est bien aligné
+        const toastContent = document.querySelector('.toast-content');
+        if (toastContent) {
+            toastContent.style.display = 'flex';
+            toastContent.style.alignItems = 'center';
+            toastContent.style.justifyContent = 'flex-start';
+            toastContent.style.width = '100%';
+        }
+        
+        // Configurer l'icône de coche pour qu'elle soit plus petite
+        const checkIcon = toast.querySelector('.fas.fa-check-circle');
+        if (checkIcon) {
+            checkIcon.style.marginRight = '8px';
+            checkIcon.style.fontSize = '16px';
+            checkIcon.style.color = '#ffffff';
+        }
+        
+        // Créer ou mettre à jour la timeline
+        let timeline = toast.querySelector('.toast-timeline');
+        if (!timeline) {
+            timeline = document.createElement('div');
+            timeline.className = 'toast-timeline';
+            toast.appendChild(timeline);
+        }
+        
+        // Style de la timeline
+        timeline.style.position = 'absolute';
+        timeline.style.bottom = '0';
+        timeline.style.left = '0';
+        timeline.style.height = '3px'; // Un peu plus fin pour un toast compact
+        timeline.style.backgroundColor = '#1956A8'; // Teinte plus foncée de bleu
+        timeline.style.width = '0%';
+        
+        // Bouton de fermeture plus petit et mieux positionné
+        const closeBtn = toast.querySelector('.close-toast');
+        if (closeBtn) {
+            closeBtn.style.fontSize = '16px';
+            closeBtn.style.position = 'absolute';
+            closeBtn.style.top = '8px';
+            closeBtn.style.right = '10px';
+        }
+        
         toast.style.display = 'block';
-        toast.style.animation = 'none';
-        toast.offsetHeight; // Forcer un reflow
-        toast.style.animation = 'toastIn 0.3s, toastOut 0.3s 2.7s';
+        
+        // Animation de la timeline
+        timeline.style.transition = 'width 3s linear';
+        setTimeout(() => {
+            timeline.style.width = '100%';
+        }, 50);
         
         setTimeout(function() {
             toast.style.display = 'none';
+            timeline.style.width = '0%'; // Réinitialiser
         }, 3000);
     }
 }
